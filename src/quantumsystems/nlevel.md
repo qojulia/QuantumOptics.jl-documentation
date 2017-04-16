@@ -1,43 +1,42 @@
-.. _section-nlevel:
+# N-Level
 
-N-Level system
-==============
-
-.. code-block:: julia
-
-    N = 3
-    b = NLevelBasis(N)
-    psi2 = nlevelstate(b, 2)
-    psi1 = transition(b, 1, 2)
+```@example
+using QuantumOptics # hide
+N = 3
+b = NLevelBasis(N)
+psi1 = nlevelstate(b, 1)
+psi2 = nlevelstate(b, 2)
+@assert psi1 == transition(b, 1, 2) * psi2
+```
 
 N-Level systems are mostly used as idealized model when the relevant physics can be captured in a small subspace of the complete Hilbert space. For example an atom can often be represented by a few relevant levels.
 
-For these kinds of systems the :jl:type:`NLevelBasis` can be used. Essentially it is defined just as::
+For these kinds of systems the [`NLevelBasis`](@ref) can be used. Essentially it is defined just as:
 
-    type NLevelBasis <: Basis
-        shape::Vector{Int}
-        N::Int
-    end
-
-
-States
-------
-
-We can create a state :math:`|m\rangle` with
-
-:jl:func:`nlevelstate(b::NLevelBasis, m::Int)`
+```julia
+type NLevelBasis <: Basis
+    shape::Vector{Int}
+    N::Int
+end
+```
 
 
-Operators
----------
+## States
 
-With the transition operator, we can create projectors of the form :math:`|m\rangle\langle n|` describing a transition from the state :math:`|n\rangle` to :math:`|m\rangle`.
+We can create a state ``|m\rangle`` with
 
-:jl:func:`transition(b::NLevelBasis, m::Int, n::Int)`
+* [`nlevelstate(b::NLevelBasis, m::Int)`](@ref)
+
+
+## Operators
+
+With the transition operator, we can create projectors of the form ``|m\rangle\langle n|`` describing a transition from the state ``|n\rangle`` to ``|m\rangle``.
+
+* [`transition(b::NLevelBasis, m::Int, n::Int)`](@ref)
 
 
 Examples
 --------
 
-* :ref:`example-raman`
-* :ref:`example-manybody-fourlevel-system`
+* [Example: raman](@ref)
+* [Example: manybody-fourlevel-system](@ref)
