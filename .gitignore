@@ -1,4 +1,5 @@
 build
+postbuild
 source/examples/
 source/tutorial/_tutorial.rst
 .ipynb_checkpoints

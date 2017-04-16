@@ -100,10 +100,9 @@ Gamma = [Γ γ₁ γ₂; γ₁ Γ γ₁; γ₂ γ₁ Γ]
 J = [sm(i) for i=1:3]
 
 d, D = diagonaljumps(Gamma, J)
-nothing # hide
 ```
 
-Now, we can call the solver with the acquired jump operators `D` multiplied by their corresponding rates `d` like so::
+Now, we can call the solver with the acquired jump operators `D` multiplied by their corresponding rates `d`:
 
 ```@example mcwf
 H = SparseOperator(threespinbasis) # hide
