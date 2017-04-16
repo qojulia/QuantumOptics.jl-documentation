@@ -1,4 +1,4 @@
-## Installation
+# Installation
 
 To install the latest official release, you can use Julia's internal package manager. Simply start the Julia interpreter and type
 

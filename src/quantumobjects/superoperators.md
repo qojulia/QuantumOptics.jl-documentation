@@ -2,13 +2,13 @@
 
 Let's now consider mappings from the space of mappings ``\mathcal{H} \rightarrow \mathcal{H}`` to itself, i.e. ``(\mathcal{H} \rightarrow \mathcal{H}) \rightarrow (\mathcal{H} \rightarrow \mathcal{H})``. In operator notation we also call these objects *super-operators*. With the operators ``A,B`` and the super-operator ``S`` the basis independent expression is denoted by
 
-```@math
+```math
 A = S B
 ```
 
 In contrast, for the basis specific version we have to choose two possibly different bases for A which we denote as ``\{|u\rangle\}`` and ``\{|v\rangle\}`` and additionally two, also possibly different bases for B, ``\{|m\rangle\}`` and ``\{|n\rangle\}``.
 
-```@math
+```math
 A &= \sum_{uv} A_{uv} |v \rangle \langle u|
 \\
 B &= \sum_{mn} B_{mn} |n \rangle \langle m|
@@ -19,7 +19,7 @@ S &= \sum_{uvmn} S_{uvmn} |v \rangle \langle u| \otimes
 
 The coefficients are then connected by
 
-```@math
+```math
 A_{uv} = \sum_{mn} S_{uvmn} B_{mn}
 ```
 

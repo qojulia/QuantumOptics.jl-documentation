@@ -2,13 +2,13 @@
 
 State vectors in **QuantumOptics.jl** are interpreted as coefficients in respect to a certain [`Basis`](@ref). For example the state ``|\psi\rangle`` can be represented in the basis ``\{|u_i\rangle\}_i`` as ``\psi_i``. These quantities are connected by
 
-```@math
+```math
 |\psi\rangle = \sum_i \psi_i |u_i\rangle
 ```
 
 and the conjugate equation
 
-```@math
+```math
 \langle\psi| = \sum_i \psi_i^* \langle u_i|.
 ```
 

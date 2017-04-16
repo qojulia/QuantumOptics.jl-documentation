@@ -399,6 +399,10 @@ manybodyoperator
 timeevolution.schroedinger
 ```
 
+```@docs
+timeevolution.schroedinger_dynamic
+```
+
 ### API: Master
 
 ```@docs
@@ -411,6 +415,10 @@ timeevolution.master_h
 
 ```@docs
 timeevolution.master_nh
+```
+
+```@docs
+timeevolution.master_dynamic
 ```
 
 ### API: Monte Carlo wave function

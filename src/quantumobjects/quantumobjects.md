@@ -4,7 +4,7 @@ Quantum objects, i.e. states, operators and super-operators, are the fundamental
 
 Mathematically, quantum states are abstract vectors in a Hilbert space and operators are linear functions that map these states from one Hilbert space to another. To perform actual numerical calculations with these objects, it is necessary to choose a basis of the Hilbert space under consideration and use their numerical representation relative to this basis. For example if the states ``\{|u_i\rangle\}_i`` form a basis of a Hilbert space, every possible state ``|\psi\rangle`` can be expressed as coordinates ``\psi_i`` in respect to this basis:
 
-```@math
+```math
 |\psi\rangle = \sum_i |u_i\rangle\langle u_i |\psi \rangle
              = \sum_i \psi_i |u_i\rangle
 ```
@@ -13,7 +13,7 @@ In **QuantumOptics.jl** all states therefore contain two types of information. T
 
 Operators are implemented in a very similar fashion. The only thing that makes it more complicated is that in principle it is possible to choose different bases for the left and right hand side, which sometimes is quite useful. Assuming that the states ``\{|u_i\rangle\}_{i=1}^{N_u}`` form a basis of one Hilbert space ``\mathcal{H}_u`` and the states ``\{|v_i\rangle\}_{i=1}^{N_v}`` form a basis of another Hilbert space ``\mathcal{H}_v``, every operator defined as map from ``\mathcal{H}_v \rightarrow \mathcal{H}_u`` can be expressed as coefficients ``A_{ij}`` in respect to these two bases:
 
-```@math
+```math
 \hat{A} = \sum_{ij} |u_i\rangle\langle u_i| \hat{A} |v_j\rangle\langle v_j|
         = \sum_{ij} A_{ij} |u_i\rangle \langle v_j|
 ```

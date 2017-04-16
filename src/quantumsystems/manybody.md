@@ -28,7 +28,7 @@ end
 
 Of course we still need a way to relate operators defined in the single particle description to equivalent many-body operators. For an arbitrary additive single particle operator ``\sum_i x_i`` this connection is given by
 
-```@math
+```math
     X = \sum_{ij} a_i^\dagger a_j
                     \left\langle u_i \right|
                     x
@@ -37,7 +37,7 @@ Of course we still need a way to relate operators defined in the single particle
 
 For two particle interactions given by the additive two particle operator ``\sum_{i \neq j} V_{ij}`` the corresponding many-body operator is given by:
 
-```@math
+```math
     X = \sum_{ijkl} a_i^\dagger a_j^\dagger a_k a_l
             \left\langle u_i \right| \left\langle u_j \right|
             x
