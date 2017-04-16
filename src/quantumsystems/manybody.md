@@ -1,4 +1,4 @@
-# Many-body system
+# Many-body
 
 ```@example
 using QuantumOptics # hide

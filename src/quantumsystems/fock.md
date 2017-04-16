@@ -1,4 +1,4 @@
-# Fock Basis
+# Fock space
 
 ```@example
 using QuantumOptics # hide
