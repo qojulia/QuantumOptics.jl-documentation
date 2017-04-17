@@ -47,12 +47,12 @@ nothing # hide
 When creating a momentum basis from a position basis the cutoff points are connected by ``p_\mathrm{min} = -\pi/dx`` and ``p_\mathrm{max} = \pi/dx`` where ``dx = (x_\mathrm{max} - x_\mathrm{min})/N``. Similarly for the inverse procedure the cutoffs are ``x_\mathrm{min} = -\pi/dp`` and ``x_\mathrm{max} = \pi/dp`` with ``dp = (p_\mathrm{max} - p_\mathrm{min})/N``.
 
 
-## States
+## [States](@id particle: States)
 
 * [`gaussianstate`](@ref)
 
 
-## Operators
+## [Operators](@id particle: Operators)
 
 All operators are defined for the position basis as well as for the momentum basis.
 
@@ -65,14 +65,14 @@ Transforming a state from one basis into another can be done efficiently using t
     Psi_p = Tpx*Psi_x
 
 
-## Additional functions
+## [Additional functions](@id particle: Additional functions)
 
 * [`particle.spacing`](@ref)
 * [`samplepoints`](@ref)
 
 
-## Examples
+## [Examples](@id particle: Examples)
 
-* [Example: particle-in-harmonic-trap](@ref)
-* [Example: particle-into-barrier](@ref)
-* [Example: nparticles-in-double-well](@ref)
+* [Particle in harmonic trap potential](@ref)
+* [Gaussian wave packet running into a potential barrier](@ref)
+* [N-Particles in a double-well potential](@ref)

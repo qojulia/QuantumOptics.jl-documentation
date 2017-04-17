@@ -18,7 +18,7 @@ end
 ```
 
 
-## States
+## [States](@id spin: States)
 
 The lowest and uppermost states are defined:
 
@@ -26,7 +26,7 @@ The lowest and uppermost states are defined:
 * [`spindown`](@ref)
 
 
-## Operators
+## [Operators](@id spin: Operators)
 
 All expected operators are implemented, all of which require a single argument of the type [`SpinBasis`](@ref).
 
@@ -37,7 +37,7 @@ All expected operators are implemented, all of which require a single argument o
 * [`sigmam`](@ref)
 
 
-## Examples
+## [Examples](@id spin: Examples)
 
-* :ref:`example-jaynes-cummings`
-* :ref:`example-two-qubit-entanglement`
+* [Jaynes-Cummings model](@ref)
+* [Entanglement of Two Qubits](@ref)

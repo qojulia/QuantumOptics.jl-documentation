@@ -62,8 +62,8 @@ nothing # hide
 
 ## Examples
 
-* [Example: jaynes-cummings](@ref)
-* [Example: particle-in-harmonic-trap](@ref)
-* [Example: particle-into-barrier](@ref)
-* [Example: two-qubit-entanglement](@ref)
-* [Example: nparticles-in-double-well](@ref)
+* [Jaynes-Cummings model](@ref)
+* [Particle in harmonic trap potential](@ref)
+* [Gaussian wave packet running into a potential barrier](@ref)
+* [Entanglement of Two Qubits](@ref)
+* [N-Particles in a double-well potential](@ref)

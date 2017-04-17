@@ -23,20 +23,20 @@ type SubspaceBasis <: Basis
 end
 ```
 
-## Operators
+## [Operators](@id subspace: Operators)
 
 To project states into the subspace or re-embed them into the super-space a projection operator can be used:
 
 * [`projector`](@ref)
 
 
-## Additional functions
+## [Additional functions](@id subspace: Additional functions)
 
 If the states used to define the subspace are not orthonormal one can use the orthonormalize function to obtain an ONB:
 
 * [`subspace.orthonormalize`](@ref)
 
 
-## Examples
+## [Examples](@id subspace: Examples)
 
-* [Example N particles in a double well`
+* [N-Particles in a double-well potential](@ref)

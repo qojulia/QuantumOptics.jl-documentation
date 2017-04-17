@@ -21,22 +21,21 @@ end
 ```
 
 
-## States
+## [States](@id nlevel: States)
 
 We can create a state ``|m\rangle`` with
 
 * [`nlevelstate(b::NLevelBasis, m::Int)`](@ref)
 
 
-## Operators
+## [Operators](@id nlevel: Operators)
 
 With the transition operator, we can create projectors of the form ``|m\rangle\langle n|`` describing a transition from the state ``|n\rangle`` to ``|m\rangle``.
 
 * [`transition(b::NLevelBasis, m::Int, n::Int)`](@ref)
 
 
-Examples
---------
+## [Examples](@id nlevel: Examples)
 
-* [Example: raman](@ref)
-* [Example: manybody-fourlevel-system](@ref)
+* [Raman Transition of a ``\Lambda``-scheme Atom](@ref)
+* [Four level system in many-body formalism](@ref)

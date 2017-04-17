@@ -56,7 +56,7 @@ If for any reason this behavior is unwanted, e.g. special operators are used tha
 
 ## Examples
 
-* [Example: pumped-cavity](@ref)
-* [Example: jaynes-cummings](@ref)
-* [Example: raman](@ref)
-* [Example: manybody-fourlevel-system](@ref)
+* [Pumped cavity](@ref)
+* [Jaynes-Cummings model](@ref)
+* [Raman Transition of a ``\Lambda``-scheme Atom](@ref)
+* [Four level system in many-body formalism](@ref)

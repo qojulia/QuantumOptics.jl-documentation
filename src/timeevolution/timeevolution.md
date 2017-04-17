@@ -15,13 +15,3 @@ tout, rho_t = timeevolution.master(T, psi0, H, J)
 tout, psi_t = timeevolution.mcwf(T, psi0, H, J)
 nothing # hide
 ```
-
-More details can be found in the following sections:
-
-```@contents
-Pages = [
-    "schroedinger.md",
-    "master.md",
-    "mcwf.md"
-    ]
-```

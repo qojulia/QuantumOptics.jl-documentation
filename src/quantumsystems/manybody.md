@@ -47,14 +47,14 @@ For two particle interactions given by the additive two particle operator ``\sum
 The [`manybodyoperator`](@ref) function uses these relations to automatically generate many-body operators from their corresponding one-body operators.
 
 
-## States
+## [States](@id manybody: States)
 
 Since it is typically more natural to label a basis state of a many-body basis by its occupation number, e.g. ``|2,0,1,0\rangle``, instead of calling it the i-th basis state, the [`basisstate`](@ref) function is overloaded to provide exactly this functionality.
 
 * [`basisstate`](@ref)
 
 
-## Operators
+## [Operators](@id manybody: Operators)
 
 Note that when using the [`create`](@ref) and [`destroy`](@ref) operators for a fixed particle number will most likely fail since every entry of them is zero. Use the [`number`](@ref) and [`transition`](@ref) operators instead.
 
@@ -68,7 +68,7 @@ The [`manybodyoperator`](@ref) function allows to automatically generate the man
 * [`manybodyoperator`](@ref)
 
 
-## Examples
+## [Examples](@id manybody: Examples)
 
-* [Example: Manybody four-level system](@ref)
-* [Example: N-particles in a double well`](@ref)
+* [Four level system in many-body formalism](@ref)
+* [N-Particles in a double-well potential`](@ref)

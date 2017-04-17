@@ -6,14 +6,14 @@ postprocessdir = "postbuild"
 targetpath = "../QuantumOptics.jl-website/src/documentation"
 
 pages = [
-        "introduction.md",
+        "index.md",
         "installation.md",
         "tutorial.md",
         "Quantum objects" => [
             "Introduction" => "quantumobjects/quantumobjects.md",
             "quantumobjects/bases.md",
             "quantumobjects/states.md",
-            "quantumobjects/operators.md"
+            "quantumobjects/operators.md",
             ],
         "Quantum systems" => [
             "Introduction" => "quantumsystems/quantumsystems.md",
@@ -22,13 +22,24 @@ pages = [
             "quantumsystems/nlevel.md",
             "quantumsystems/particle.md",
             "quantumsystems/subspace.md",
-            "quantumsystems/manybody.md"
+            "quantumsystems/manybody.md",
         ],
         "Time-evolution" => [
             "Introduction" => "timeevolution/timeevolution.md",
             "Schrödinger equation" => "timeevolution/schroedinger.md",
             "Master equation" => "timeevolution/master.md",
             "Quantum trajectories" => "timeevolution/mcwf.md",
+        ],
+        "Examples" => [
+            "examples/pumped-cavity.md",
+            "examples/jaynes-cummings.md",
+            "examples/particle-in-harmonic-trap.md",
+            "examples/particle-into-barrier.md",
+            "examples/raman.md",
+            "examples/two-qubit-entanglement.md",
+            "examples/correlation-spectrum.md",
+            "examples/manybody-fourlevel-system.md",
+            "examples/nparticles-in-double-well.md",
         ],
         "api.md"
     ]

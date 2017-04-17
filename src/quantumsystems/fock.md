@@ -21,26 +21,26 @@ type FockBasis <: Basis
 end
 ```
 
-## States
+## [States](@id fock: States)
 
 * [`fockstate`](@ref)
 * [`coherentstate`](@ref)
 
 
-## Operators
+## [Operators](@id fock: Operators)
 
 * [`number`](@ref)
 * [`destroy`](@ref)
 * [`create`](@ref)
 
 
-## Additional functions
+## [Additional functions](@id fock: Additional functions)
 
 * [`qfunc`](@ref)
 
 
-## Examples
+## [Examples](@id fock: Examples)
 
-* [Example: Pumped cavity](@ref)
-* [Example: Jaynes-Cummings](@ref)
-* [Example: Correlation spectrum](@ref)
+* [Pumped cavity](@ref)
+* [Jaynes-Cummings model](@ref)
+* [Two-time correlation function and spectrum of a Fock state](@ref)

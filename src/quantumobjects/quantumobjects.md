@@ -23,16 +23,3 @@ Since for operators two different Hilbert spaces are involved, every operator in
 For super-operators the number of involved bases further doubles. In general, they map operators defined in ``\mathcal{H}_v \rightarrow \mathcal{H}_u`` to operators defined in ``\mathcal{H}_m \rightarrow \mathcal{H}_n``.
 
 The fact that **QuantumOptics.jl** knows about the choice of basis for every quantum object means that it can check if all performed operations physically make sense, catching many possible mistakes early on. Additionally, explicitly specifying a basis makes the code much easier to read as well as more convenient to write. As can be found in the section [Quantum systems](@ref), many functions are already implemented that take a basis as argument and generate states and operators that are commonly used in the corresponding quantum systems.
-
-More information on the concrete implementation of bases, states, operators and super-operators can be found in the following sections:
-
-
-```@contents
-Pages = [
-    "bases.md",
-    "states.md",
-    "operators.md",
-    "superoperators.md"
-    ]
-Depth = 1
-```
