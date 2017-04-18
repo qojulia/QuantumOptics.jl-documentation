@@ -47,7 +47,9 @@ pages = [
             "examples/manybody-fourlevel-system.md",
             "examples/nparticles-in-double-well.md",
         ],
-        "api.md"
+        "steadystate.md",
+        "timecorrelations.md",
+        "api.md",
     ]
 
 makedocs(
