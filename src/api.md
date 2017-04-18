@@ -421,6 +421,10 @@ timeevolution.master_nh
 timeevolution.master_dynamic
 ```
 
+```@docs
+timeevolution.master_nh_dynamic
+```
+
 ### [Monte Carlo wave function](@id API: Monte Carlo wave function)
 
 ```@docs

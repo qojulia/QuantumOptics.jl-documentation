@@ -50,11 +50,17 @@ For performance reasons the solver internally first creates the non-hermitian Ha
 
 If for any reason this behavior is unwanted, e.g. special operators are used that don't support addition, the function [`timeevolution.master_h`](@ref) (h for hermitian) can be used.
 
-* [`timeevolution.master_h(tspan, rho0::DenseOperator, H::Operator, J::Vector)`](@ref)
-* [`timeevolution.master_nh(tspan, rho0::DenseOperator, Hnh::Operator, J::Vector)`](@ref)
+
+## [Functions](@id master: Functions)
+
+* [`timeevolution.master`](@ref)
+* [`timeevolution.master_h`](@ref)
+* [`timeevolution.master_nh`](@ref)
+* [`timeevolution.master_dynamic`](@ref)
+* [`timeevolution.master_nh_dynamic`](@ref)
 
 
-## Examples
+## [Examples](@id master: Examples)
 
 * [Pumped cavity](@ref)
 * [Jaynes-Cummings model](@ref)
