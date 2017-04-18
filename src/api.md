@@ -1,7 +1,7 @@
 # API
 
 
-## API: Bases
+## [Bases](@id API: Bases)
 
 ```@docs
 Basis
@@ -19,7 +19,7 @@ length
 bases.multiplicable
 ```
 
-### API: Composite bases
+### [Composite bases](@id API: Composite bases)
 
 ```@docs
 CompositeBasis
@@ -37,7 +37,7 @@ ptrace
 permutesystems
 ```
 
-### API: Subspace bases
+### [Subspace bases](@id API: Subspace bases)
 
 ```@docs
 SubspaceBasis
@@ -54,7 +54,7 @@ projector(b1::SubspaceBasis, b2::Basis)
 ```
 
 
-## API: States
+## [States](@id API: States)
 
 ```@docs
 StateVector
@@ -98,7 +98,7 @@ basisstate
 ```
 
 
-## API: Operators
+## [Operators](@id API: Operators)
 
 ```@docs
 Operator
@@ -160,7 +160,7 @@ operators.gemv!
 operators.gemm!
 ```
 
-### API: DenseOperators
+### [DenseOperators](@id API: DenseOperators)
 
 ```@docs
 DenseOperator
@@ -176,7 +176,7 @@ projector(a::Ket)
 projector(a::Bra)
 ```
 
-### API: SparseOperators
+### [SparseOperators](@id API: SparseOperators)
 
 ```@docs
 SparseOperator
@@ -186,7 +186,7 @@ SparseOperator
 sparse
 ```
 
-### API: Lazy Operators
+### [Lazy Operators](@id API: Lazy Operators)
 
 ```@docs
 LazyTensor
@@ -201,7 +201,7 @@ LazyProduct
 ```
 
 
-## API: Superoperators
+## [Superoperators](@id API: Superoperators)
 
 ```@docs
 superoperators.SuperOperator
@@ -232,7 +232,7 @@ expm(op::DenseSuperOperator)
 ```
 
 
-## API: Random operators
+## [Random operators](@id API: Random operators)
 
 ```@docs
 randstate
@@ -243,7 +243,7 @@ randoperator
 ```
 
 
-## API: Metrics
+## [Metrics](@id API: Metrics)
 
 ```@docs
 tracedistance
@@ -258,9 +258,9 @@ entropy_vn
 ```
 
 
-## API: Systems
+## [Systems](@id API: Systems)
 
-### API: Fock
+### [Fock](@id API: Fock)
 
 ```@docs
 FockBasis
@@ -290,7 +290,7 @@ coherentstate
 qfunc
 ```
 
-### API: N-level
+### [N-level](@id API: N-level)
 
 ```@docs
 NLevelBasis
@@ -304,7 +304,7 @@ transition
 nlevelstate
 ```
 
-### API: Spin
+### [Spin](@id API: Spin)
 
 ```@docs
 SpinBasis
@@ -338,7 +338,7 @@ spinup
 spindown
 ```
 
-### API: Particle
+### [Particle](@id API: Particle)
 
 ```@docs
 PositionBasis
@@ -372,7 +372,7 @@ gaussianstate
 particle.FFTOperator(::MomentumBasis, ::PositionBasis)
 ```
 
-### API: Many-body
+### [Many-body](@id API: Many-body)
 
 ```@docs
 ManyBodyBasis
@@ -391,9 +391,9 @@ manybodyoperator
 ```
 
 
-## API: Time-evolution
+## [Time-evolution](@id API: Time-evolution)
 
-### API: Schroedinger
+### [Schroedinger](@id API: Schroedinger)
 
 ```@docs
 timeevolution.schroedinger
@@ -403,7 +403,7 @@ timeevolution.schroedinger
 timeevolution.schroedinger_dynamic
 ```
 
-### API: Master
+### [Master](@id API: Master)
 
 ```@docs
 timeevolution.master
@@ -421,7 +421,7 @@ timeevolution.master_nh
 timeevolution.master_dynamic
 ```
 
-### API: Monte Carlo wave function
+### [Monte Carlo wave function](@id API: Monte Carlo wave function)
 
 ```@docs
 timeevolution.mcwf
@@ -431,7 +431,7 @@ diagonaljumps
 ```
 
 
-## API: Spectral analysis
+## [Spectral analysis](@id API: Spectral analysis)
 
 ```@docs
 eig
@@ -450,7 +450,7 @@ simdiag
 ```
 
 
-## API: Steady-states
+## [Steady-states](@id API: Steady-states)
 
 ```@docs
 steadystate.master
@@ -461,7 +461,7 @@ steadystate.eigenvector
 ```
 
 
-## API: Time correlations
+## [Time correlations](@id API: Time correlations)
 
 ```@docs
 timecorrelations.correlation
