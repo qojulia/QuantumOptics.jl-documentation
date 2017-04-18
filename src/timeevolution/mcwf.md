@@ -72,6 +72,7 @@ function fout(t, psi)
   push!(exp_a, expect(a, psi)/norm(psi))
 end
 timeevolution.mcwf(tspan, psi0, H, J; fout=fout)
+nothing # hide
 ```
 
 Note, that the given state is not normalized and is still in use by the ode solver. Therefore it should not be changed and if one wants to store the state at a certain point of time it has to be copied explicitly.
@@ -95,11 +96,11 @@ spinbasis = SpinBasis(1//2)
 threespinbasis = spinbasis ⊗ spinbasis ⊗ spinbasis
 sm(i) = embed(threespinbasis, i, sigmam(spinbasis))
 
-Γ, γ₁, γ₂, = 1.0, 0.5, 0.2
-Gamma = [Γ γ₁ γ₂; γ₁ Γ γ₁; γ₂ γ₁ Γ]
+a, b, c = 1.0, 0.5, 0.2
+Gamma = [a b c; b a c; c b a]
 J = [sm(i) for i=1:3]
-
 d, D = diagonaljumps(Gamma, J)
+nothing # hide
 ```
 
 Now, we can call the solver with the acquired jump operators `D` multiplied by their corresponding rates `d`:
@@ -111,7 +112,14 @@ tout, psi_t = timeevolution.mcwf(tspan, psi0, H, [sqrt(d[i])*D[i] for i=1:3])
 nothing # hide
 ```
 
-## Examples
+## [Functions](@id mcwf: Functions)
 
-* [Example: pumped-cavity]
-* [Example: jaynes-cummings]
+* [`timeevolution.mcwf`](@ref)
+* [`timeevolution.mcwf_h`](@ref)
+* [`timeevolution.mcwf_nh`](@ref)
+* [`diagonaljumps`](@ref)
+
+## [Examples](@id mcwf: Examples)
+
+* [Pumped cavity](@ref)
+* [Jaynes-Cummings model](@ref)

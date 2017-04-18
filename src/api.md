@@ -426,6 +426,15 @@ timeevolution.master_dynamic
 ```@docs
 timeevolution.mcwf
 ```
+
+```@docs
+timeevolution.mcwf_h
+```
+
+```@docs
+timeevolution.mcwf_nh
+```
+
 ```@docs
 diagonaljumps
 ```
