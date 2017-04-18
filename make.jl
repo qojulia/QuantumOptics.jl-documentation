@@ -5,6 +5,12 @@ builddir = "build"
 postprocessdir = "postbuild"
 targetpath = "../QuantumOptics.jl-website/src/documentation"
 
+@assert !isdir(basename(targetpath))
+if !isdir(targetpath)
+    println("Creating documentation output directory at \"", targetpath, "\"")
+    mkdir(targetpath)
+end
+
 pages = [
         "index.md",
         "installation.md",
