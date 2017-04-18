@@ -60,7 +60,13 @@ nothing # hide
 ```
 
 
-## Examples
+## [Functions](@id schroedinger: Functions)
+
+* [`timeevolution.schroedinger`](@ref)
+* [`timeevolution.schroedinger_dynamic`](@ref)
+
+
+## [Examples](@id schroedinger: Examples)
 
 * [Jaynes-Cummings model](@ref)
 * [Particle in harmonic trap potential](@ref)
