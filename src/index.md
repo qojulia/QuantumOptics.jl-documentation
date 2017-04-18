@@ -6,6 +6,6 @@ One of the core concepts of **QuantumOptics.jl** is that all quantum objects, i.
 
 After choosing a basis **QuantumOptics.jl** provides many useful functions to create common [States](@ref) and [Operators](@ref) which can be combined in all the expected ways. Consequently, constructing arbitrary Hamiltonians and Liouvillians and specifying initial states is straightforward. These objects can be used to perform a [Time-evolution](@ref).
 
-Although the main focus is on simulating dynamics of (open) quantum systems, there are nevertheless many additional features available to calculate [steady states](@ref) the [spectralanalysis](@ref), and [correlation functions](@ref).
+Although the main focus is on simulating dynamics of (open) quantum systems, there are nevertheless additional features available to calculate a [Steady state](@ref) or [Two-time correlation functions](@ref).
 
 For a quick introduction it is probably best to start reading the [Tutorial](@ref). It shows a typical approach to study a quantum system and provides links to the corresponding topics in the documentation.
