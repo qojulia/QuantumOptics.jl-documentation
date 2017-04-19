@@ -62,7 +62,7 @@ makedocs(
 # Copy files to separate directory for post processing
 cp(builddir, postprocessdir; remove_destination=true)
 
-layout(name) = "---\nlayout: $name\n---\n\n"
+layout(search) = "---\nlayout: default\ntype: documentation\nsearch: $search\n---\n\n"
 extractbody(text) = text[last(search(text, "<body>"))+1:first(search(text, "</body>"))-1]
 
 for (rootdir, dirs, files) in walkdir(postprocessdir)
@@ -73,9 +73,9 @@ for (rootdir, dirs, files) in walkdir(postprocessdir)
             text = readstring(path)
             text = extractbody(text)
             if file == "search.html"
-                text = layout("documentation_search") * text
+                text = layout("true") * text
             else
-                text = layout("documentation") * text
+                text = layout("false") * text
             end
             f = write(path, text)
         end
