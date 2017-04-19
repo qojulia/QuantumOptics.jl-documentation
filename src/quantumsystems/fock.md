@@ -32,6 +32,7 @@ end
 * [`number`](@ref)
 * [`destroy`](@ref)
 * [`create`](@ref)
+* [`displace`](@ref)
 
 
 ## [Additional functions](@id fock: Additional functions)

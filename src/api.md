@@ -1,7 +1,11 @@
 # API
 
 
-## [Bases](@id API: Bases)
+## [Quantum-objects](@id API: Quantum objects)
+
+### [Types](@id API: Quantum objects types)
+
+* General basis types. Specialized bases can be found in the section [API: Quantum-systems](@ref).
 
 ```@docs
 Basis
@@ -12,49 +16,10 @@ GenericBasis
 ```
 
 ```@docs
-length
-```
-
-```@docs
-bases.multiplicable
-```
-
-### [Composite bases](@id API: Composite bases)
-
-```@docs
 CompositeBasis
 ```
 
-```@docs
-tensor
-```
-
-```@docs
-ptrace
-```
-
-```@docs
-permutesystems
-```
-
-### [Subspace bases](@id API: Subspace bases)
-
-```@docs
-SubspaceBasis
-```
-
-```@docs
-subspace.orthonormalize
-```
-
-```@docs
-projector(b1::SubspaceBasis, b2::SubspaceBasis)
-projector(b1::Basis, b2::SubspaceBasis)
-projector(b1::SubspaceBasis, b2::Basis)
-```
-
-
-## [States](@id API: States)
+* States
 
 ```@docs
 StateVector
@@ -68,125 +33,19 @@ Bra
 Ket
 ```
 
-```@docs
-tensor{T<:StateVector}(a::T, b::T)
-```
-
-```@docs
-tensor(::Ket, ::Bra)
-```
-
-```@docs
-dagger(x::Bra)
-dagger(x::Ket)
-```
-
-```@docs
-states.norm(x::StateVector)
-```
-
-```@docs
-states.normalize(x::StateVector)
-```
-
-```@docs
-states.normalize!(x::StateVector)
-```
-
-```@docs
-basisstate
-```
-
-
-## [Operators](@id API: Operators)
+* General purpose operators. A few more specialized operators are implemented in [API: Quantum-systems](@ref).
 
 ```@docs
 Operator
 ```
 
 ```@docs
-dagger(a::Operator)
-```
-
-```@docs
-identityoperator
-```
-
-```@docs
-trace(x::Operator)
-```
-
-```@docs
-ptrace(a::Operator, index::Vector{Int})
-```
-
-```@docs
-normalize(op::Operator)
-```
-
-```@docs
-normalize!(op::Operator)
-```
-
-```@docs
-expect
-```
-
-```@docs
-variance
-```
-
-```@docs
-tensor(a::Operator, b::Operator)
-```
-
-```@docs
-embed
-```
-
-```@docs
-permutesystems(a::Operator, perm::Vector{Int})
-```
-
-```@docs
-expm(op::Operator)
-```
-
-```@docs
-operators.gemv!
-```
-
-```@docs
-operators.gemm!
-```
-
-### [DenseOperators](@id API: DenseOperators)
-
-```@docs
 DenseOperator
 ```
 
 ```@docs
-full
-```
-
-```@docs
-projector(a::Ket, b::Bra)
-projector(a::Ket)
-projector(a::Bra)
-```
-
-### [SparseOperators](@id API: SparseOperators)
-
-```@docs
 SparseOperator
 ```
-
-```@docs
-sparse
-```
-
-### [Lazy Operators](@id API: Lazy Operators)
 
 ```@docs
 LazyTensor
@@ -201,10 +60,10 @@ LazyProduct
 ```
 
 
-## [Superoperators](@id API: Superoperators)
+* Super operators:
 
 ```@docs
-superoperators.SuperOperator
+SuperOperator
 ```
 
 ```@docs
@@ -213,6 +72,27 @@ DenseSuperOperator
 
 ```@docs
 SparseSuperOperator
+```
+
+
+### [Functions](@id API: Quantum objects functions)
+
+* Functions to generate general states, operators and super-operators
+
+```@docs
+basisstate
+```
+
+```@docs
+identityoperator
+```
+
+```@docs
+randstate
+```
+
+```@docs
+randoperator
 ```
 
 ```@docs
@@ -227,38 +107,103 @@ spost
 liouvillian
 ```
 
+* As far as it makes sense the same functions are implemented for bases, states, operators and superoperators.
+
 ```@docs
+bases.samebases
+```
+
+```@docs
+bases.multiplicable
+```
+
+```@docs
+bases.basis
+```
+
+```@docs
+dagger
+```
+
+```@docs
+tensor
+```
+
+```@docs
+projector(a::Ket, b::Bra)
+projector(a::Ket)
+projector(a::Bra)
+```
+
+```@docs
+states.norm(x::StateVector)
+```
+
+```@docs
+trace
+```
+
+```@docs
+ptrace
+```
+
+```@docs
+normalize(x::StateVector)
+normalize(op::Operator)
+```
+
+```@docs
+normalize!(x::StateVector)
+normalize!(op::Operator)
+```
+
+```@docs
+expect
+```
+
+```@docs
+variance
+```
+
+```@docs
+embed
+```
+
+```@docs
+permutesystems
+```
+
+```@docs
+expm(op::Operator)
 expm(op::DenseSuperOperator)
 ```
 
-
-## [Random operators](@id API: Random operators)
-
 ```@docs
-randstate
+operators.gemv!
 ```
 
 ```@docs
-randoperator
+operators.gemm!
 ```
 
-
-## [Metrics](@id API: Metrics)
-
-```@docs
-tracedistance
-```
+* Conversion of operators
 
 ```@docs
-tracedistance_general
+full
 ```
 
 ```@docs
-entropy_vn
+sparse
+```
+
+### [Exceptions](@id API: Quantum objects exceptions)
+
+```@docs
+bases.IncompatibleBases
 ```
 
 
-## [Systems](@id API: Systems)
+## [Quantum systems](@id API: Quantum systems)
 
 ### [Fock](@id API: Fock)
 
@@ -276,6 +221,10 @@ destroy
 
 ```@docs
 create
+```
+
+```@docs
+displace
 ```
 
 ```@docs
@@ -369,7 +318,21 @@ gaussianstate
 ```
 
 ```@docs
-particle.FFTOperator(::MomentumBasis, ::PositionBasis)
+particle.FFTOperator
+```
+
+### [Subspace bases](@id API: Subspace bases)
+
+```@docs
+SubspaceBasis
+```
+
+```@docs
+subspace.orthonormalize
+```
+
+```@docs
+projector(b1::SubspaceBasis, b2::SubspaceBasis)
 ```
 
 ### [Many-body](@id API: Many-body)
@@ -388,6 +351,33 @@ bosonstates
 
 ```@docs
 manybodyoperator
+```
+
+
+## [Metrics](@id API: Metrics)
+
+```@docs
+tracenorm
+```
+
+```@docs
+tracedistance
+```
+
+```@docs
+tracenorm_general
+```
+
+```@docs
+tracedistance_general
+```
+
+```@docs
+entropy_vn
+```
+
+```@docs
+fidelity
 ```
 
 
@@ -447,15 +437,19 @@ diagonaljumps
 ## [Spectral analysis](@id API: Spectral analysis)
 
 ```@docs
-eig
+eig(::DenseOperator)
 ```
 
 ```@docs
-eigs
+eigs(::SparseOperator)
 ```
 
 ```@docs
-eigvals
+eigvals(::DenseOperator)
+```
+
+```@docs
+eigvals!(::DenseOperator)
 ```
 
 ```@docs

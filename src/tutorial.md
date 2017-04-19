@@ -2,7 +2,7 @@
 
 In this tutorial we will step through the common tasks necessary to simulate a quantum system. At each step links to documentation and examples, that explain the topic in more detail, will be provided.
 
-In order to use the *QuantumOptics.jl* library it has to be loaded into the current workspace.
+In order to use the **QuantumOptics.jl** library it has to be loaded into the current workspace.
 
 ```@example tutorial
 using QuantumOptics
@@ -11,7 +11,7 @@ using QuantumOptics
 
 ## Bases
 
-The first step is always to define a suitable basis for the quantum system under consideration. For example a Fock basis can be used to describe a field mode. It takes an Integer as argument which specifies the photon number cutoff.
+The first step is always to define a suitable basis for the quantum system under consideration. For example a [`FockBasis`](@ref) can be used to describe a field mode inside of a cavity. It takes an Integer as argument which specifies the photon number cutoff.
 
 ```@example tutorial
 b = FockBasis(20)
@@ -19,16 +19,16 @@ nothing # hide
 ```
 
 Many quantum systems are already implemented:
-* Fock bases
-* Spins
-* Particles
-* N-level systems
-* Many-body systems
+* [Fock space](@ref)
+* [Spin](@ref)
+* [Particle](@ref)
+* [N-Level](@ref)
+* [Many-body](@ref)
 
 
 ## States and Operators
 
-Functions that create the typical operators and states in these bases are provided.
+For these quantum systems, functions that create the typical operators and states are provided. Typically, they take a basis as argument and create the operator or state in respect to this basis.
 
 ```@example tutorial
 a = destroy(b)
@@ -46,7 +46,7 @@ dpsi = -1im*(a + at)*psi
 nothing # hide
 ```
 
-The `dagger()` function can be used to transform a ket state into a bra state which for example can be used to create a density operator
+The [`dagger()`](@ref) function can be used to transform a ket state into a bra state which for example can be used to create a density operator
 
 ```@example tutorial
 rho = psi ⊗ dagger(psi)
@@ -59,7 +59,7 @@ or to calculate expectation values.
 println("α = ", dagger(psi)*a*psi)
 ```
 
-Alternatively. the `expect()` function can be used.
+Alternatively. the [`expect()`](@ref) function can be used.
 
 ```@example tutorial
 println("α = ", expect(a, psi))
@@ -91,7 +91,7 @@ H_field = ω_field*n
 nothing # hide
 ```
 
-Combining operators from those two systems can be done with the `tensor()` function or with the equivalent ``\otimes`` operator.
+Combining operators from those two systems can be done with the [`tensor()`](@ref) function or with the equivalent ``\otimes`` operator.
 
 ```@example tutorial
 Ω = 1
@@ -99,7 +99,7 @@ H_int = Ω*(a ⊗ sp + at ⊗ sm)
 nothing # hide
 ```
 
-To extend the single system Hamiltonians ``H_{atom}`` and ``H_{spin}`` to the composite system Hilbert space, one possibility is to combine them with identity operators from the opposite sub-system.
+To extend the single system Hamiltonians ``H_\mathrm{atom}`` and ``H_\mathrm{spin}`` to the composite system Hilbert space, one possibility is to combine them with identity operators from the opposite sub-system.
 
 ```@example tutorial
 I_field = identityoperator(b_fock)
@@ -110,7 +110,7 @@ H_field_ = I_atom ⊗ H_field
 nothing # hide
 ```
 
-However, especially for larger systems this can become tedious and it's more convenient to use the `embed()` function.
+However, especially for larger systems this can become tedious and it's more convenient to use the [`embed()`](@ref) function.
 
 ```@example tutorial
 b = b_fock ⊗ b_spin # Basis of composite system
@@ -127,28 +127,28 @@ nothing # hide
 
 ## [Time evolution](@id Tutorial: Time evolution)
 
-Several different types of time evolution are implemented in *QuantumOptics.jl*
-* schroedinger
-* master
-* mcwf
+Several different types of [Time-evolution](@ref) are implemented in **QuantumOptics.jl**:
+* [Schrödinger time evolution](@ref)
+* [Master time evolution](@ref)
+* [Monte Carlo wave function time evolution](@ref) (also called *quantum trajectories*)
 
 All of them share a very similar interface so that changing from one to another is mostly done by changing the function name:
 
 ```julia
-schroedinger(T, psi0, H)
-master(T, psi0/rho0, H, J)
-mcwf(T, psi0, H, J)
+timeevolution.schroedinger(tspan, psi0, H)
+timeevolution.master(tspan, psi0/rho0, H, J)
+timeevolution.mcwf(tspan, psi0, H, J)
 ```
 
-They all return two vectors ``tout`` and ``states``.
+They all return two vectors `tout` and `states`.
 
 ### Schrödinger equation
 
 Let's now analyze the dynamics of the system according to the Schrödinger equation.
 
 ```@example tutorial
-T = [0:0.05:5;]
-tout, ψt = timeevolution.schroedinger(T, ψ0, H);
+tspan = [0:0.05:5;]
+tout, ψt = timeevolution.schroedinger(tspan, ψ0, H);
 nothing # hide
 ```
 
@@ -179,12 +179,12 @@ nothing # hide
 
 ### Master equation
 
-Let's now add photon loss to the cavity by introducing a jump operator `a`. This means the system is now an open quantum system and is described by a master equation.
+Add photon loss to the cavity can be achieved by introducing a jump operator `a`. This means the system is now an open quantum system and is described by a master equation.
 
 ```@example tutorial
 κ = 1.
 J = [embed(b, 1, a)]
-tout, ρt = timeevolution.master(T, ψ0, H, J; Gamma=[κ]);
+tout, ρt = timeevolution.master(tspan, ψ0, H, J; Gamma=[κ]);
 
 figure(figsize=[10, 3])
 
@@ -221,7 +221,7 @@ subplot(1, 2, 2)
 xlabel("Time")
 ylabel(L"$\langle n \rangle$")
 
-tout, ψt_mcwf = timeevolution.mcwf(T, ψ0, H, J; seed=UInt(0),
+tout, ψt_mcwf = timeevolution.mcwf(tspan, ψ0, H, J; seed=UInt(0),
                                    display_beforeevent=true,
                                    display_afterevent=true);
 subplot(1, 2, 1)
@@ -240,11 +240,11 @@ In the statistical average the MCWF time evolution is equivalent to the time evo
 ```@example tutorial
 Ntrajectories = 10
 
-exp_n = zeros(Float64, length(T))
-exp_e = zeros(Float64, length(T))
+exp_n = zeros(Float64, length(tspan))
+exp_e = zeros(Float64, length(tspan))
 
 function fout(t, psi)
-    i = findfirst(T, t)
+    i = findfirst(tspan, t)
     N = norm(psi)
     exp_e[i] += real(expect(2, sp*sm, normalize(psi)))
     exp_n[i] += real(expect(1, n, normalize(psi)))
@@ -252,18 +252,18 @@ end
 
 srand(0)
 for i=1:Ntrajectories
-    timeevolution.mcwf(T, ψ0, H, J; fout=fout)
+    timeevolution.mcwf(tspan, ψ0, H, J; fout=fout)
 end
 
 figure(figsize=[10, 3])
 
 subplot(1, 2, 1)
-plot(T, expect(2, sp*sm, ρt))
-plot(T, exp_e/Ntrajectories)
+plot(tspan, expect(2, sp*sm, ρt))
+plot(tspan, exp_e/Ntrajectories)
 
 subplot(1, 2, 2)
-plot(T, expect(1, n, ρt))
-plot(T, exp_n/Ntrajectories)
+plot(tspan, expect(1, n, ρt))
+plot(tspan, exp_n/Ntrajectories)
 
 tight_layout() # hide
 savefig("tutorial_mcwf_average.svg") # hide

@@ -47,6 +47,7 @@ pages = [
             "examples/manybody-fourlevel-system.md",
             "examples/nparticles-in-double-well.md",
         ],
+        "metrics.md",
         "steadystate.md",
         "timecorrelations.md",
         "api.md",

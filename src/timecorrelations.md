@@ -1,13 +1,8 @@
 # Two-time correlation functions
 
-.. jl:autofunction:: timecorrelations.jl correlation
 
-.. jl:autofunction:: timecorrelations.jl spectrum
-
-.. jl:autofunction:: timecorrelations.jl correlation2spectrum
-
-As a brief example, say we want to calculate the two-time correlation function of a cavity field, i.e. ``g(t) = \langle a(t) a^\dagger(0)``.
-We can do this with::
+As a brief example, say we want to calculate the two-time correlation function of a cavity field, i.e. ``g(t) = \langle a(t) a^\dagger(0) \rangle``.
+We can do this with:
 
 ```@example timecorrelations
 using QuantumOptics # hide
@@ -23,7 +18,7 @@ g = timecorrelations.correlation(tspan, ρ0, H, J, dagger(a), a)
 nothing # hide
 ```
 
-If we omit the list of times `tspan`, the function automatically calculates the correlation until steady-state is reached::
+If we omit the list of times `tspan`, the function automatically calculates the correlation until steady-state is reached:
 
 ```@example timecorrelations
 t_s, g_s = timecorrelations.correlation(ρ0, H, J, dagger(a), a)
