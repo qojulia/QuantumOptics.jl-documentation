@@ -189,11 +189,11 @@ operators.gemm!
 * Conversion of operators
 
 ```@docs
-full
+full(::Operator)
 ```
 
 ```@docs
-sparse
+sparse(::Operator)
 ```
 
 ### [Exceptions](@id API: Quantum objects exceptions)
@@ -212,15 +212,15 @@ FockBasis
 ```
 
 ```@docs
-number
+number(::FockBasis)
 ```
 
 ```@docs
-destroy
+destroy(::FockBasis)
 ```
 
 ```@docs
-create
+create(::FockBasis)
 ```
 
 ```@docs
@@ -306,11 +306,13 @@ samplepoints
 ```
 
 ```@docs
-position
+position(b::PositionBasis)
+position(b::MomentumBasis)
 ```
 
 ```@docs
-momentum
+momentum(b::PositionBasis)
+momentum(b::MomentumBasis)
 ```
 
 ```@docs
@@ -347,6 +349,19 @@ fermionstates
 
 ```@docs
 bosonstates
+```
+
+```@docs
+number(::ManyBodyBasis, ::Int)
+number(::ManyBodyBasis)
+```
+
+```@docs
+destroy(::ManyBodyBasis, ::Int)
+```
+
+```@docs
+create(::ManyBodyBasis, ::Int)
 ```
 
 ```@docs
@@ -441,7 +456,7 @@ eig(::DenseOperator)
 ```
 
 ```@docs
-eigs(::SparseOperator)
+eigs(::SparseOperator, args...)
 ```
 
 ```@docs
