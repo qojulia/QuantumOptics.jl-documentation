@@ -88,6 +88,10 @@ identityoperator
 ```
 
 ```@docs
+diagonaloperator
+```
+
+```@docs
 randstate
 ```
 
@@ -114,7 +118,15 @@ bases.samebases
 ```
 
 ```@docs
+bases.check_samebases
+```
+
+```@docs
 bases.multiplicable
+```
+
+```@docs
+bases.check_multiplicable
 ```
 
 ```@docs
@@ -133,6 +145,10 @@ tensor
 projector(a::Ket, b::Bra)
 projector(a::Ket)
 projector(a::Bra)
+```
+
+```@docs
+dm
 ```
 
 ```@docs
@@ -246,7 +262,7 @@ NLevelBasis
 ```
 
 ```@docs
-transition
+transition(::NLevelBasis, ::Int, ::Int)
 ```
 
 ```@docs
@@ -316,6 +332,10 @@ momentum(b::MomentumBasis)
 ```
 
 ```@docs
+potentialoperator
+```
+
+```@docs
 gaussianstate
 ```
 
@@ -368,6 +388,10 @@ create(::ManyBodyBasis, ::Int)
 manybodyoperator
 ```
 
+```@docs
+onebodyexpect
+```
+
 
 ## [Metrics](@id API: Metrics)
 
@@ -397,6 +421,17 @@ fidelity
 
 
 ## [Time-evolution](@id API: Time-evolution)
+
+
+### [ODE solver](@id API: ODE solver)
+
+```@docs
+QuantumOptics.ode_dopri.ode
+```
+
+```@docs
+QuantumOptics.ode_dopri.ode_event
+```
 
 ### [Schroedinger](@id API: Schroedinger)
 
