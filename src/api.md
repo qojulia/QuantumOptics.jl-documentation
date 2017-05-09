@@ -255,6 +255,10 @@ coherentstate
 qfunc
 ```
 
+```@docs
+wigner
+```
+
 ### [N-level](@id API: N-level)
 
 ```@docs

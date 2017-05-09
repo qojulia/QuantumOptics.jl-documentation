@@ -38,6 +38,7 @@ end
 ## [Additional functions](@id fock: Additional functions)
 
 * [`qfunc`](@ref)
+* [`wigner`](@ref)
 
 
 ## [Examples](@id fock: Examples)
