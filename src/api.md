@@ -347,6 +347,10 @@ gaussianstate
 particle.FFTOperator
 ```
 
+```@docs
+transform
+```
+
 ### [Subspace bases](@id API: Subspace bases)
 
 ```@docs
