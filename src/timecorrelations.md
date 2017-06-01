@@ -1,7 +1,7 @@
 # Two-time correlation functions
 
 
-As a brief example, say we want to calculate the two-time correlation function of a cavity field, i.e. ``g(t) = \langle a(t) a^\dagger(0) \rangle``.
+As a brief example, say we want to calculate the two-time correlation function of a cavity field, i.e. ``g(t) = \langle a^\dagger(t) a(0) \rangle``.
 We can do this with:
 
 ```@example timecorrelations
