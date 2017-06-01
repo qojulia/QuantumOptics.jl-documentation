@@ -495,19 +495,11 @@ diagonaljumps
 ## [Spectral analysis](@id API: Spectral analysis)
 
 ```@docs
-eig(::DenseOperator)
+eigenstates
 ```
 
 ```@docs
-eigs(::SparseOperator, args...)
-```
-
-```@docs
-eigvals(::DenseOperator)
-```
-
-```@docs
-eigvals!(::DenseOperator)
+eigenenergies
 ```
 
 ```@docs
