@@ -39,6 +39,7 @@ pages = [
         "metrics.md",
         "steadystate.md",
         "timecorrelations.md",
+		"semiclassical.md",
         "Examples" => [
             "Pumped cavity" => "examples/pumped-cavity.md",
             "Jaynes-Cummings" => "examples/jaynes-cummings.md",
@@ -49,6 +50,7 @@ pages = [
             "Correlation spectrum" => "examples/correlation-spectrum.md",
             "Simple many-body system" => "examples/manybody-fourlevel-system.md",
             "N particles in double well" => "examples/nparticles-in-double-well.md",
+			"Doppler cooling" => "examples/doppler-cooling.md",
         ],
         "api.md",
     ]
