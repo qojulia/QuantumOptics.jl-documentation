@@ -8,7 +8,6 @@ Using the framework's implementation, we can define this state by:
 
 ```@example semiclassical1
 using QuantumOptics # hide
-
 b_atom = SpinBasis(1//2)
 
 ψ = (spinup(b_atom) + spindown(b_atom))/sqrt(2)
@@ -29,9 +28,9 @@ Furthermore, we can calculate the dynamic, semi-classical time evolution. This c
 
 The functions, must have the form
 
-```@example semiclassical2
-using QuantumOptics # hide
-
+```@example semiclassical1
+H = 0*one(b_atom) # hide
+J, Jdagger = [], [] # hide
 # fquantum for a Schrödinger time evolution
 function fquantum_schroedinger(t, ψ, u)
   # update H (Hamiltonian) according to dependencies on
@@ -56,7 +55,18 @@ function fclassical(t, ψ, u, du)
 end
 nothing # hide
 ```
+
 Note, that the way these functions are defined has a great impact on the performance of the calculation since they are evaluated at every time step. To save time try to optimize them, e.g. by calculating required operator products outside of the functions.
+
+We can then calculate the time evolution by passing the functions to the solver like so
+
+```@example semiclassical1
+tspan = [0:0.1:10;] # hide
+tout, ψt = semiclassical.schroedinger_dynamic(tspan, ψ_sc, fquantum_schroedinger, fclassical)
+tout, ρt = semiclassical.master_dynamic(tspan, ψ_sc, fquantum_master, fclassical)
+
+nothing # hide
+```
 
 
 ## [Functions](@id semiclassical: Functions)
