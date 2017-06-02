@@ -531,3 +531,18 @@ timecorrelations.spectrum
 ```@docs
 timecorrelations.correlation2spectrum
 ```
+
+
+## [Semi-classical](@id API: Semi-classical systems)
+
+```@docs
+semiclassical.State
+```
+
+```@docs
+semiclassical.schroedinger_dynamic
+```
+
+```@docs
+semiclassical.master_dynamic
+```
