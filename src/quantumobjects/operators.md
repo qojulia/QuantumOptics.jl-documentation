@@ -85,7 +85,7 @@ To convert other operators to sparse operators the [`sparse(::Operator)`](@ref) 
 
 ## Lazy operators
 
-Lazy operators allow delayed evaluation of certain operations. This is useful when combining two operators is numerically expensive but separate multiplication with states is relatively cheap. A nice example is the [`FFTOperator`](@ref) implemented for particles. It allows using a fast fourier transformation to convert a state from real space to momentum space, applying a diagonal operator and converting it back. Doing this in operator notation is only fast if the the order of operations is ``\mathrm{IFFT}*(D*(\mathrm{FFT}*\psi))``. To create a Hamiltonian that uses this calculation order, lazy evaluation is needed:
+Lazy operators allow delayed evaluation of certain operations. This is useful when combining two operators is numerically expensive but separate multiplication with states is relatively cheap. A nice example is the [`transform`](@ref) implemented for particles. It allows using a fast fourier transformation to convert a state from real space to momentum space, applying a diagonal operator and converting it back. Doing this in operator notation is only fast if the the order of operations is ``\mathrm{IFFT}*(D*(\mathrm{FFT}*\psi))``. To create a Hamiltonian that uses this calculation order, lazy evaluation is needed:
 
 ```@example operators
 xmin = -5
@@ -97,7 +97,7 @@ b_momentum = MomentumBasis(b_position)
 p = momentum(b_momentum)
 x = position(b_position)
 
-Tpx = particle.FFTOperator(b_momentum, b_position);
+Tpx = particle.transform(b_momentum, b_position);
 Txp = dagger(Tpx)
 
 H_kin = LazyProduct(Txp, p^2/2, Tpx)

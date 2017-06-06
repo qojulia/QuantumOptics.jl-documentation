@@ -184,7 +184,7 @@ Add photon loss to the cavity can be achieved by introducing a jump operator `a`
 ```@example tutorial
 κ = 1.
 J = [embed(b, 1, a)]
-tout, ρt = timeevolution.master(tspan, ψ0, H, J; Gamma=[κ]);
+tout, ρt = timeevolution.master(tspan, ψ0, H, J; rates=[κ]);
 
 figure(figsize=[10, 3])
 

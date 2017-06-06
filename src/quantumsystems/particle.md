@@ -59,9 +59,9 @@ All operators are defined for the position basis as well as for the momentum bas
 * [`momentum`](@ref)
 * [`position`](@ref)
 
-Transforming a state from one basis into another can be done efficiently using the [`FFTOperator`](@ref):
+Transforming a state from one basis into another can be done efficiently using the [`transform`](@ref):
 
-    Tpx = FFTOperator(basis_momentum, basis_position)
+    Tpx = transform(basis_momentum, basis_position)
     Psi_p = Tpx*Psi_x
 
 
