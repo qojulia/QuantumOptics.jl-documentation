@@ -97,7 +97,7 @@ b_momentum = MomentumBasis(b_position)
 p = momentum(b_momentum)
 x = position(b_position)
 
-Tpx = particle.transform(b_momentum, b_position);
+Tpx = transform(b_momentum, b_position);
 Txp = dagger(Tpx)
 
 H_kin = LazyProduct(Txp, p^2/2, Tpx)
