@@ -28,11 +28,11 @@ The arguments required are quite similar to the ones of [`timeevolution.schroedi
 
 The additional arguments available are
 
-* `Gamma::{Vector{Float64}, Matrix{Float64}}`
+* `rates::{Vector{Float64}, Matrix{Float64}}`
 * `Jdagger::Vector`
 * `fout::Function`
 
-The first specifies the decay rates of the system with default values one. If `Gamma` is a vector of length `length(J)`, then the `i` th entry of `Gamma` is paired with the `i`-th entry of `J`, such that `J_i` decays with ``\gamma_i``. If, on the other hand, `Gamma` is a matrix, then all entries of `J` are paired with one another and matched with the corresponding entrie of `Gamma`, resulting
+The first specifies the decay rates of the system with default values one. If `rates` is a vector of length `length(J)`, then the `i` th entry of `rates` is paired with the `i`-th entry of `J`, such that `J_i` decays with ``\gamma_i``. If, on the other hand, `rates` is a matrix, then all entries of `J` are paired with one another and matched with the corresponding entrie of `rates`, resulting
 in a Lindblad term of the form ``\sum_{i,j}\gamma_{ij}\left(J_i\rho J_j^\dagger - J_i^\dagger J_j\rho/2 - \rho J_i^\dagger J_j/2\right)``.
 
 The second keyword argument can be used to pass a specific set of jump operators to be used in place of all ``J^\dagger`` appearances in the Lindblad term.

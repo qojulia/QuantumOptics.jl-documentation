@@ -87,7 +87,7 @@ where ``v^{(i)}`` is the eigenvector corresponding to the eigenvalue ``d_i``.
 
 This diagonalization is implemented with the function
 
-* [`diagonaljumps(Gamma::Array{Float64}, J::Vector)`](@ref)
+* [`diagonaljumps(rates::Array{Float64}, J::Vector)`](@ref)
 
 which returns the eigenvalues (new decay rates) and the corresponding set of jump operators. As a quick example, say you have three spin-1/2 particles that decay collectively. When using the master equation solver you can simply pass the matrix containing the collective decay rates as a keyword argument. To do the same with the MCWF we need to do:
 
@@ -97,9 +97,9 @@ threespinbasis = spinbasis ⊗ spinbasis ⊗ spinbasis
 sm(i) = embed(threespinbasis, i, sigmam(spinbasis))
 
 a, b, c = 1.0, 0.5, 0.2
-Gamma = [a b c; b a c; c b a]
+rates = [a b c; b a c; c b a]
 J = [sm(i) for i=1:3]
-d, D = diagonaljumps(Gamma, J)
+d, D = diagonaljumps(rates, J)
 nothing # hide
 ```
 
