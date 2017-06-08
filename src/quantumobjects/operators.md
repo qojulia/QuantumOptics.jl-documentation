@@ -1,6 +1,6 @@
 # Operators
 
-Operators can be defined as linear maps from one Hilbert space to another. However, equivalently to states, operators in **QuantumOptics.jl** are interpreted as coefficients of an abstract operator in respect to one or more generally two, possibly distinct [Bases](bases.md @ref). For a certain choice of bases ``\{|u_i\rangle\}_i`` and ``\{|v_j\rangle\}_j`` an abstract operator ``A`` has the coefficients ``A_{ij}`` which are connected by the relation
+Operators can be defined as linear maps from one Hilbert space to another. However, equivalently to states, operators in **QuantumOptics.jl** are interpreted as coefficients of an abstract operator in respect to one or more generally two, possibly distinct [Bases](@ref). For a certain choice of bases ``\{|u_i\rangle\}_i`` and ``\{|v_j\rangle\}_j`` an abstract operator ``A`` has the coefficients ``A_{ij}`` which are connected by the relation
 
 ```math
 A =  \sum_{ij} A_{ij} | u_i \rangle \langle v_j |
