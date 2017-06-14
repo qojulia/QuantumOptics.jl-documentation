@@ -78,4 +78,4 @@ nothing # hide
 
 ## [Examples](@id semiclassical: Examples)
 
-* [Doppler cooling of a two-level atom](@ref)
+* [Cavity cooling of a two-level atom](@ref)

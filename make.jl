@@ -50,7 +50,7 @@ pages = [
             "Correlation spectrum" => "examples/correlation-spectrum.md",
             "Simple many-body system" => "examples/manybody-fourlevel-system.md",
             "N particles in double well" => "examples/nparticles-in-double-well.md",
-			"Doppler cooling" => "examples/doppler-cooling.md",
+			"Cavity cooling" => "examples/cavity-cooling.md",
         ],
         "api.md",
     ]
