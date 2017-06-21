@@ -39,7 +39,7 @@ pages = [
         "metrics.md",
         "steadystate.md",
         "timecorrelations.md",
-		"semiclassical.md",
+        "semiclassical.md",
         "Examples" => [
             "Pumped cavity" => "examples/pumped-cavity.md",
             "Jaynes-Cummings" => "examples/jaynes-cummings.md",
@@ -50,7 +50,7 @@ pages = [
             "Correlation spectrum" => "examples/correlation-spectrum.md",
             "Simple many-body system" => "examples/manybody-fourlevel-system.md",
             "N particles in double well" => "examples/nparticles-in-double-well.md",
-			"Cavity cooling" => "examples/cavity-cooling.md",
+            "Cavity cooling" => "examples/cavity-cooling.md",
         ],
         "api.md",
     ]
@@ -82,10 +82,19 @@ for (rootdir, dirs, files) in walkdir(postprocessdir)
             else
                 text = layout("false") * text
             end
-            f = write(path, text)
+            write(path, text)
         end
     end
 end
+
+# Remove body font-size from css file
+path = joinpath(postprocessdir, "assets/documenter.css")
+text = readstring(path)
+i0 = first(search(text, "body"))
+i0 = first(search(text, "font-size", i0))
+i0 = last(rsearch(text, "\n", i0))
+i1 = first(search(text, "\n", i0+1))
+write(path, text[1:i0-1]*text[i1:end])
 
 # Copy finished documentation build to website
 cp(postprocessdir, targetpath; remove_destination=true)
