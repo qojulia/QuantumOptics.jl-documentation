@@ -9,7 +9,7 @@ using QuantumOptics
 ```
 
 
-## Bases (@id Tutorial: Bases)
+## [Bases](@id Tutorial: Bases)
 
 The first step is always to define a suitable basis for the quantum system under consideration. For example a [`FockBasis`](@ref) can be used to describe a field mode inside of a cavity. It takes an Integer as argument which specifies the photon number cutoff.
 
