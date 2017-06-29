@@ -26,7 +26,7 @@ type ManyBodyBasis <: Basis
 end
 ```
 
-Of course we still need a way to relate operators defined in the single particle description to equivalent many-body operators. For an arbitrary additive single particle operator ``\sum_i x_i`` this connection is given by
+Of course we still need a way to relate operators defined in the single particle description to equivalent many-body operators. For an arbitrary additive single particle operator ``\sum_n x_n`` this connection is given by
 
 ```math
     X = \sum_{ij} a_i^\dagger a_j
@@ -35,12 +35,12 @@ Of course we still need a way to relate operators defined in the single particle
                     \left| u_j \right\rangle
 ```
 
-For two particle interactions given by the additive two particle operator ``\sum_{i \neq j} V_{ij}`` the corresponding many-body operator is given by:
+For two particle interactions given by the additive two particle operator ``\sum_{m \neq n} v_{mn}`` the corresponding many-body operator is given by:
 
 ```math
-    X = \sum_{ijkl} a_i^\dagger a_j^\dagger a_k a_l
+    V = \sum_{ijkl} a_i^\dagger a_j^\dagger a_k a_l
             \left\langle u_i \right| \left\langle u_j \right|
-            x
+            v
             \left| u_k \right\rangle \left| u_l \right\rangle
 ```
 
