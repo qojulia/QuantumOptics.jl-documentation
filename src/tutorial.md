@@ -162,12 +162,12 @@ figure(figsize=[10, 3])
 subplot(1, 2, 1)
 xlabel("Time")
 ylabel(L"$\langle |e\rangle \langle e| \rangle$")
-plot(tout, expect(2, sp*sm, ψt))
+plot(tout, real(expect(2, sp*sm, ψt)))
 
 subplot(1, 2, 2)
 xlabel("Time")
 ylabel(L"$\langle n \rangle$")
-plot(tout, expect(1, n, ψt));
+plot(tout, real(expect(1, n, ψt)));
 
 tight_layout() # hide
 savefig("tutorial_schroedinger.svg") # hide
@@ -191,12 +191,12 @@ figure(figsize=[10, 3])
 subplot(1, 2, 1)
 xlabel("Time")
 ylabel(L"$\langle |e\rangle \langle e| \rangle$")
-plot(tout, expect(2, sp*sm, ρt))
+plot(tout, real(expect(2, sp*sm, ρt)))
 
 subplot(1, 2, 2)
 xlabel("Time")
 ylabel(L"$\langle n \rangle$")
-plot(tout, expect(1, n, ρt))
+plot(tout, real(expect(1, n, ρt)))
 
 tight_layout() # hide
 savefig("tutorial_master.svg") # hide
@@ -225,9 +225,9 @@ tout, ψt_mcwf = timeevolution.mcwf(tspan, ψ0, H, J; seed=UInt(0),
                                    display_beforeevent=true,
                                    display_afterevent=true);
 subplot(1, 2, 1)
-plot(tout, expect(2, sp*sm, ψt_mcwf))
+plot(tout, real(expect(2, sp*sm, ψt_mcwf)))
 subplot(1, 2, 2)
-plot(tout, expect(1, n, ψt_mcwf))
+plot(tout, real(expect(1, n, ψt_mcwf)))
 tight_layout() # hide
 savefig("tutorial_mcwf.svg") # hide
 nothing # hide
@@ -258,11 +258,11 @@ end
 figure(figsize=[10, 3])
 
 subplot(1, 2, 1)
-plot(tspan, expect(2, sp*sm, ρt))
+plot(tspan, real(expect(2, sp*sm, ρt)))
 plot(tspan, exp_e/Ntrajectories)
 
 subplot(1, 2, 2)
-plot(tspan, expect(1, n, ρt))
+plot(tspan, real(expect(1, n, ρt)))
 plot(tspan, exp_n/Ntrajectories)
 
 tight_layout() # hide
