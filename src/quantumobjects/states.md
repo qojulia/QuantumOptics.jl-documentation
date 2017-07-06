@@ -60,8 +60,8 @@ nothing # hide
 
 The following functions are also available for states:
 
-    [`norm`](@ref)
-    [`normalize`](@ref)
-    [`normalize!](@ref)`
-    [`ptrace`](@ref)
-    [`permutesystems`](@ref)
+* [`norm`](@ref)
+* [`normalize`](@ref)
+* [`normalize!`](@ref)
+* [`ptrace`](@ref)
+* [`permutesystems`](@ref)
