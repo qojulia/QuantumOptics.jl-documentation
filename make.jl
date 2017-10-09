@@ -51,6 +51,7 @@ pages = [
             "Simple many-body system" => "examples/manybody-fourlevel-system.md",
             "N particles in double well" => "examples/nparticles-in-double-well.md",
             "Cavity cooling" => "examples/cavity-cooling.md",
+            "Optomechanical cavity" => "examples/optomech-cooling.md",
             "Ramsey spectroscopy" => "examples/ramsey.md",
         ],
         "api.md",
