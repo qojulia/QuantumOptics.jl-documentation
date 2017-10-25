@@ -408,15 +408,23 @@ tracenorm
 ```
 
 ```@docs
+tracenorm_h
+```
+
+```@docs
+tracenorm_nh
+```
+
+```@docs
 tracedistance
 ```
 
 ```@docs
-tracenorm_general
+tracedistance_h
 ```
 
 ```@docs
-tracedistance_general
+tracedistance_nh
 ```
 
 ```@docs

@@ -3,9 +3,11 @@
 ## [Functions](@id metrics: Functions)
 
 * [`tracenorm`](@ref)
+* [`tracenorm_h`](@ref)
+* [`tracenorm_nh`](@ref)
 * [`tracedistance`](@ref)
-* [`tracenorm_general`](@ref)
-* [`tracedistance_general`](@ref)
+* [`tracedistance_h`](@ref)
+* [`tracedistance_nh`](@ref)
 * [`entropy_vn`](@ref)
 * [`fidelity`](@ref)
 

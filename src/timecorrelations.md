@@ -22,7 +22,7 @@ If the list of times `tspan` is omitted, the function automatically calculates t
 Furthermore, we can calculate the spectrum by means of the Wiener-Khinchin theorem, i.e. as Fourier transform of the correlation function,
 
 ```math
-S(\omega) = \int dt e^{-i\omega t}\langle A^\dagger(t)A\rangle.
+S(\omega) = 2\Re\left\{\int_0^\infty dt e^{-i\omega t}\langle A^\dagger(t)A\rangle\right\}.
 ```
 
 This can be done directly by using [`timecorrelations.spectrum`](@ref), which internally calculates the correlation function and the spectrum for a given list of frequencies. Alternatively, if you already calculated the correlation function you can calculate the spectrum and the corresponding frequencies with [`timecorrelations.correlation2spectrum`](@ref).
