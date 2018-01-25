@@ -348,6 +348,14 @@ particle.FFTOperator
 ```
 
 ```@docs
+particle.FFTOperators
+```
+
+```@docs
+particle.FFTKets
+```
+
+```@docs
 transform
 ```
 
@@ -433,6 +441,22 @@ entropy_vn
 
 ```@docs
 fidelity
+```
+
+```@docs
+ptranspose
+```
+
+```@docs
+PPT
+```
+
+```@docs
+negativity
+```
+
+```@docs
+logarithmic_negativity
 ```
 
 

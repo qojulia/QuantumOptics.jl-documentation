@@ -108,7 +108,28 @@ nothing # hide
 
 In this case the Hamiltonian ``H`` is a lazy sum of the kinetic term ``p^2/2`` and the potential term ``x^2`` where the kinetic term is the lazy product mentioned before. In the end this results in a speed up from ``O(N^2)`` to ``O(N \log N)``.
 
-There are currently three different concrete implementations:
+Besides the above [`LazyProduct`](@ref), there is also an implementation for lazy sums and lazy tensor products. While a [`LazySum`](@ref) works very much identical to the [`LazyProduct`](@ref), a [`LazyTensor`](@ref) is slightly different in terms of implementation. As a brief example, consider the case of two spin-1/2 particles:
+
+```@example operators
+b0 = SpinBasis(1//2)
+b = tensor(b0, b0)
+
+sm0 = sigmam(b0) # Single spin operator
+
+# Build composite space using lazy tensors
+sm1 = LazyTensor(b, [1], [sm0])
+sm2 = LazyTensor(b, [2], [sm0])
+
+H = LazySum(LazyProduct(dagger(sm1), sm1), LazyProduct(dagger(sm2), sm2))
+nothing # hide
+```
+
+---
+**Note**
+A [`LazyTensor`](@ref) can only consist of [`SparseOperator`](@ref) and/or [`DenseOperator`](@ref) when it is to be used with a time evolution. Using, for example, [`LazyProduct`](@ref) to build a [`LazyTensor`](@ref) will result in an error. However, in almost all use cases, one can rewrite these constructs such that [`LazyTensor`](@ref) remains at the lowest level.
+---
+
+See also:
 
 * [`LazyTensor`](@ref)
 * [`LazySum`](@ref)

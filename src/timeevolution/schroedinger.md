@@ -42,6 +42,7 @@ function exp(t, psi)
   push!(exp_val, expect(A, psi))
 end
 timeevolution.schroedinger(tspan, psi0, H; fout=exp)
+nothing # hide
 ```
 
 Although the method using `fout` might seem more complicated, it can be very useful for large systems to save memory since instead of all the states we only store one complex number per time step. Note, that `fout` must always be defined with the arguments `(t, psi)`. If `fout` is given, all variables are assigned within `fout` and the call to [`timeevolution.schroedinger`](@ref) returns `nothing`.

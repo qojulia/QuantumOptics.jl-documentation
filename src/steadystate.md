@@ -23,7 +23,7 @@ H = η*(destroy(b) + create(b))
 J = [sqrt(2κ)*destroy(b)]
 ρ_master = steadystate.master(H, J)
 ρ_eig = steadystate.eigenvector(H, J)
-println("n_master = ", real(expect(number(b), ρ_master)))
+println("n_master = ", real(expect(number(b), ρ_master[end])))
 println("n_eig = ", real(expect(number(b), ρ_eig)))
 nothing # hide
 ```

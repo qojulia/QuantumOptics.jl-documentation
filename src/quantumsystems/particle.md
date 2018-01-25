@@ -36,7 +36,7 @@ type MomentumBasis <: Basis
 end
 ```
 
-Since real space and momentum space are connected via a Fourier transformation the bases themselfes are connected. The numerically inevitable cutoff implies that the functions :math:`\Psi(x)` and :math:`\Psi(p)` can be interpreted to continue periodically over the whole real axis. The specific choice of the cutoff points is therefore irrelevant as long as the interval length stays the same. This free choice of cutoff points allows to easily create a corresponding [`MomentumBasis`](@ref) rom a [`PositionBasis`](@ref) nd vice versa:
+Since real space and momentum space are connected via a Fourier transformation the bases themselves are connected. The numerically inevitable cutoff implies that the functions ``\Psi(x)`` and ``\Psi(p)`` can be interpreted to continue periodically over the whole real axis. The specific choice of the cutoff points is therefore irrelevant as long as the interval length stays the same. This free choice of cutoff points allows to easily create a corresponding [`MomentumBasis`](@ref) from a [`PositionBasis`](@ref) and vice versa:
 
 ```@example particle
 b_momentum = MomentumBasis(b_position)
@@ -64,6 +64,18 @@ Transforming a state from one basis into another can be done efficiently using t
     Tpx = transform(basis_momentum, basis_position)
     Psi_p = Tpx*Psi_x
 
+This also works for composite bases, so long as at least one of them is a [`PositionBasis`](@ref) or [`MomentumBasis`](@ref), respectively. For example:
+
+```@example particle
+b_fock = FockBasis(10)
+b_comp_x = b_position^2 ⊗ b_fock
+b_comp_p = b_momentum^2 ⊗ b_fock
+
+Txp = transform(b_comp_x, b_comp_p)
+nothing # hide
+```
+
+The function will then automatically identify the first to bases of the composite basis `b_comp_x` as position basis and define a corresponding FFT from `b_comp_p` to `b_comp_x`. Note, that it is also possible to specify the indexes of the bases one wants to transform. The above [`FFTOperator`](@ref particle.FFTOperator) is equivalent to writing `transform(b_comp_x, b_comp_p; index=[1, 2])`. This can be used if one does not want to FFT all position/momentum bases of a composite basis. Additionally, in order to save memory one can specify the option argument `ket_only`, for example `transform(b_comp_x, b_comp_p; ket_only=true)`. The resulting [`FFTOperator`](@ref particle.FFTOperator) is then of the subtype [`FFTKets`](@ref particle.FFTKets) and can only be applied to [`Ket`](@ref) states. This means, that this type of [`FFTOperator`](@ref particle.FFTOperator) can only be used when calculating the time evolution according to a Schrödinger equation, as opposed to the more general [`FFTOperators`](@ref particle.FFTOperators), which can also handle operators. However, when treating large systems, the memory efficiency is much better.
 
 ## [Additional functions](@id particle: Additional functions)
 
