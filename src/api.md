@@ -520,6 +520,14 @@ timeevolution.mcwf_nh
 ```
 
 ```@docs
+timeevolution.mcwf_dynamic
+```
+
+```@docs
+timeevolution.mcwf_nh_dynamic
+```
+
+```@docs
 diagonaljumps
 ```
 
