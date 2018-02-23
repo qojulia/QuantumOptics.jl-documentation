@@ -462,17 +462,6 @@ logarithmic_negativity
 
 ## [Time-evolution](@id API: Time-evolution)
 
-
-### [ODE solver](@id API: ODE solver)
-
-```@docs
-QuantumOptics.ode_dopri.ode
-```
-
-```@docs
-QuantumOptics.ode_dopri.ode_event
-```
-
 ### [Schroedinger](@id API: Schroedinger)
 
 ```@docs
@@ -585,4 +574,30 @@ semiclassical.schroedinger_dynamic
 
 ```@docs
 semiclassical.master_dynamic
+```
+
+## [Stochastics](@id API: Stochastics)
+
+```@docs
+stochastic.schroedinger
+```
+
+```@docs
+stochastic.schroedinger_dynamic
+```
+
+```@docs
+stochastic.master
+```
+
+```@docs
+stochastic.master_dynamic
+```
+
+```@docs
+stochastic.schroedinger_semiclassical
+```
+
+```@docs
+stochastic.master_semiclassical
 ```

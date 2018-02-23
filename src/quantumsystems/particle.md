@@ -18,7 +18,7 @@ p = momentum(b_position)
 nothing # hide
 ```
 
-For particles **QuantumOptics.jl** provides two different choices - either the calculations can be done in real space or they can be done in momentum space by using [`PositionBasis`](@ref) r [`MomentumBasis`](@ref) espectively. The definition of these two bases types is:
+For particles **QuantumOptics.jl** provides two different choices - either the calculations can be done in real space or they can be done in momentum space by using [`PositionBasis`](@ref) or [`MomentumBasis`](@ref) respectively. The definition of these two bases types is:
 
 ```julia
 type PositionBasis <: Basis
@@ -88,3 +88,4 @@ The function will then automatically identify the first to bases of the composit
 * [Particle in harmonic trap potential](@ref)
 * [Gaussian wave packet running into a potential barrier](@ref)
 * [N-Particles in a double-well potential](@ref)
+* [Dynamics of a two-dimensional wavepacket hitting a Gaussian potential](@ref)

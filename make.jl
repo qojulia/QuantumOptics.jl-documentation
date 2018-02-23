@@ -40,11 +40,18 @@ pages = [
         "steadystate.md",
         "timecorrelations.md",
         "semiclassical.md",
+        "Stochastics" => [
+            "Introduction" => "stochastic/stochastic.md",
+            "Stochastic Schrödinger equation" => "stochastic/schroedinger.md",
+            "Stochastic Master equation" => "stochastic/master.md",
+            "Stochastic semiclassical systems" => "stochastic/semiclassical.md",
+        ],
         "Examples" => [
             "Pumped cavity" => "examples/pumped-cavity.md",
             "Jaynes-Cummings" => "examples/jaynes-cummings.md",
             "Particle in harmonic trap" => "examples/particle-in-harmonic-trap.md",
             "Particle into barrier" => "examples/particle-into-barrier.md",
+            "Wavepacket in 2D" => "examples/wavepacket2D.md",
             "Raman transition" => "examples/raman.md",
             "2 qubit entanglement" => "examples/two-qubit-entanglement.md",
             "Correlation spectrum" => "examples/correlation-spectrum.md",
@@ -53,6 +60,8 @@ pages = [
             "Cavity cooling" => "examples/cavity-cooling.md",
             "Optomechanical cavity" => "examples/optomech-cooling.md",
             "Ramsey spectroscopy" => "examples/ramsey.md",
+            "Dephasing of Atom" => "examples/atom-dephasing.md",
+            "Quantum Zeno Effect" => "examples/quantum-zeno-effect.md",
         ],
         "api.md",
     ]
