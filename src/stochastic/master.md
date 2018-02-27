@@ -8,9 +8,9 @@ A stochastic master equation with multiple output channels (simultaneous measure
                     J_i \rho J_i^\dagger
                     - \frac{1}{2} J_i^\dagger J_i \rho
                     - \frac{1}{2} \rho J_i^\dagger J_i
-                +\sum_k
-                    \left(J_k^s\rho + \rho \left(J_k^s\right)^\dagger\right)\xi_k(t)
                 \right)
+                +\sum_i
+                    \left(J_i^s\rho + \rho \left(J_i^s\right)^\dagger\right)\xi_i(t)
 ```
 
 Here, $J_i$ are the Lindblad damping operators, while $J_i^s$ are the stochastic damping operators. The superoperator $J_i^s\rho + \rho\left(J_i^s\right)^\dagger$ describes the information gain from the $i$th measurement on the system and is proportional to the (white-) noise term $\xi_i(t)$. The function that implements this equation is very similar to [`timeevolution.master`](@ref).
@@ -28,7 +28,7 @@ stochastic.master(tspan, ρ0, H, J, Js; dt=dt)
 nothing # hide
 ```
 
-The only additional argument here is `Js`, which is a vector containing the stochastic damping operators $J_i^s$ which constitute the superoperator defined in the stochastic master equation above. Optionally, it is also possible to calculate a stochastic master equation where there are additional stochastic terms present in the Hamiltonian. This can be done by passing the optional argument `Hs` which is a vector containing all operators in the Hamiltonian that are proportional to a noise term to the function.
+The only additional argument here is `Js`, which is a vector containing the stochastic damping operators $J_i^s$ which constitute the superoperator defined in the stochastic master equation above. Optionally, it is also possible to calculate a stochastic master equation where there are additional stochastic terms present in the Hamiltonian. This can be done by passing the optional argument `Hs`, which is a vector containing all operators in the Hamiltonian that are proportional to a noise term.
 
 ```@example stochastic-master
 Hs = [H] # hide
@@ -56,7 +56,7 @@ stochastic.master_dynamic(tspan, ρ0, fdeterm, fstoch; dt=dt)
 nothing # hide
 ```
 
-Note, that optionally one can include rates in the function output, `fdeterm(t, rho) = H, J, Jdagger, rates`, `fstoch(t, rho) = Js, Jsdagger, rates_s`. If one wants to include additional stochastic terms in the Hamiltonian, one can do this by defining another function and passing it as the optional argument `fstoch_H`.
+Note, that optionally one can include rates in the function output, `fdeterm(t, rho) = H, J, Jdagger, rates`, `fstoch(t, rho) = Js, Jsdagger, rates_s`. If you want to include additional stochastic terms in the Hamiltonian, you can do this by defining another function and passing it as the optional argument `fstoch_H`.
 
 ```@example stochastic-master
 function fstoch_H(t, rho)
