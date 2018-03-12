@@ -126,7 +126,9 @@ nothing # hide
 
 ---
 **Note**
+
 A [`LazyTensor`](@ref) can only consist of [`SparseOperator`](@ref) and/or [`DenseOperator`](@ref) when it is to be used with a time evolution. Using, for example, [`LazyProduct`](@ref) to build a [`LazyTensor`](@ref) will result in an error. However, in almost all use cases, one can rewrite these constructs such that [`LazyTensor`](@ref) remains at the lowest level.
+
 ---
 
 See also:
