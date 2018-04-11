@@ -13,7 +13,6 @@ H = number(b) # hide
 Hs = [H] # hide
 tspan = [0,0.1] # hide
 ψ0 = semiclassical.State(fockstate(b, 0), [0.0im, 0.0im]) # hide
-dt = 1e-1 # hide
 fquantum_schroedinger(t, psi, u) = H # hide
 fclassical_schroedinger(t, psi, u, du) = du # hide
 function fstoch_q_schroedinger(t, psi, u)
@@ -28,7 +27,7 @@ function fstoch_c_schroedinger(t, psi, u, du)
 end
 
 stochastic.schroedinger_semiclassical(tspan, ψ0, fquantum_schroedinger, fclassical_schroedinger;
-fstoch_quantum=fstoch_q_schroedinger, fstoch_classical=fstoch_c_schroedinger, dt=dt)
+fstoch_quantum=fstoch_q_schroedinger, fstoch_classical=fstoch_c_schroedinger)
 nothing # hide
 ```
 
@@ -36,7 +35,7 @@ Note, that here `ψ0` needs to be a [`semiclassical.State`](@ref). If one of the
 
 ## Semi-classical stochastic master equation
 
-Implementing a semi-classical stochastic master equation works similarly to above. The output of the functions needs to be altered in order to return the jump operators needed for the Lindblad and measurement superoperators, respectively.
+Implementing a semi-classical stochastic master equation works similarly to above. The output of the functions needs to be altered in order to return the jump operators needed for the Lindblad and measurement superoperator, respectively.
 
 ```@example stochastic-semiclassical
 J = [destroy(b)] # hide
@@ -58,7 +57,7 @@ function fstoch_c_master(t, psi, u, du)
 end
 
 stochastic.master_semiclassical(tspan, ρ0, fquantum_master, fclassical_master;
-fstoch_quantum=fstoch_q_master, fstoch_classical=fstoch_c_master, dt=dt)
+fstoch_quantum=fstoch_q_master, fstoch_classical=fstoch_c_master)
 nothing # hide
 ```
 
@@ -71,7 +70,7 @@ fstoch_H(t, rho, u) = Hs # hide
 fstoch_J(t, rho, u) = J, Jdagger # hide
 stochastic.master_semiclassical(tspan, ρ0, fquantum_master, fclassical_master;
 fstoch_quantum=fstoch_q_master,
-fstoch_classical=fstoch_c_master, fstoch_H=fstoch_H, fstoch_J=fstoch_J, dt=dt)
+fstoch_classical=fstoch_c_master, fstoch_H=fstoch_H, fstoch_J=fstoch_J)
 nothing # hide
 ```
 

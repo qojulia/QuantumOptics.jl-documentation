@@ -601,3 +601,9 @@ stochastic.schroedinger_semiclassical
 ```@docs
 stochastic.master_semiclassical
 ```
+
+## [Printing](@id API: Printing)
+
+```@docs
+QuantumOptics.set_printing
+```

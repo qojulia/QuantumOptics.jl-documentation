@@ -25,7 +25,7 @@ y = Bra(basis, [0,1,0])
 
 Many of the commonly used states are already implemented in the specific quantum systems, e.g. [`spinup`](@ref) for spins or [`coherentstate`](@ref) for systems described by a fock basis. The [`basisstate`](@ref) function is defined for every basis and is used to generate the i-th basis-state of this basis.
 
-All expected arithmetic functions like *, /, +, - are implemented:
+All expected arithmetic functions like `*, /, +, -` are implemented:
 
 ```@example states
 x + x
@@ -50,6 +50,7 @@ x ⊗ x
 tensor(x, x, x)
 nothing # hide
 ```
+When working with the `.data` fields of composite states, please keep in mind the order of the data (see [`Operators`](@ref tensor_order) for details).
 
 Alternatively, one can use the tensor function to create a density operator by combining a ket with a bra:
 

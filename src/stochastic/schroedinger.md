@@ -17,19 +17,17 @@ H = number(b) # hide
 Hs = [H] # hide
 tspan = [0,0.1] # hide
 ψ0 = fockstate(b, 0) # hide
-dt = 1e-1 # hide
-stochastic.schroedinger(tspan, ψ0, H, Hs; dt=dt)
+stochastic.schroedinger(tspan, ψ0, H, Hs)
 nothing # hide
 ```
 
-Here, the first three arguments are the same as for [`timeevolution.schroedinger`](@ref). The additional argument `Hs` is either an [`Operator`](@ref) or a vector of operators. The first case corresponds to the stochastic Schrödinger equation featuring only a single noise process, while the latter corresponds to a number of noise processes, where the operators $H_i^s$ are the entries in the vector `Hs`. Note, that the keyword argument `dt` has to be set here since the default algorithms use fixed time steps (e.g. `dt=1e-2`). A default choice of `dt` is not included since it strongly depends on the given problem. For more details on algorithms, see the [**DifferentialEquations.jl** documentation](http://docs.juliadiffeq.org/stable/).
+Here, the first three arguments are the same as for [`timeevolution.schroedinger`](@ref). The additional argument `Hs` is either an [`Operator`](@ref) or a vector of operators. The first case corresponds to the stochastic Schrödinger equation featuring only a single noise process, while the latter corresponds to a number of noise processes, where the operators $H_i^s$ are the entries in the vector `Hs`.
 
 A time-dependent stochastic Schrödinger equation can also be implemented using [`stochastic.schroedinger_dynamic`](@ref). Instead of the two parts of the Hamiltonian `H` and `Hs`, the dynamic version takes two functions as arguments. One, that returns the deterministic part of the dynamic Hamiltonian, while the other returns a vector with the (time- or state-dependent) operators $H_i^s$ as entries.
 
 ```@example stochastic-schroedinger
 tspan = [0,0.1] # hide
 ψ0 = fockstate(b, 0) # hide
-dt = 1e-1 # hide
 function fdeterm(t, psi)
     # Calculate time-dependent stuff
     # Update deterministic part of Hamiltonian
@@ -39,14 +37,14 @@ end
 function fstoch(t, psi)
     # Calculate time-dependent stuff
     # Update stochastic part(s) of Hamiltonian
-    Hs
+    Hs # This has to be a vector
 end
 
-stochastic.schroedinger_dynamic(tspan, ψ0, fdeterm, fstoch; dt=dt)
+stochastic.schroedinger_dynamic(tspan, ψ0, fdeterm, fstoch)
 nothing # hide
 ```
 
-Note, that the solver requires to know the number of noise processes. This number is calculated automatically from the given function `fstoch` by calculating the output at time `t=0`. If you want to avoid an initial execution of the function (e.g. because you defined some parameter to change incrementally in the function), you can make the solver skip the initial calculation of `fstoch`. This is done by passing the number of noise processes, i.e. the length of the vector `Hs` that is returned by `fstoch`, using the optional argument `noise_processes`.
+Note, that the solver requires to know the number of noise processes. This number is calculated automatically from the given function `fstoch` by calculating the output at time `t=0`. If you want to avoid an initial execution of the function, you can make the solver skip the initial calculation of `fstoch`. This is done by passing the number of noise processes, i.e. the length of the vector `Hs` that is returned by `fstoch`, using the optional argument `noise_processes`.
 
 ## [Functions](@id stochastic-schroedinger: Functions)
 

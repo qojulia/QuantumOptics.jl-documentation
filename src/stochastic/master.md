@@ -4,16 +4,27 @@ A stochastic master equation with multiple output channels (simultaneous measure
 
 ```math
 \dot{\rho} = -\frac{i}{\hbar} \big[H,\rho\big]
-             + \sum_i \left(
-                    J_i \rho J_i^\dagger
-                    - \frac{1}{2} J_i^\dagger J_i \rho
-                    - \frac{1}{2} \rho J_i^\dagger J_i
-                \right)
-                +\sum_i
-                    \left(J_i^s\rho + \rho \left(J_i^s\right)^\dagger\right)\xi_i(t)
+             + \mathcal{L}[\rho] + \mathcal{H}[\rho]
 ```
 
-Here, $J_i$ are the Lindblad damping operators, while $J_i^s$ are the stochastic damping operators. The superoperator $J_i^s\rho + \rho\left(J_i^s\right)^\dagger$ describes the information gain from the $i$th measurement on the system and is proportional to the (white-) noise term $\xi_i(t)$. The function that implements this equation is very similar to [`timeevolution.master`](@ref).
+where
+
+```math
+\mathcal{L}[\rho]=\sum_i \left(
+       J_i \rho J_i^\dagger
+       - \frac{1}{2} J_i^\dagger J_i \rho
+       - \frac{1}{2} \rho J_i^\dagger J_i
+   \right)
+```
+
+and
+
+```math
+\sum_i
+    \left(J_i^s\rho + \rho \left(J_i^s\right)^\dagger\right)\xi_i(t) - \langle J_i^s + \left(J_i^s\right)^\dagger\rangle
+```
+
+Here, $J_i$ are the Lindblad damping operators, while $J_i^s$ are the stochastic damping operators. The superoperator $\mathcal{H}[\rho]$ describes the information gain from the $i$th measurement on the system and contains the (white-) noise term $\xi_i(t)$. The last term in $\mathcal{H}[\rho]$ (the expectation value) ensures trace conservation. The function that implements this equation is very similar to [`timeevolution.master`](@ref).
 
 ```@example stochastic-master
 using QuantumOptics # hide
@@ -23,8 +34,7 @@ J = [destroy(b)] # hide
 Js = J # hide
 tspan = [0,0.1] # hide
 ρ0 = fockstate(b, 0) # hide
-dt = 1e-1 # hide
-stochastic.master(tspan, ρ0, H, J, Js; dt=dt)
+stochastic.master(tspan, ρ0, H, J, Js)
 nothing # hide
 ```
 
@@ -32,7 +42,7 @@ The only additional argument here is `Js`, which is a vector containing the stoc
 
 ```@example stochastic-master
 Hs = [H] # hide
-stochastic.master(tspan, ρ0, H, J, Js; Hs=Hs, dt=dt)
+stochastic.master(tspan, ρ0, H, J, Js; Hs=Hs)
 nothing # hide
 ```
 
@@ -52,7 +62,7 @@ function fstoch(t, rho)
     # Calculate time-dependent stuff
     Js, Jsdagger
 end
-stochastic.master_dynamic(tspan, ρ0, fdeterm, fstoch; dt=dt)
+stochastic.master_dynamic(tspan, ρ0, fdeterm, fstoch)
 nothing # hide
 ```
 
@@ -74,7 +84,7 @@ function fstoch_J(t, rho)
     # Calculate time-dependent stuff
     Js_2, Js_2dagger
 end
-stochastic.master_dynamic(tspan, ρ0, fdeterm, fstoch; fstoch_H=fstoch_H, fstoch_J=fstoch_J, dt=dt)
+stochastic.master_dynamic(tspan, ρ0, fdeterm, fstoch; fstoch_H=fstoch_H, fstoch_J=fstoch_J)
 nothing # hide
 ```
 
