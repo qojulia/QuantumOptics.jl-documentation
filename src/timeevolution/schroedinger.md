@@ -35,13 +35,8 @@ nothing # hide
 or equivalently:
 
 ```@example schroedinger
-tout = Float64[]
-exp_val = Complex128[]
-function exp(t, psi)
-  push!(tout, t)
-  push!(exp_val, expect(A, psi))
-end
-timeevolution.schroedinger(tspan, psi0, H; fout=exp)
+exp(t, psi) = expect(A, psi)
+tout, exp_val = timeevolution.schroedinger(tspan, psi0, H; fout=exp)
 nothing # hide
 ```
 

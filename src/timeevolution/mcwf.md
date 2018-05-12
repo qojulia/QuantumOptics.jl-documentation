@@ -117,6 +117,7 @@ nothing # hide
 * [`timeevolution.mcwf`](@ref)
 * [`timeevolution.mcwf_h`](@ref)
 * [`timeevolution.mcwf_nh`](@ref)
+* [`timeevolution.mcwf_dynamic`](@ref)
 * [`diagonaljumps`](@ref)
 
 ## [Examples](@id mcwf: Examples)
