@@ -92,10 +92,6 @@ diagonaloperator
 ```
 
 ```@docs
-randstate
-```
-
-```@docs
 randoperator
 ```
 
@@ -600,6 +596,28 @@ stochastic.schroedinger_semiclassical
 
 ```@docs
 stochastic.master_semiclassical
+```
+
+## [State definitions](@id API: State definitions)
+
+```@docs
+randstate
+```
+
+```@docs
+thermalstate
+```
+
+```@docs
+coherentthermalstate
+```
+
+```@docs
+phase_average
+```
+
+```@docs
+passive_state
 ```
 
 ## [Printing](@id API: Printing)

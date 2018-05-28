@@ -17,15 +17,15 @@ Additionally this quantum jump formalism also has a very intuitive physical inte
 
 This physical picture can be used to easily understand the actual MCWF algorithm
 
-1. Calculate coherent time evolution according to a Schroedinger equation with non-hermitian Hamiltonian ``H_\mathrm{nh} = H - \frac{i\hbar}{2} \sum_i J_i^\dagger J_i``
+1.- Calculate coherent time evolution according to a Schroedinger equation with non-hermitian Hamiltonian ``H_\mathrm{nh} = H - \frac{i\hbar}{2} \sum_i J_i^\dagger J_i``
 
 ```math
 i\hbar\frac{\mathrm{d}}{\mathrm{d} t} |\Psi(t)\rangle = H_\mathrm{nh} |\Psi(t)\rangle
 ```
 
-2. Since the Hamiltonian is non-hermitian the norm of the quantum state is not conserved and actually decreases with time. This can be interpreted in the way that the smaller the norm of the state gets the more probable it is that a quantum jump occurs. Quantitatively this means that the coherent time evolution stops when ``\langle \Psi(t)|\Psi(t)\rangle < p`` where ``p`` is a randomly generated number between 0 and 1.
+2.- Since the Hamiltonian is non-hermitian the norm of the quantum state is not conserved and actually decreases with time. This can be interpreted in the way that the smaller the norm of the state gets the more probable it is that a quantum jump occurs. Quantitatively this means that the coherent time evolution stops when ``\langle \Psi(t)|\Psi(t)\rangle < p`` where ``p`` is a randomly generated number between 0 and 1.
 
-3. At these randomly determined times a quantum jump according to
+3.- At these randomly determined times a quantum jump according to
 
 ```math
 |\Psi(t)\rangle \rightarrow \frac{J_i |\Psi(t)\rangle}{||J_i |\Psi(t)\rangle||}
@@ -33,7 +33,7 @@ i\hbar\frac{\mathrm{d}}{\mathrm{d} t} |\Psi(t)\rangle = H_\mathrm{nh} |\Psi(t)\r
 
   is performed.
 
-4. Continue with coherent time evolution.
+4.- Continue with coherent time evolution.
 
 The stochastic average of these trajectories is then equal to the solution of the master equation ``\rho(t)``
 
@@ -67,11 +67,10 @@ nothing # hide
 Since this function only calculates state vectors (as explained above), it requires the initial state in the form of a ket. Without any additional keyword arguments the [`timeevolution.mcwf`](@ref) function returns two vectors, the first contains the times identical to tspan and the second the state of the system at these points of time. However, finer control of the output is possible by using the keyword arguments `display_beforeevent` and `display_afterevent`. If they are set to `true` the state of the system immediately before and after a jump is added to these vectors. To avoid keeping all the states in memory when only certain expectation values are needed, one can optionally pass a function `fout(t, psi)` which is called at every specified point of time:
 
 ```@example mcwf
-exp_a = []
 function fout(t, psi)
-  push!(exp_a, expect(a, psi)/norm(psi))
+    expect(a, psi)/norm(psi)
 end
-timeevolution.mcwf(tspan, psi0, H, J; fout=fout)
+tout, exp_a = timeevolution.mcwf(tspan, psi0, H, J; fout=fout)
 nothing # hide
 ```
 
