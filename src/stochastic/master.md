@@ -24,7 +24,9 @@ and
     \left(J_i^s\rho + \rho \left(J_i^s\right)^\dagger\right)\xi_i(t) - \langle J_i^s + \left(J_i^s\right)^\dagger\rangle
 ```
 
-Here, $J_i$ are the Lindblad damping operators, while $J_i^s$ are the stochastic damping operators. The superoperator $\mathcal{H}[\rho]$ describes the information gain from the $i$th measurement on the system and contains the (white-) noise term $\xi_i(t)$. The last term in $\mathcal{H}[\rho]$ (the expectation value) ensures trace conservation. The function that implements this equation is very similar to [`timeevolution.master`](@ref).
+Here, $J_i$ are the Lindblad damping operators, while $J_i^s$ are the stochastic damping operators. The superoperator $\mathcal{H}[\rho]$ describes the information gain from all measurements on the system and contains the (white-) noise terms $\xi_i(t)$. The last term in $\mathcal{H}[\rho]$ (the expectation value) ensures trace conservation. Note, that a stochastic master equation involving the term $\mathcal{H}$ usually is a stochastic equation in the Itô sense. So be aware of the algorithm you use, especially since the [default](@ref stochastic-defaults) is Stratonovich.
+
+The function that implements this equation is very similar to [`timeevolution.master`](@ref).
 
 ```@example stochastic-master
 using QuantumOptics # hide

@@ -20,7 +20,7 @@ nothing # hide
 Like the [Time-evolution](@ref) module, the stochastic solvers are built around the stochastic differential equation solvers from [**DifferentialEquations.jl**](https://github.com/JuliaDiffEq/DifferentialEquations.jl). Many of the options available for stochastic problems treated with [**DifferentialEquations.jl**](https://github.com/JuliaDiffEq/DifferentialEquations.jl) like, for example, the choice of algorithm can be used seamlessly within **QuantumOptics.jl**.
 
 
-### Default algorithms and noise
+### [Default algorithms and noise](@id stochastic-defaults)
 
 The framework will try to automatically choose default settings that best suit the problem at hand. However, it can only do so much, so please be mindful of what the requirements for your calculation really are. The default algorithms that are implemented solve the stochastic equation in the **Stratonovich** sense. More specifically, they are
 
