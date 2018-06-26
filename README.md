@@ -1,6 +1,6 @@
 # QuantumOptics.jl documentation
 
-The documentation is built using markdown files and [Documenter.jl](https://juliadocs.github.io/Documenter.jl) and includes resources from **QuantumOptics.jl** and **QuantumOptics.jl-examples**:
+This is the source repository for the documentation. You can find an already built version of the documentation at https://qojulia.org/documentation/. The documentation is built using markdown files and [Documenter.jl](https://juliadocs.github.io/Documenter.jl) and includes resources from **QuantumOptics.jl** and **QuantumOptics.jl-examples**:
 
 * Functions exported from **QuantumOptics.jl** are included in `api.md`.
 * Examples from **QuantumOptics.jl-examples** are included in `src/examples`
