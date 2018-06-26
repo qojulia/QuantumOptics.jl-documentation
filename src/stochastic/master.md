@@ -24,7 +24,7 @@ and
     \left(J_i^s\rho + \rho \left(J_i^s\right)^\dagger\right)\xi_i(t) - \langle J_i^s + \left(J_i^s\right)^\dagger\rangle
 ```
 
-Here, $J_i$ are the Lindblad damping operators, while $J_i^s$ are the stochastic damping operators. The superoperator $\mathcal{H}[\rho]$ describes the information gain from all measurements on the system and contains the (white-) noise terms $\xi_i(t)$. The last term in $\mathcal{H}[\rho]$ (the expectation value) ensures trace conservation. Note, that a stochastic master equation involving the term $\mathcal{H}$ usually is a stochastic equation in the Itô sense. So be aware of the algorithm you use, especially since the [default](@ref stochastic-defaults) is Stratonovich.
+Here, $J_i$ are the Lindblad damping operators, while $J_i^s$ are the stochastic damping operators. The superoperator $\mathcal{H}[\rho]$ describes the information gain from all measurements on the system and contains the (white-) noise terms $\xi_i(t)$. The last term in $\mathcal{H}[\rho]$ (the expectation value) ensures trace conservation. Note, that a stochastic master equation involving the term $\mathcal{H}$ usually is a stochastic equation in the Itô sense. So be aware of the algorithm you use.
 
 The function that implements this equation is very similar to [`timeevolution.master`](@ref).
 
@@ -35,8 +35,9 @@ H = number(b) # hide
 J = [destroy(b)] # hide
 Js = J # hide
 tspan = [0,0.1] # hide
+dt = 0.1 # hide
 ρ0 = fockstate(b, 0) # hide
-stochastic.master(tspan, ρ0, H, J, Js)
+stochastic.master(tspan, ρ0, H, J, Js; dt=dt)
 nothing # hide
 ```
 
@@ -44,7 +45,7 @@ The only additional argument here is `Js`, which is a vector containing the stoc
 
 ```@example stochastic-master
 Hs = [H] # hide
-stochastic.master(tspan, ρ0, H, J, Js; Hs=Hs)
+stochastic.master(tspan, ρ0, H, J, Js; Hs=Hs, dt=dt)
 nothing # hide
 ```
 
@@ -64,7 +65,7 @@ function fstoch(t, rho)
     # Calculate time-dependent stuff
     Js, Jsdagger
 end
-stochastic.master_dynamic(tspan, ρ0, fdeterm, fstoch)
+stochastic.master_dynamic(tspan, ρ0, fdeterm, fstoch; dt=dt)
 nothing # hide
 ```
 
@@ -86,7 +87,7 @@ function fstoch_J(t, rho)
     # Calculate time-dependent stuff
     Js_2, Js_2dagger
 end
-stochastic.master_dynamic(tspan, ρ0, fdeterm, fstoch; fstoch_H=fstoch_H, fstoch_J=fstoch_J)
+stochastic.master_dynamic(tspan, ρ0, fdeterm, fstoch; fstoch_H=fstoch_H, fstoch_J=fstoch_J, dt=dt)
 nothing # hide
 ```
 

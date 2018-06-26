@@ -12,6 +12,7 @@ b = FockBasis(2) # hide
 H = number(b) # hide
 Hs = [H] # hide
 tspan = [0,0.1] # hide
+dt = 0.1 # hide
 ψ0 = semiclassical.State(fockstate(b, 0), [0.0im, 0.0im]) # hide
 fquantum_schroedinger(t, psi, u) = H # hide
 fclassical_schroedinger(t, psi, u, du) = du # hide
@@ -28,11 +29,11 @@ end
 
 # Quantum noise
 stochastic.schroedinger_semiclassical(tspan, ψ0, fquantum_schroedinger, fclassical_schroedinger;
-fstoch_quantum=fstoch_q_schroedinger)
+fstoch_quantum=fstoch_q_schroedinger, dt=dt)
 
 # Classical noise
 stochastic.schroedinger_semiclassical(tspan, ψ0, fquantum_schroedinger, fclassical_schroedinger;
-fstoch_classical=fstoch_c_schroedinger)
+fstoch_classical=fstoch_c_schroedinger, dt=dt)
 nothing # hide
 ```
 
@@ -63,11 +64,11 @@ end
 
 # Quantum noise
 stochastic.master_semiclassical(tspan, ρ0, fquantum_master, fclassical_master;
-fstoch_quantum=fstoch_q_master)
+fstoch_quantum=fstoch_q_master, dt=dt)
 
 # Classical noise
 stochastic.master_semiclassical(tspan, ρ0, fquantum_master, fclassical_master;
-fstoch_classical=fstoch_c_master)
+fstoch_classical=fstoch_c_master, dt=dt)
 nothing # hide
 ```
 
@@ -79,7 +80,7 @@ In addition to the noise in the measurement superoperator and the classical nois
 fstoch_H(t, rho, u) = Hs # hide
 fstoch_J(t, rho, u) = J, Jdagger # hide
 stochastic.master_semiclassical(tspan, ρ0, fquantum_master, fclassical_master;
-fstoch_quantum=fstoch_q_master, fstoch_H=fstoch_H, fstoch_J=fstoch_J)
+fstoch_quantum=fstoch_q_master, fstoch_H=fstoch_H, fstoch_J=fstoch_J, dt=dt)
 nothing # hide
 ```
 
@@ -110,7 +111,7 @@ end
 
 stochastic.schroedinger_semiclassical(tspan, ψ0, fquantum_schroedinger, fclassical_schroedinger;
 fstoch_quantum=fstoch_q_diagonal, fstoch_classical=fstoch_c_diagonal,
-noise_prototype_classical=zeros(Complex128, 2, 2))
+noise_prototype_classical=zeros(Complex128, 2, 2), dt=dt)
 nothing # hide
 ```
 
@@ -128,7 +129,7 @@ function fstoch_c_nondiag(t, psi, u, du)
     du[2,3] = u[2]
 end
 
-stochastic.schroedinger_semiclassical(tspan, ψ0, fquantum_schroedinger, fclassical_schroedinger;
+stochastic.schroedinger_semiclassical(tspan, ψ0, fquantum_schroedinger, fclassical_schroedinger; dt=dt,
 fstoch_classical=fstoch_c_nondiag, noise_prototype_classical=zeros(Complex128, 2, 3))
 nothing # hide
 ```

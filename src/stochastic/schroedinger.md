@@ -17,7 +17,8 @@ H = number(b) # hide
 Hs = [H] # hide
 tspan = [0,0.1] # hide
 ψ0 = fockstate(b, 0) # hide
-stochastic.schroedinger(tspan, ψ0, H, Hs)
+dt = 0.1 # hide
+stochastic.schroedinger(tspan, ψ0, H, Hs; dt=dt)
 nothing # hide
 ```
 
@@ -40,11 +41,33 @@ function fstoch(t, psi)
     Hs # This has to be a vector
 end
 
-stochastic.schroedinger_dynamic(tspan, ψ0, fdeterm, fstoch)
+stochastic.schroedinger_dynamic(tspan, ψ0, fdeterm, fstoch; dt=dt)
 nothing # hide
 ```
 
 Note, that the solver requires to know the number of noise processes. This number is calculated automatically from the given function `fstoch` by calculating the output at time `t=0`. If you want to avoid an initial execution of the function, you can make the solver skip the initial calculation of `fstoch`. This is done by passing the number of noise processes, i.e. the length of the vector `Hs` that is returned by `fstoch`, using the optional argument `noise_processes`.
+
+For some problems, it can be useful to renormalize the state vector after every time step taken (this can be used to avoid numerical issues for problems where the norm can become very small). To do this here, you can simply set the keyword `normalize=true`, e.g.
+
+```@example stochastic-schroedinger
+stochastic.schroedinger(tspan, ψ0, H, Hs; dt=dt, normalize=true)
+nothing # hide
+```
+
+To be clear what this renormalization does, it uses a so-called `FunctionCallingCallback` from **DifferentialEquations.jl's** callback library (see the documentation). So doing the following
+
+```@example stochastic-schroedinger
+import DiffEqCallbacks # hide
+norm_func(u::Vector{Complex128}, t::Float64, integrator) = normalize!(u)
+ncb = DiffEqCallbacks.FunctionCallingCallback(norm_func;
+                 func_everystep=true, func_start=false)
+
+stochastic.schroedinger(tspan, ψ0, H, Hs; dt=dt, callback=ncb)
+nothing # hide
+```
+
+is the same as setting `normalize=true`. See also **DifferentialEquations.jl's** [callback library](http://docs.juliadiffeq.org/latest/features/callback_library.html#FunctionCallingCallback-1)
+
 
 ## [Functions](@id stochastic-schroedinger: Functions)
 
