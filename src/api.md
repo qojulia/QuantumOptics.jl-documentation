@@ -583,6 +583,10 @@ stochastic.schroedinger_dynamic
 ```
 
 ```@docs
+stochastic.homodyne_carmichael
+```
+
+```@docs
 stochastic.master
 ```
 

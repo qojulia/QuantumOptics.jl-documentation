@@ -1,6 +1,6 @@
 # Stochastic Master equation
 
-A stochastic master equation with multiple output channels (simultaneous measurements) has the general form
+A stochastic master equation has the general form
 
 ```math
 \dot{\rho} = -\frac{i}{\hbar} \big[H,\rho\big]
@@ -20,11 +20,15 @@ where
 and
 
 ```math
-\sum_i
-    \left(J_i^s\rho + \rho \left(J_i^s\right)^\dagger\right)\xi_i(t) - \langle J_i^s + \left(J_i^s\right)^\dagger\rangle
+\mathcal{H}[\rho] = \sum_n\left[
+    \left(C_n\rho + \rho C_n^\dagger\right) - \langle C_n + C_n^\dagger\rangle\rho\right]\xi_n(t)
 ```
 
-Here, $J_i$ are the Lindblad damping operators, while $J_i^s$ are the stochastic damping operators. The superoperator $\mathcal{H}[\rho]$ describes the information gain from all measurements on the system and contains the (white-) noise terms $\xi_i(t)$. The last term in $\mathcal{H}[\rho]$ (the expectation value) ensures trace conservation. Note, that a stochastic master equation involving the term $\mathcal{H}$ usually is a stochastic equation in the Itô sense. So be aware of the algorithm you use.
+Here, $J_i$ are the Lindblad damping operators, while $C_n$ are operators proportional to the white noise terms $\xi_n(t)$. The last term in $\mathcal{H}[\rho]$ (the expectation value) ensures trace conservation.
+
+In order to describe a measurement, one has to set the operators $C_n$ proportional to collapse operators [1]. The superoperator $\mathcal{H}$ then describes the information gain due to a measurement. For example, to describe unit-efficiency homodyne detection in a single cavity mode, one has to set $C = \sqrt{\kappa}a e^{-i\theta}$, where $\kappa$ is the damping rate, $a$ the photon annihilation operator and $\theta$ is the phase difference between the signal field and the local oscillator.
+
+Note, that (if desired) stochastic terms $H_n^s$ in the Hamiltonian can be included by setting $C_n = -i H_n^s$. If the operators $H_n^s$ are Hermitian, then the $\mathcal{H}[\rho]$ simply becomes a commutator and the expectation value vanishes (since the commutator preserves the trace).
 
 The function that implements this equation is very similar to [`timeevolution.master`](@ref).
 
@@ -33,29 +37,21 @@ using QuantumOptics # hide
 b = FockBasis(2) # hide
 H = number(b) # hide
 J = [destroy(b)] # hide
-Js = J # hide
+C = J # hide
 tspan = [0,0.1] # hide
 dt = 0.1 # hide
 ρ0 = fockstate(b, 0) # hide
-stochastic.master(tspan, ρ0, H, J, Js; dt=dt)
+stochastic.master(tspan, ρ0, H, J, C; dt=dt)
 nothing # hide
 ```
 
-The only additional argument here is `Js`, which is a vector containing the stochastic damping operators $J_i^s$ which constitute the superoperator defined in the stochastic master equation above. Optionally, it is also possible to calculate a stochastic master equation where there are additional stochastic terms present in the Hamiltonian. This can be done by passing the optional argument `Hs`, which is a vector containing all operators in the Hamiltonian that are proportional to a noise term.
+The only additional argument here is `C`, which is a vector containing the operators $C_n$ which constitute the superoperator defined in the stochastic master equation above.
 
-```@example stochastic-master
-Hs = [H] # hide
-stochastic.master(tspan, ρ0, H, J, Js; Hs=Hs, dt=dt)
-nothing # hide
-```
-
-In principle, it is also possible to add stochastic terms to the standard Lindblad term. This is a rather special case, though, and so it is only implemented with the dynamic version of the stochastic master equation, [`stochastic.master_dynamic`](@ref).
-
-Usage of the dynamic version is straightforward. One simply needs to define two functions for the deterministic and the stochastic part of the master equation, respectively.
+For time-dependent problems, one can make use of the dynamic version. You simply need to define two functions for the deterministic and the stochastic part of the master equation, respectively.
 
 ```@example stochastic-master
 Jdagger = dagger.(J) # hide
-Jsdagger = dagger.(Js) # hide
+Cdagger = dagger.(C) # hide
 function fdeterm(t, rho)
     # Calculate time-dependent stuff
     H, J, Jdagger
@@ -63,41 +59,16 @@ end
 
 function fstoch(t, rho)
     # Calculate time-dependent stuff
-    Js, Jsdagger
+    C, Cdagger
 end
 stochastic.master_dynamic(tspan, ρ0, fdeterm, fstoch; dt=dt)
 nothing # hide
 ```
 
-Note, that optionally one can include rates in the function output, `fdeterm(t, rho) = H, J, Jdagger, rates`, `fstoch(t, rho) = Js, Jsdagger, rates_s`. If you want to include additional stochastic terms in the Hamiltonian, you can do this by defining another function and passing it as the optional argument `fstoch_H`.
+Note, that `C` and `Cdagger` have to be vectors of equal length containing the operators $C_n$.
+Optionally, one can include rates in the function output, `fdeterm(t, rho) = H, J, Jdagger, rates` for the deterministic part.
 
-```@example stochastic-master
-function fstoch_H(t, rho)
-    # Calculate time-dependent stuff
-    Hs
-end
-nothing # hide
-```
-
-Here, `Hs` is again a vector of operators. Finally, one can also add some stochastic Lindblad terms to the equation by defining yet another function
-
-```@example stochastic-master
-Js_2, Js_2dagger = Js, Jsdagger # hide
-function fstoch_J(t, rho)
-    # Calculate time-dependent stuff
-    Js_2, Js_2dagger
-end
-stochastic.master_dynamic(tspan, ρ0, fdeterm, fstoch; fstoch_H=fstoch_H, fstoch_J=fstoch_J, dt=dt)
-nothing # hide
-```
-
-The last line in the above example corresponds to the calculation of a stochastic master equation that includes noise
-
-- due to information gain by a measurement `fstoch`
-- in the Hamiltonian `fstoch_H`
-- in the Lindblad term `fstoch_J`
-
-Like in the [`stochastic.schroedinger_dynamic`](@ref) function, if you want to avoid initial calculation of these functions in order to find the total number of noise processes, you can do so by passing the `noise_processes` keyword argument. Note, that `noise_processes` has to be equal to `length(Js) + length(Hs) + length(Js_2)` if all the functions are defined.
+Like in the [`stochastic.schroedinger_dynamic`](@ref) function, if you want to avoid initial calculation of the given functions in order to find the total number of noise processes, you can do so by passing the `noise_processes` keyword argument. Note, that `noise_processes` has to be equal to `length(C)`.
 
 ## [Functions](@id stochastic-master: Functions)
 
@@ -107,3 +78,7 @@ Like in the [`stochastic.schroedinger_dynamic`](@ref) function, if you want to a
 ## [Examples](@id stochastic-master: Examples)
 
 * [Quantum Zeno Effect](@ref)
+
+## [References](@id stochastic-master: References)
+
+[1] Jacobs, K. and Steck, D. A. A straighforward introduction to continuous quantum measurements, Contemporary Physics, 47:5, 279-303, (2006). URL: https://arxiv.org/abs/quant-ph/0611067

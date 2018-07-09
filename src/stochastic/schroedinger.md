@@ -1,4 +1,4 @@
-normalize_state# Stochastic Schrödinger equation
+# Stochastic Schrödinger equation
 
 The stochastic Schrödinger equation has the basic form
 
@@ -69,6 +69,41 @@ nothing # hide
 is the same as setting `normalize_state=true`. See also **DifferentialEquations.jl's** [callback library](http://docs.juliadiffeq.org/latest/features/callback_library.html#FunctionCallingCallback-1).
 
 
+## [Detection schemes with the stochastic Schrödinger equation ](@id schroedinger-homodyne)
+
+Currently, **QuantumOptics.jl** features only one pre-defined measurement scheme to be used with the stochastic Schrödinger equation. Namely, with the function [`stochastic.homodyne_carmichael`](@ref), one can obtain the function `fdeterm` and `fstoch` needed to describe homodyne detection as derived by H. J. Carmichael. These can then be used with `stochastic.schroedinger_dynamic`.
+
+Consider a system descibed by the Hamiltonian $H_0$. If it is subject to decay with a operator $C$ and the output from this decay channel is subject to homodyne detection, the problem at hand is completely described by the stochastic state-dependent Hamiltonian [1,2]
+
+$H = H_0 - \frac{i}{2}C^\dagger C + iC e^{-i\theta}\left(\xi(t) + \langle C e^{-i\theta} + C^\dagger e^{i\theta}\rangle\right).$
+
+Here, $\theta$ is the phase difference between the signal field (from the decay channel) and the local oscillator. In order to implement this, one needs to split this according to the deterministic and stochastic parts of the Hamiltonian. Additionally, the deterministic part needs to account for the nonlinear term (expectation value). This can be done by, for example,
+
+```@example stochastic-schroedinger
+H0 = number(b) # hide
+C = destroy(b) # hide
+θ = 0.5π
+Hs = 1.0im*C*e^(-1.0im*θ)
+Y = C*exp(-1.0im*θ) + dagger(C)*e^(1.0im*θ)
+CdagC = -0.5im*dagger(C)*C
+H_nl(ψ) = expect(Y, normalize(ψ))*Hs + CdagC
+
+fdet_homodyne(t, ψ) = H0 + H_nl(ψ)
+fst_homodyne(t, ψ) = [Hs]
+stochastic.schroedinger_dynamic(tspan, ψ0, fdet_homodyne, fst_homodyne; dt=dt)
+```
+
+The above code would calculate a stochastic trajectory for the measurement of the y-quadrature ($\theta = \pi/2$). Since this scheme is quite commonly used, there is a function which defines the (performance optimized) functions `fdeterm` and `fstoch`. Hence, one can implement the above example in a much more simple way:
+
+```@example stochastic-schroedinger
+θ = 0.5π
+fdet_cm, fst_cm = stochastic.homodyne_carmichael(H0, C, θ; normalize_expect=false)
+stochastic.schroedinger_dynamic(tspan, ψ0, fdet_cm, fst_cm; dt=dt, normalize_state=true)
+```
+
+Note the `normalize_expect=false` option is set above. This removes the `normalize` in the expectation value as used above in the definition of `H_nl(ψ)` thereby offering better performance. Note, that for the calculation of this expectation value $\psi$ should be normalized. So be aware of this when using this option! In the above example, we took care of this by also setting `normalize_state=true` in the call to the stochastic Schrödinger equation thus ensuring that $\psi$ is always normalized.
+
+
 ## [Functions](@id stochastic-schroedinger: Functions)
 
 * [`stochastic.schroedinger`](@ref)
@@ -78,3 +113,9 @@ is the same as setting `normalize_state=true`. See also **DifferentialEquations.
 ## [Examples](@id stochastic-schroedinger: Examples)
 
 * [Two-level atom driven by a noisy laser](@ref)
+
+## [References](@id stochastic-schroedinger: References)
+
+[1] Carmichael, Howard. An open systems approach to quantum optics: Lectures presented at the Université Libre de Bruxelles, October 28 to November 4, 1991. Vol. 18. Springer Science & Business Media, 2009.
+
+[2] Wiseman, H. M., & Milburn, G. J. (1993). Quantum theory of field-quadrature measurements. Physical review A, 47(1), 642.

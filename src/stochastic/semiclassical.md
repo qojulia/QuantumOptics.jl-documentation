@@ -41,19 +41,19 @@ Note, that here `ψ0` needs to be a [`semiclassical.State`](@ref). If one of the
 
 ## Semi-classical stochastic master equation
 
-Implementing a semi-classical stochastic master equation works similarly to above. The output of the functions needs to be altered in order to return the jump operators needed for the Lindblad and measurement superoperator, respectively.
+Implementing a semi-classical stochastic master equation works similarly to above. The output of the functions needs to be altered in order to return the operators needed for the Lindblad and stochastic superoperator, respectively.
 
 ```@example stochastic-semiclassical
 J = [destroy(b)] # hide
 Jdagger = dagger.(J) # hide
-Js = J # hide
-Jsdagger = Jdagger # hide
+C = J # hide
+Cdagger = Jdagger # hide
 ρ0 = ψ0 # hide
 fquantum_master(t, psi, u) = H, J, Jdagger # hide
 fclassical_master(t, psi, u, du) = du # hide
 function fstoch_q_master(t, psi, u)
     # Calculate time-dependent stuff
-    Js, Jsdagger
+    C, Cdagger
 end
 
 function fstoch_c_master(t, psi, u, du)
@@ -72,23 +72,7 @@ fstoch_classical=fstoch_c_master, dt=dt)
 nothing # hide
 ```
 
-Note, that the operators returned by `fstoch_q_master` are cast in the form of a measurement superoperator in a stochastic master equation. Again, if one of the functions is omitted, the semi-classical time evolution is calculated where noise is only present in the part for which the respective function is defined.
-
-In addition to the noise in the measurement superoperator and the classical noise you can also define additional functions `fstoch_H(t, rho, u)` and `fstoch_J(t, rho, u)` that correspond to stochastic terms in the Hamiltonian and stochastic Lindblad processes as in [`stochastic.master_dynamic`](@ref).
-
-```@example stochastic-semiclassical
-fstoch_H(t, rho, u) = Hs # hide
-fstoch_J(t, rho, u) = J, Jdagger # hide
-stochastic.master_semiclassical(tspan, ρ0, fquantum_master, fclassical_master;
-fstoch_quantum=fstoch_q_master, fstoch_H=fstoch_H, fstoch_J=fstoch_J, dt=dt)
-nothing # hide
-```
-
-Executing the above command with the proper definitions for `fstoch_H` and `fstoch_J`, one effectively calculates a semi-classical time evolution with noise
-
-- due to a measurement superoperator `fstoch_quantum`
-- in the Hamiltonian `fstoch_H`
-- in a Lindblad term `fstoch_J`
+Note, that the operators returned by `fstoch_q_master` are cast in the form of a stochastic superoperator in the stochastic master equation. Again, if one of the functions is omitted, the semi-classical time evolution is calculated where noise is only present in the part for which the respective function is defined.
 
 If this is to combined with classical noise, some extra options are necessary.
 
