@@ -90,7 +90,7 @@ H_nl(ψ) = expect(Y, normalize(ψ))*Hs + CdagC
 
 fdet_homodyne(t, ψ) = H0 + H_nl(ψ)
 fst_homodyne(t, ψ) = [Hs]
-stochastic.schroedinger_dynamic(tspan, ψ0, fdet_homodyne, fst_homodyne; dt=dt)
+stochastic.schroedinger_dynamic(tspan, ψ0, fdet_homodyne, fst_homodyne; dt=dt, normalize_state=true)
 nothing # hide
 ```
 
@@ -98,12 +98,10 @@ The above code would calculate a stochastic trajectory for the measurement of th
 
 ```@example stochastic-schroedinger
 θ = 0.5π
-fdet_cm, fst_cm = stochastic.homodyne_carmichael(H0, C, θ; normalize_expect=false)
+fdet_cm, fst_cm = stochastic.homodyne_carmichael(H0, C, θ)
 stochastic.schroedinger_dynamic(tspan, ψ0, fdet_cm, fst_cm; dt=dt, normalize_state=true)
 nothing # hide
 ```
-
-Note the `normalize_expect=false` option is set above. This removes the `normalize` in the expectation value as used above in the definition of `H_nl(ψ)` thereby offering better performance. Note, that for the calculation of this expectation value $\psi$ should be normalized. So be aware of this when using this option! In the above example, we took care of this by also setting `normalize_state=true` in the call to the stochastic Schrödinger equation thus ensuring that $\psi$ is always normalized.
 
 
 ## [Functions](@id stochastic-schroedinger: Functions)
