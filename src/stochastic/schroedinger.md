@@ -6,7 +6,7 @@ The stochastic Schrödinger equation has the basic form
 i\hbar\frac{\mathrm{d}}{\mathrm{d} t} |\Psi(t)\rangle = \left(H + \sum_i H_i^s \xi_i(t)\right) |\Psi(t)\rangle
 ```
 
-where $H_i^s$ are the terms in the Hamiltonian that are each proportional to an independent noise term $\xi_i(t)$. Note, that by default the noise is assumed to be white-noise (uncorrelated in time), i.e. $\langle\xi_i(t)\xi_i(t')\rangle = \delta(t-t')$.
+where $H_i^s$ are the terms in the Hamiltonian that are each proportional to an independent noise term $\xi_i(t)$. Note, that by default the noise is assumed to be real white-noise (uncorrelated in time), i.e. $\langle\xi_i(t)\xi_i(t')\rangle = \delta(t-t')$.
 
 The above equation is straightforward to implement with
 
@@ -47,7 +47,7 @@ nothing # hide
 
 Note, that the solver requires to know the number of noise processes. This number is calculated automatically from the given function `fstoch` by calculating the output at time `t=0`. If you want to avoid an initial execution of the function, you can make the solver skip the initial calculation of `fstoch`. This is done by passing the number of noise processes, i.e. the length of the vector `Hs` that is returned by `fstoch`, using the optional argument `noise_processes`.
 
-For some problems, it can be useful to renormalize the state vector after every time step taken (this can be used to avoid numerical issues for problems where the norm can become very small). To do this here, you can simply set the keyword `normalize_state=true`, e.g.
+For some problems, it can be useful to renormalize the state vector after every time step taken (this can be used to avoid numerical issues for problems where the norm can become very small/large). To do this here, you can simply set the keyword `normalize_state=true`, e.g.
 
 ```@example stochastic-schroedinger
 stochastic.schroedinger(tspan, ψ0, H, Hs; dt=dt, normalize_state=true)
@@ -71,9 +71,9 @@ is the same as setting `normalize_state=true`. See also **DifferentialEquations.
 
 ## [Detection schemes with the stochastic Schrödinger equation ](@id schroedinger-homodyne)
 
-Currently, **QuantumOptics.jl** features only one pre-defined measurement scheme to be used with the stochastic Schrödinger equation. Namely, with the function [`stochastic.homodyne_carmichael`](@ref), one can obtain the function `fdeterm` and `fstoch` needed to describe homodyne detection as derived by H. J. Carmichael. These can then be used with `stochastic.schroedinger_dynamic`.
+Currently, **QuantumOptics.jl** features only one pre-defined measurement scheme to be used with the stochastic Schrödinger equation. Namely, with the function [`stochastic.homodyne_carmichael`](@ref), one can obtain the function `fdeterm` and `fstoch` needed to describe homodyne detection as derived by H. J. Carmichael. These can then be used with `stochastic.schroedinger_dynamic`. Note, that this version does not preserve the norm.
 
-Consider a system descibed by the Hamiltonian $H_0$. If it is subject to decay with a operator $C$ and the output from this decay channel is subject to homodyne detection, the problem at hand is completely described by the stochastic state-dependent Hamiltonian [1,2]
+Consider a system descibed by the Hamiltonian $H_0$. If it is subject to decay with an operator $C$ and the output from this decay channel is subject to homodyne detection, the problem at hand is completely described by the stochastic state-dependent Hamiltonian [1,2]
 
 $H = H_0 - \frac{i}{2}C^\dagger C + iC e^{-i\theta}\left(\xi(t) + \langle C e^{-i\theta} + C^\dagger e^{i\theta}\rangle\right).$
 
