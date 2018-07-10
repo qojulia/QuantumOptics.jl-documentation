@@ -81,4 +81,4 @@ Like in the [`stochastic.schroedinger_dynamic`](@ref) function, if you want to a
 
 ## [References](@id stochastic-master: References)
 
-[1] Jacobs, K. and Steck, D. A. A straighforward introduction to continuous quantum measurements, Contemporary Physics, 47:5, 279-303, (2006). URL: https://arxiv.org/abs/quant-ph/0611067
+[1] Jacobs, K. and Steck, D. A. A straighforward introduction to continuous quantum measurements, Contemporary Physics, 47:5, 279-303, (2006). URL: [https://arxiv.org/abs/quant-ph/0611067](https://arxiv.org/abs/quant-ph/0611067)
