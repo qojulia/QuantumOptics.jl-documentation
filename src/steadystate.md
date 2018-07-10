@@ -12,7 +12,7 @@ For smaller system sizes finding eigenvectors of super-operators is the preferre
 
 * [`steadystate.eigenvector`](@ref)
 
-A simple example, that can also be solved analytically, is to compute the steady-state photon number of a cavity driven with an amplitude ``\eta`` and damping rate ``2\kappa``. The analytical solution is ``n=\eta^2/\kappa^2``, while in the toolbox we may calculate this with:
+A simple example, that can also be solved analytically is to compute the steady-state photon number of a cavity driven with an amplitude ``\eta`` and damping rate ``2\kappa``. The analytical solution is ``n=\eta^2/\kappa^2``, while in the toolbox we may calculate this with:
 
 ```@example steadystate
 using QuantumOptics # hide
@@ -21,14 +21,14 @@ b = FockBasis(10)
 η = 0.5κ
 H = η*(destroy(b) + create(b))
 J = [sqrt(2κ)*destroy(b)]
-ρ_master = steadystate.master(H, J)
+tout, ρ_master = steadystate.master(H, J)
 ρ_eig = steadystate.eigenvector(H, J)
 println("n_master = ", real(expect(number(b), ρ_master[end])))
 println("n_eig = ", real(expect(number(b), ρ_eig)))
 nothing # hide
 ```
 
-Due to numerical errors the results are not exactly ``0.25``. Decreasing the value of `tol` below its default `1e-3` improves the accuracy for the time-evolution approach.
+Note, that [`steadystate.master`](@ref) returns a list of times and density matrices containing the initial time/state and the time/state when steady state is reached. Due to numerical errors the results are not exactly ``0.25``. Decreasing the value of `tol` below its default `1e-3` improves the accuracy for the time-evolution approach.
 
 
 ## [Functions](@id steadstate: Functions)

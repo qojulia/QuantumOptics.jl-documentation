@@ -71,7 +71,7 @@ is the same as setting `normalize_state=true`. See also **DifferentialEquations.
 
 ## [Detection schemes with the stochastic Schrödinger equation ](@id schroedinger-homodyne)
 
-Currently, **QuantumOptics.jl** features only one pre-defined measurement scheme to be used with the stochastic Schrödinger equation. Namely, with the function [`stochastic.homodyne_carmichael`](@ref), one can obtain the function `fdeterm` and `fstoch` needed to describe homodyne detection as derived by H. J. Carmichael. These can then be used with `stochastic.schroedinger_dynamic`. Note, that this version does not preserve the norm.
+Currently, **QuantumOptics.jl** features only one pre-defined measurement scheme to be used with the stochastic Schrödinger equation. Namely, with the function [`stochastic.homodyne_carmichael`](@ref), one can obtain the function `fdeterm` and `fstoch` needed to describe homodyne detection as derived by H. J. Carmichael. These can then be used with [`stochastic.schroedinger_dynamic`](@ref). Note, that this version does not preserve the norm.
 
 Consider a system descibed by the Hamiltonian $H_0$. If it is subject to decay with an operator $C$ and the output from this decay channel is subject to homodyne detection, the problem at hand is completely described by the stochastic state-dependent Hamiltonian [1,2]
 
