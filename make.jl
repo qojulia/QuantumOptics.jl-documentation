@@ -62,6 +62,7 @@ pages = [
             "Ramsey spectroscopy" => "examples/ramsey.md",
             "Dephasing of Atom" => "examples/atom-dephasing.md",
             "Quantum Zeno Effect" => "examples/quantum-zeno-effect.md",
+            "Quantum Kicked Top" => "examples/quantum-kicked-top.md"
         ],
         "api.md",
     ]
