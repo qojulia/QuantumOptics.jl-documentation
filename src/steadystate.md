@@ -37,3 +37,5 @@ Note, that [`steadystate.master`](@ref) returns a list of times and density matr
 * [`steadystate.eigenvector`](@ref)
 
 ## [Examples](@id steadystate: Examples)
+
+* [Optomechanical Cavity](@ref)

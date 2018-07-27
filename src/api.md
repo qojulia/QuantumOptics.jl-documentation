@@ -247,12 +247,31 @@ fockstate
 coherentstate
 ```
 
+
+### [Phase space](@id API: Phase space)
+
 ```@docs
 qfunc
 ```
 
 ```@docs
 wigner
+```
+
+```@docs
+coherentspinstate
+```
+
+```@docs
+qfuncsu2
+```
+
+```@docs
+wignersu2
+```
+
+```@docs
+ylm
 ```
 
 ### [N-level](@id API: N-level)
@@ -540,6 +559,10 @@ steadystate.master
 
 ```@docs
 steadystate.eigenvector
+```
+
+```@docs
+steadystate.liouvillianspectrum
 ```
 
 
