@@ -30,4 +30,4 @@ Besides the expected algebraic operations there are a few additional functions t
 * [`spre`](@ref)
 * [`spost`](@ref)
 * [`liouvillian`](@ref)
-* [`expm`](@ref)
+* [`exp`](@ref)

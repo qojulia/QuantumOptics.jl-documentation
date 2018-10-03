@@ -16,7 +16,7 @@ b_atom = SpinBasis(1//2)
 x = 0.2
 p = 7.5
 
-u = Complex128[x, p] # Complex vector containing classical variabls
+u = ComplexF64[x, p] # Complex vector containing classical variables
 
 ψ_sc = semiclassical.State(ψ, u)
 ρ_sc = semiclassical.State(ρ, u)

@@ -95,7 +95,7 @@ end
 
 stochastic.schroedinger_semiclassical(tspan, ψ0, fquantum_schroedinger, fclassical_schroedinger;
 fstoch_quantum=fstoch_q_diagonal, fstoch_classical=fstoch_c_diagonal,
-noise_prototype_classical=zeros(Complex128, 2, 2), dt=dt)
+noise_prototype_classical=zeros(ComplexF64, 2, 2), dt=dt)
 nothing # hide
 ```
 
@@ -114,7 +114,7 @@ function fstoch_c_nondiag(t, psi, u, du)
 end
 
 stochastic.schroedinger_semiclassical(tspan, ψ0, fquantum_schroedinger, fclassical_schroedinger; dt=dt,
-fstoch_classical=fstoch_c_nondiag, noise_prototype_classical=zeros(Complex128, 2, 3))
+fstoch_classical=fstoch_c_nondiag, noise_prototype_classical=zeros(ComplexF64, 2, 3))
 nothing # hide
 ```
 

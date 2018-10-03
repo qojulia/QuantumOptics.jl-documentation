@@ -152,7 +152,7 @@ states.norm(x::StateVector)
 ```
 
 ```@docs
-trace
+tr
 ```
 
 ```@docs
@@ -186,8 +186,8 @@ permutesystems
 ```
 
 ```@docs
-expm(op::Operator)
-expm(op::DenseSuperOperator)
+exp(op::Operator)
+exp(op::DenseSuperOperator)
 ```
 
 ```@docs
@@ -201,7 +201,7 @@ operators.gemm!
 * Conversion of operators
 
 ```@docs
-full(::Operator)
+dense
 ```
 
 ```@docs

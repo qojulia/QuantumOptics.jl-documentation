@@ -58,7 +58,7 @@ To be clear what this renormalization does, it uses a so-called `FunctionCalling
 
 ```@example stochastic-schroedinger
 import DiffEqCallbacks # hide
-norm_func(u::Vector{Complex128}, t::Float64, integrator) = normalize!(u)
+norm_func(u::Vector{ComplexF64}, t::Float64, integrator) = normalize!(u)
 ncb = DiffEqCallbacks.FunctionCallingCallback(norm_func;
                  func_everystep=true, func_start=false)
 
@@ -83,8 +83,8 @@ Here, $\theta$ is the phase difference between the signal field (from the decay 
 H0 = number(b) # hide
 C = destroy(b) # hide
 θ = 0.5π
-Hs = 1.0im*C*e^(-1.0im*θ)
-Y = C*exp(-1.0im*θ) + dagger(C)*e^(1.0im*θ)
+Hs = 1.0im*C*exp(-1.0im*θ)
+Y = C*exp(-1.0im*θ) + dagger(C)*exp(1.0im*θ)
 CdagC = -0.5im*dagger(C)*C
 H_nl(ψ) = expect(Y, normalize(ψ))*Hs + CdagC
 

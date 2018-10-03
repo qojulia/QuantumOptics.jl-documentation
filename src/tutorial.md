@@ -50,6 +50,8 @@ The [`dagger()`](@ref) function can be used to transform a ket state into a bra 
 
 ```@example tutorial
 rho = psi ⊗ dagger(psi)
+# Alternatively, replace the ⊗ symbol (typed with \otimes)
+# by tensor(psi, dagger(psi))
 nothing # hide
 ```
 
@@ -244,13 +246,13 @@ exp_n = zeros(Float64, length(tspan))
 exp_e = zeros(Float64, length(tspan))
 
 function fout(t, psi)
-    i = findfirst(tspan, t)
+    i = findfirst(isequal(t), tspan)
     N = norm(psi)
     exp_e[i] += real(expect(2, sp*sm, normalize(psi)))
     exp_n[i] += real(expect(1, n, normalize(psi)))
 end
 
-srand(0)
+using Random; Random.seed!(0)
 for i=1:Ntrajectories
     timeevolution.mcwf(tspan, ψ0, H, J; fout=fout)
 end

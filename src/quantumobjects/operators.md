@@ -10,7 +10,7 @@ For this reason all operators define a left hand as well as a right hand basis:
 
 ```@example operators
 using QuantumOptics # hide
-type MyOperator <: Operator
+mutable struct MyOperator <: Operator
     basis_l::Basis
     basis_r::Basis
     # ...
@@ -38,7 +38,7 @@ Additionally, the following functions are implemented for all types of operators
 
 * [`dagger`](@ref)
 * [`identityoperator`](@ref)
-* [`trace`](@ref)
+* [`tr`](@ref)
 * [`normalize`](@ref)
 * [`normalize!`](@ref)
 * [`expect`](@ref)
@@ -47,9 +47,9 @@ Additionally, the following functions are implemented for all types of operators
 * [`permutesystems`](@ref)
 * [`embed`](@ref)
 * [`ptrace`](@ref)
-* [`expm`](@ref)
+* [`exp`](@ref)
 
-Conversion from one type of operator to another is also provided. I.e. to obtain a [`DenseOperator`](@ref) or [`SparseOperator`](@ref) use the [`full`](@ref) and [`sparse`](@ref) functions, respectively.
+Conversion from one type of operator to another is also provided. I.e. to obtain a [`DenseOperator`](@ref) or [`SparseOperator`](@ref) use the [`DenseOperator`](@ref) constructor and [`sparse`](@ref) function, respectively.
 
 ### [Operator data and tensor products](@id tensor_order)
 
@@ -64,13 +64,13 @@ The data field of an operator (or a ket/bra) built by a tensor product exhibits 
 type DenseOperator <: Operator
     basis_l::Basis
     basis_r::Basis
-    data::Matrix{Complex128}
+    data::Matrix{ComplexF64}
 end
 ```
 
 where the data is stored as complex (dense) matrix in the `data` field.
 
-The [`full(::Operator)`](@ref) function can be used to convert other types of operators to dense operators.
+The [`DenseOperator(::Operator)`](@ref) constructor can be used to convert other types of operators to dense operators.
 
 
 ## Sparse operators
@@ -81,7 +81,7 @@ The [`full(::Operator)`](@ref) function can be used to convert other types of op
 type SparseOperator <: Operator
     basis_l::Basis
     basis_r::Basis
-    data::SparseMatrixCSC{Complex128}
+    data::SparseMatrixCSC{ComplexF64}
 end
 ```
 To convert other operators to sparse operators the [`sparse(::Operator)`](@ref) function can be used.
