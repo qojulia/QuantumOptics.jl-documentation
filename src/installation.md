@@ -15,5 +15,5 @@ The source code is available on GitHub at https://github.com/bastikr/QuantumOpti
 Alternatively, you can use git to clone the repository.
 
 ```bash
-    >> git clone https://github.com/bastikr/QuantumOptics.jl.git
+    >> git clone https://github.com/qojulia/QuantumOptics.jl.git
 ```
