@@ -6,7 +6,7 @@ To install the latest official release, you can use Julia's internal package man
     pkg> add QuantumOptics
 ```
 
-The source code is available on GitHub at https://github.com/bastikr/QuantumOptics.jl (Note: this version may be unstable). You can also use Julia's package manager to checkout this version.
+The source code is available on GitHub at https://github.com/qojulia/QuantumOptics.jl (Note: this version may be unstable). You can also use Julia's package manager to checkout this version.
 
 ```julia
     pkg> develop QuantumOptics
