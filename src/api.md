@@ -36,7 +36,7 @@ Ket
 * General purpose operators. A few more specialized operators are implemented in [API: Quantum-systems](@ref).
 
 ```@docs
-Operator
+AbstractOperator
 ```
 
 ```@docs
@@ -161,12 +161,12 @@ ptrace
 
 ```@docs
 normalize(x::StateVector)
-normalize(op::Operator)
+normalize(op::AbstractOperator)
 ```
 
 ```@docs
 normalize!(x::StateVector)
-normalize!(op::Operator)
+normalize!(op::AbstractOperator)
 ```
 
 ```@docs
@@ -186,7 +186,7 @@ permutesystems
 ```
 
 ```@docs
-exp(op::Operator)
+exp(op::AbstractOperator)
 exp(op::DenseSuperOperator)
 ```
 
@@ -205,7 +205,7 @@ dense
 ```
 
 ```@docs
-sparse(::Operator)
+sparse(::AbstractOperator)
 ```
 
 ### [Exceptions](@id API: Quantum objects exceptions)

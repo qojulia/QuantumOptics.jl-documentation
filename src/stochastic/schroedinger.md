@@ -22,7 +22,7 @@ stochastic.schroedinger(tspan, ψ0, H, Hs; dt=dt)
 nothing # hide
 ```
 
-Here, the first three arguments are the same as for [`timeevolution.schroedinger`](@ref). The additional argument `Hs` is either an [`Operator`](@ref) or a vector of operators. The first case corresponds to the stochastic Schrödinger equation featuring only a single noise process, while the latter corresponds to a number of noise processes, where the operators $H_i^s$ are the entries in the vector `Hs`.
+Here, the first three arguments are the same as for [`timeevolution.schroedinger`](@ref). The additional argument `Hs` is either an [`AbstractOperator`](@ref) or a vector of operators. The first case corresponds to the stochastic Schrödinger equation featuring only a single noise process, while the latter corresponds to a number of noise processes, where the operators $H_i^s$ are the entries in the vector `Hs`.
 
 A time-dependent stochastic Schrödinger equation can also be implemented using [`stochastic.schroedinger_dynamic`](@ref). Instead of the two parts of the Hamiltonian `H` and `Hs`, the dynamic version takes two functions as arguments. One, that returns the deterministic part of the dynamic Hamiltonian, while the other returns a vector with the (time- or state-dependent) operators $H_i^s$ as entries.
 

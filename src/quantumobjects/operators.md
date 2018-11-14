@@ -10,14 +10,14 @@ For this reason all operators define a left hand as well as a right hand basis:
 
 ```@example operators
 using QuantumOptics # hide
-mutable struct MyOperator <: Operator
-    basis_l::Basis
-    basis_r::Basis
+mutable struct MyOperator{BL<:Basis,BR<:Basis} <: AbstractOperator{BL,BR}
+    basis_l::BL
+    basis_r::BR
     # ...
 end
 ```
 
-For performance reasons there are several different implementations of operators in **QuantumOptics.jl**, all inheriting from the abstract [`Operator`](@ref) type:
+For performance reasons there are several different implementations of operators in **QuantumOptics.jl**, all inheriting from the abstract [`AbstractOperator`](@ref) type:
 
 * [Dense operators](@ref)
 * [Sparse operators](@ref)
@@ -61,16 +61,16 @@ The data field of an operator (or a ket/bra) built by a tensor product exhibits 
 [`DenseOperator`](@ref) is the default type used for density operators. I.e. creating an operator by using the tensor product of a ket and a bra state results in a [`DenseOperator`](@ref). It is implemented as:
 
 ```julia
-type DenseOperator <: Operator
-    basis_l::Basis
-    basis_r::Basis
-    data::Matrix{ComplexF64}
+type DenseOperator{BL<:Basis,BR<:Basis,T<:Matrix{ComplexF64}} <: AbstractOperator{BL,BR}
+    basis_l::BL
+    basis_r::BR
+    data::T
 end
 ```
 
 where the data is stored as complex (dense) matrix in the `data` field.
 
-The [`DenseOperator(::Operator)`](@ref) constructor can be used to convert other types of operators to dense operators.
+The [`DenseOperator(::AbstractOperator)`](@ref) constructor can be used to convert other types of operators to dense operators.
 
 
 ## Sparse operators
@@ -78,13 +78,14 @@ The [`DenseOperator(::Operator)`](@ref) constructor can be used to convert other
 [`SparseOperator`](@ref) is the default type used in **QuantumOptics.jl**. The reason is that in many quantum systems the Hamiltonians and jump operators in respect to the commonly used bases are sparse. They are implemented as:
 
 ```julia
-type SparseOperator <: Operator
-    basis_l::Basis
-    basis_r::Basis
-    data::SparseMatrixCSC{ComplexF64}
+using SparseArrays # hide
+type SparseOperator{BL<:Basis,BR<:Basis,T<:SparseMatrixCSC{ComplexF64,Int}} <: AbstractOperator{BL,BR}
+    basis_l::BL
+    basis_r::BR
+    data::T
 end
 ```
-To convert other operators to sparse operators the [`sparse(::Operator)`](@ref) function can be used.
+To convert other operators to sparse operators the [`sparse(::AbstractOperator)`](@ref) function can be used.
 
 
 ## Lazy operators
