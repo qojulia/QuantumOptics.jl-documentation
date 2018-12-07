@@ -50,7 +50,7 @@ and also the stochastic average of the single trajectory expectation values is e
 
 avoiding explicit calculations of density matrices.
 
-The function computing a time evolution with the MCWF method can be called analogously to [`timeevolution.master`](@ref), namely with::
+The function computing a time evolution with the MCWF method can be called analogously to [`timeevolution.master`](@ref), namely with:
 
 ```@example mcwf
 using QuantumOptics # hide
@@ -64,11 +64,11 @@ tout, psit = timeevolution.mcwf(tspan, psi0, H, J)
 nothing # hide
 ```
 
-Since this function only calculates state vectors (as explained above), it requires the initial state in the form of a ket. Without any additional keyword arguments the [`timeevolution.mcwf`](@ref) function returns two vectors, the first contains the times identical to tspan and the second the state of the system at these points of time. However, finer control of the output is possible by using the keyword arguments `display_beforeevent` and `display_afterevent`. If they are set to `true` the state of the system immediately before and after a jump is added to these vectors. To avoid keeping all the states in memory when only certain expectation values are needed, one can optionally pass a function `fout(t, psi)` which is called at every specified point of time:
+Since this function only calculates state vectors (as explained above), it requires the initial state in the form of a [`Ket`](@ref). Without any additional keyword arguments the [`timeevolution.mcwf`](@ref) function returns two vectors, the first contains the times identical to tspan and the second the state of the system at these points of time. However, finer control of the output is possible by using the keyword arguments `display_beforeevent` and `display_afterevent`. If they are set to `true` the state of the system immediately before and after a jump is added to these vectors. To avoid keeping all the states in memory when only certain expectation values are needed, one can optionally pass a function `fout(t, psi)` which is called at every specified point of time:
 
 ```@example mcwf
 function fout(t, psi)
-    expect(a, psi)/norm(psi)
+    expect(a, psi)/norm(psi)^2
 end
 tout, exp_a = timeevolution.mcwf(tspan, psi0, H, J; fout=fout)
 nothing # hide
@@ -107,7 +107,7 @@ Now, we can call the solver with the acquired jump operators `D` multiplied by t
 ```@example mcwf
 H = SparseOperator(threespinbasis) # hide
 psi0 = basisstate(threespinbasis, 1) # hide
-tout, psi_t = timeevolution.mcwf(tspan, psi0, H, [sqrt(d[i])*D[i] for i=1:3])
+tout, psi_t = timeevolution.mcwf(tspan, psi0, H, D; rates=d)
 nothing # hide
 ```
 
