@@ -40,6 +40,10 @@ AbstractOperator
 ```
 
 ```@docs
+DataOperator
+```
+
+```@docs
 DenseOperator
 ```
 
@@ -507,6 +511,10 @@ timeevolution.master_dynamic
 
 ```@docs
 timeevolution.master_nh_dynamic
+```
+
+```@docs
+timeevolution.@skiptimechecks
 ```
 
 ### [Monte Carlo wave function](@id API: Monte Carlo wave function)
