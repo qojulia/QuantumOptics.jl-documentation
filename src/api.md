@@ -251,6 +251,10 @@ fockstate
 coherentstate
 ```
 
+```@docs
+coherentstate!
+```
+
 
 ### [Phase space](@id API: Phase space)
 
@@ -543,6 +547,15 @@ timeevolution.mcwf_nh_dynamic
 diagonaljumps
 ```
 
+### [Bloch-Redfield master](@id API: Bloch-Redfield)
+
+```@docs
+timeevolution.bloch_redfield_tensor
+```
+
+```@docs
+timeevolution.master_bloch_redfield
+```
 
 ## [Spectral analysis](@id API: Spectral analysis)
 
