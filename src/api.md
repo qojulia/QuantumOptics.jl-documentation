@@ -337,7 +337,7 @@ MomentumBasis
 ```
 
 ```@docs
-particle.spacing
+spacing
 ```
 
 ```@docs
