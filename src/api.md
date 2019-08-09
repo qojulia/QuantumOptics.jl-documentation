@@ -668,6 +668,28 @@ phase_average
 passive_state
 ```
 
+## [Pauli](@id API: Pauli)
+
+```@docs
+PauliBasis
+```
+
+```@docs
+PauliTransferMatrix
+```
+
+```@docs
+DensePauliTransferMatrix
+```
+
+```@docs
+ChiMatrix
+```
+
+```@docs
+DenseChiMatrix
+```
+
 ## [Printing](@id API: Printing)
 
 ```@docs
