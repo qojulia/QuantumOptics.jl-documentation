@@ -37,7 +37,7 @@ Note, that the switch to the `EulerHeun` method solves the problem in the Strato
 The default noise is uncorrelated (white noise). Furthermore, since most equations involving quantum noise feature Hermitian noise operators, the noise is chosen to be real. For example,
 
 ```@example stochastic-intro
-tout, ψt = stochastic.schroedinger(T, ψ0, H, Hs; noise=StochasticDiffEq.RealWienerProcess!(0.0, [0.0]), dt=1e-1)
+tout, ψt = stochastic.schroedinger(T, ψ0, H, Hs; noise=StochasticDiffEq.RealWienerProcess(0.0, 0.0), dt=1e-1)
 nothing # hide
 ```
 

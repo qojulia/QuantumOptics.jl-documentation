@@ -72,7 +72,7 @@ pages = [
 makedocs(
     modules = [QuantumOptics],
     checkdocs = :exports,
-    format=:html,
+    format=Documenter.HTML(),
     build = builddir,
     sitename = "QuantumOptics.jl",
     pages = pages
