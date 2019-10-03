@@ -64,10 +64,21 @@ We can then calculate the time evolution by passing the functions to the solver 
 tspan = [0:0.1:10;] # hide
 tout, ψt = semiclassical.schroedinger_dynamic(tspan, ψ_sc, fquantum_schroedinger, fclassical)
 tout, ρt = semiclassical.master_dynamic(tspan, ψ_sc, fquantum_master, fclassical)
-
 nothing # hide
 ```
 
+Computing Monte-Carlo wave function trajectories of a semiclassical system slightly differs in syntax. Namely, when using [`semiclassical.mcwf_dynamic`](@ref) one can also apply "jumps" to the classical part of the system. This is for example the case when considering the recoil an atom experiences when it spontaneously emits a photon. The semiclassical jump is implemented via an additional function, i.e. using the previously defined functions one needs to define an additional one like so:
+
+```@example semiclassical1
+function fjump_classical(t,psi,u,i)
+  # update u according to the jump occurring with J[i]
+  # -- no return statement!
+end
+tout, ψt = semiclassical.mcwf_dynamic(tspan, ψ_sc, fquantum_master, fclassical, fjump_classical)
+nothing # hide
+```
+
+Note, that the function `fjump_classical` takes four arguments: the time `t`, and the quantum and classical parts of the state `psi` and `u`, respectively. The last argument `i` is an integer corresponding to the index of the list of jump operators. This can be used when there are multiple possible jumps which act on `u` in a different way.
 
 ## [Functions](@id semiclassical: Functions)
 
@@ -75,6 +86,7 @@ nothing # hide
 * [`semiclassical.State`](@ref)
 * [`semiclassical.schroedinger_dynamic`](@ref)
 * [`semiclassical.master_dynamic`](@ref)
+* [`semiclassical.mcwf_dynamic`](@ref)
 
 ## [Examples](@id semiclassical: Examples)
 
