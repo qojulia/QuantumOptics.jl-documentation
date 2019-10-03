@@ -61,7 +61,7 @@ The data field of an operator (or a ket/bra) built by a tensor product exhibits 
 [`DenseOperator`](@ref) is the default type used for density operators. I.e. creating an operator by using the tensor product of a ket and a bra state results in a [`DenseOperator`](@ref). It is implemented as:
 
 ```julia
-type DenseOperator{BL<:Basis,BR<:Basis,T<:Matrix{ComplexF64}} <: AbstractOperator{BL,BR}
+mutable struct DenseOperator{BL<:Basis,BR<:Basis,T<:Matrix{ComplexF64}} <: AbstractOperator{BL,BR}
     basis_l::BL
     basis_r::BR
     data::T
@@ -79,7 +79,7 @@ The [`DenseOperator(::AbstractOperator)`](@ref) constructor can be used to conve
 
 ```julia
 using SparseArrays # hide
-type SparseOperator{BL<:Basis,BR<:Basis,T<:SparseMatrixCSC{ComplexF64,Int}} <: AbstractOperator{BL,BR}
+mutable struct SparseOperator{BL<:Basis,BR<:Basis,T<:SparseMatrixCSC{ComplexF64,Int}} <: AbstractOperator{BL,BR}
     basis_l::BL
     basis_r::BR
     data::T

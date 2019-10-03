@@ -19,7 +19,7 @@ Describing systems consisting of many identical particles in a tensor product sp
 This concept is captured in the [`ManyBodyBasis`](@ref) type:
 
 ```julia
-type ManyBodyBasis <: Basis
+struct ManyBodyBasis <: Basis
     shape::Vector{Int}
     onebodybasis::Basis
     occupations::Vector{Vector{Int}}

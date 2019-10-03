@@ -15,7 +15,7 @@ A fock space describes the situation of variable particle number. I.e. the syste
 To create a basis of a Fock space **QuantumOptics.jl** provides the [`FockBasis`](@ref) class which has to be supplied with an integer specifying the maximum number of photons. It is defined as:
 
 ```julia
-type FockBasis <: Basis
+struct FockBasis <: Basis
     shape::Vector{Int}
     N::Int
 end

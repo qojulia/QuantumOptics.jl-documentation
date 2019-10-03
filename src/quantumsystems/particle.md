@@ -21,14 +21,14 @@ nothing # hide
 For particles **QuantumOptics.jl** provides two different choices - either the calculations can be done in real space or they can be done in momentum space by using [`PositionBasis`](@ref) or [`MomentumBasis`](@ref) respectively. The definition of these two bases types is:
 
 ```julia
-type PositionBasis <: Basis
+struct PositionBasis <: Basis
     shape::Vector{Int}
     xmin::Float64
     xmax::Float64
     N::Int
 end
 
-type MomentumBasis <: Basis
+struct MomentumBasis <: Basis
     shape::Vector{Int}
     pmin::Float64
     pmax::Float64

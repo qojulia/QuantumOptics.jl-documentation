@@ -16,7 +16,7 @@ nothing # hide
 Oftentimes it is possible to restrict a large Hilbert to a small subspace while still retaining the most important physical effects. This reduction can be done with the [`SubspaceBasis`](@ref) which is implemented as:
 
 ```julia
-type SubspaceBasis <: Basis
+struct SubspaceBasis <: Basis
     shape::Vector{Int}
     superbasis::Basis
     basisstates::Vector{Ket}

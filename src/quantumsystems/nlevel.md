@@ -14,7 +14,7 @@ N-Level systems are mostly used as idealized model when the relevant physics can
 For these kinds of systems the [`NLevelBasis`](@ref) can be used. Essentially it is defined just as:
 
 ```julia
-type NLevelBasis <: Basis
+struct NLevelBasis <: Basis
     shape::Vector{Int}
     N::Int
 end

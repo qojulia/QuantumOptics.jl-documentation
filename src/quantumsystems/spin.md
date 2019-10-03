@@ -11,7 +11,7 @@ nothing # hide
 Spin systems of arbitrary spin number can be modeled with the [`SpinBasis`](@ref) which is defined as:
 
 ```julia
-type SpinBasis <: Basis
+struct SpinBasis <: Basis
     shape::Vector{Int}
     spinnumber::Rational{Int}
 end

@@ -36,7 +36,7 @@ However, since operators and states represented in any generic basis can be comb
 The cleaner way is to implement own special purpose bases by deriving from the abstract [`Basis`](@ref) type. The only mandatory property of all basis types is that they have a field `shape` which specifies the dimensionality of their Hilbert space. E.g. a spin 1/2 basis could be implemented as:
 
 ```julia
-type SpinBasis <: Basis
+struct SpinBasis <: Basis
     shape::Vector{Int}
     SpinBasis() = new(Int[2]) # Constructor
 end
