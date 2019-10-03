@@ -616,6 +616,10 @@ semiclassical.schroedinger_dynamic
 semiclassical.master_dynamic
 ```
 
+```@docs
+semiclassical.mcwf_dynamic
+```
+
 ## [Stochastics](@id API: Stochastics)
 
 ```@docs
