@@ -75,11 +75,11 @@ Txp = transform(b_comp_x, b_comp_p)
 nothing # hide
 ```
 
-The function will then automatically identify the first to bases of the composite basis `b_comp_x` as position basis and define a corresponding FFT from `b_comp_p` to `b_comp_x`. Note, that it is also possible to specify the indexes of the bases one wants to transform. The above [`FFTOperator`](@ref particle.FFTOperator) is equivalent to writing `transform(b_comp_x, b_comp_p; index=[1, 2])`. This can be used if one does not want to FFT all position/momentum bases of a composite basis. Additionally, in order to save memory one can specify the option argument `ket_only`, for example `transform(b_comp_x, b_comp_p; ket_only=true)`. The resulting [`FFTOperator`](@ref particle.FFTOperator) is then of the subtype [`FFTKets`](@ref particle.FFTKets) and can only be applied to [`Ket`](@ref) states. This means, that this type of [`FFTOperator`](@ref particle.FFTOperator) can only be used when calculating the time evolution according to a Schrödinger equation, as opposed to the more general [`FFTOperators`](@ref particle.FFTOperators), which can also handle operators. However, when treating large systems, the memory efficiency is much better.
+The function will then automatically identify the first to bases of the composite basis `b_comp_x` as position basis and define a corresponding FFT from `b_comp_p` to `b_comp_x`. Note, that it is also possible to specify the indexes of the bases one wants to transform. The above [`FFTOperator`](@ref QuantumOpticsBase.FFTOperator) is equivalent to writing `transform(b_comp_x, b_comp_p; index=[1, 2])`. This can be used if one does not want to FFT all position/momentum bases of a composite basis. Additionally, in order to save memory one can specify the option argument `ket_only`, for example `transform(b_comp_x, b_comp_p; ket_only=true)`. The resulting [`FFTOperator`](@ref QuantumOpticsBase.FFTOperator) is then of the subtype [`FFTKets`](@ref QuantumOpticsBase.FFTKets) and can only be applied to [`Ket`](@ref) states. This means, that this type of [`FFTOperator`](@ref QuantumOpticsBase.FFTOperator) can only be used when calculating the time evolution according to a Schrödinger equation, as opposed to the more general [`FFTOperators`](@ref QuantumOpticsBase.FFTOperators), which can also handle operators. However, when treating large systems, the memory efficiency is much better.
 
 ## [Additional functions](@id particle: Additional functions)
 
-* [`particle.spacing`](@ref)
+* [`spacing`](@ref)
 * [`samplepoints`](@ref)
 
 

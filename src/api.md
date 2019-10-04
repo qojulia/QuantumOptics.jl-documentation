@@ -114,23 +114,23 @@ liouvillian
 * As far as it makes sense the same functions are implemented for bases, states, operators and superoperators.
 
 ```@docs
-bases.samebases
+QuantumOpticsBase.samebases
 ```
 
 ```@docs
-bases.check_samebases
+QuantumOpticsBase.check_samebases
 ```
 
 ```@docs
-bases.multiplicable
+QuantumOpticsBase.multiplicable
 ```
 
 ```@docs
-bases.check_multiplicable
+QuantumOpticsBase.check_multiplicable
 ```
 
 ```@docs
-bases.basis
+QuantumOpticsBase.basis
 ```
 
 ```@docs
@@ -152,7 +152,7 @@ dm
 ```
 
 ```@docs
-states.norm(x::StateVector)
+norm(x::StateVector)
 ```
 
 ```@docs
@@ -195,11 +195,11 @@ exp(op::DenseSuperOperator)
 ```
 
 ```@docs
-operators.gemv!
+QuantumOpticsBase.gemv!
 ```
 
 ```@docs
-operators.gemm!
+QuantumOpticsBase.gemm!
 ```
 
 * Conversion of operators
@@ -215,7 +215,7 @@ sparse(::AbstractOperator)
 ### [Exceptions](@id API: Quantum objects exceptions)
 
 ```@docs
-bases.IncompatibleBases
+QuantumOpticsBase.IncompatibleBases
 ```
 
 
@@ -367,15 +367,15 @@ gaussianstate
 ```
 
 ```@docs
-particle.FFTOperator
+QuantumOpticsBase.FFTOperator
 ```
 
 ```@docs
-particle.FFTOperators
+QuantumOpticsBase.FFTOperators
 ```
 
 ```@docs
-particle.FFTKets
+QuantumOpticsBase.FFTKets
 ```
 
 ```@docs
@@ -389,7 +389,7 @@ SubspaceBasis
 ```
 
 ```@docs
-subspace.orthonormalize
+QuantumOpticsBase.orthonormalize
 ```
 
 ```@docs
@@ -421,6 +421,10 @@ destroy(::ManyBodyBasis, ::Int)
 
 ```@docs
 create(::ManyBodyBasis, ::Int)
+```
+
+```@docs
+transition(::ManyBodyBasis, ::Int, ::Int)
 ```
 
 ```@docs
@@ -697,5 +701,5 @@ DenseChiMatrix
 ## [Printing](@id API: Printing)
 
 ```@docs
-QuantumOptics.set_printing
+QuantumOpticsBase.set_printing
 ```

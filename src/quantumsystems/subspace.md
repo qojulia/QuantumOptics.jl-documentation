@@ -34,7 +34,7 @@ To project states into the subspace or re-embed them into the super-space a proj
 
 If the states used to define the subspace are not orthonormal one can use the orthonormalize function to obtain an ONB:
 
-* [`subspace.orthonormalize`](@ref)
+* [`QuantumOpticsBase.orthonormalize`](@ref)
 
 
 ## [Examples](@id subspace: Examples)

@@ -53,7 +53,7 @@ Conversion from one type of operator to another is also provided. I.e. to obtain
 
 ### [Operator data and tensor products](@id tensor_order)
 
-The data field of an operator (or a ket/bra) built by a tensor product exhibits reverse ordering to the standard Kronecker product, i.e. `tensor(A, B).data = kron(B.data, A.data)`. This is due to the fact that this order respects the column-major order of stored data in the Julia language which is beneficial for performance. One has to keep this in mind when manipulating the data fields. If desired you can change the data output printed to the REPL with the [`QuantumOptics.set_printing`](@ref) function, i.e. by doing `QuantumOptics.set_printing(standard_order=true)`. Note, that this will only change the displayed output while leaving the respective operator data fields the unmodified.
+The data field of an operator (or a ket/bra) built by a tensor product exhibits reverse ordering to the standard Kronecker product, i.e. `tensor(A, B).data = kron(B.data, A.data)`. This is due to the fact that this order respects the column-major order of stored data in the Julia language which is beneficial for performance. One has to keep this in mind when manipulating the data fields. If desired you can change the data output printed to the REPL with the [`QuantumOpticsBase.set_printing`](@ref) function, i.e. by doing `QuantumOpticsBase.set_printing(standard_order=true)`. Note, that this will only change the displayed output while leaving the respective operator data fields the unmodified.
 
 
 ## Dense operators

@@ -1,5 +1,6 @@
 using Documenter
 using QuantumOptics
+using QuantumOpticsBase
 
 builddir = "build"
 postprocessdir = "postbuild"
@@ -70,7 +71,7 @@ pages = [
     ]
 
 makedocs(
-    modules = [QuantumOptics],
+    modules = [QuantumOptics,QuantumOpticsBase],
     checkdocs = :exports,
     format=Documenter.HTML(),
     build = builddir,

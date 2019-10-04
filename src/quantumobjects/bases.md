@@ -42,4 +42,4 @@ struct SpinBasis <: Basis
 end
 ```
 
-The default behavior for new bases is to allow operations for bases of the same type, but reject mixing with other bases. Finer control over the interaction with other bases can be achieved by overloading the `==` operator as well as the [`bases.multiplicable`](@ref) function.
+The default behavior for new bases is to allow operations for bases of the same type, but reject mixing with other bases. Finer control over the interaction with other bases can be achieved by overloading the `==` operator as well as the [`QuantumOpticsBase.multiplicable`](@ref) function.
