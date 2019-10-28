@@ -92,7 +92,7 @@ for (rootdir, dirs, files) in walkdir(postprocessdir)
             path = joinpath(rootdir, file)
             text = read(path, String)
             text = extractbody(text)
-            if file == "search.html"
+            if occursin("search", rootdir)
                 text_ = layout("true") * text
             else
                 text_ = layout("false") * text
