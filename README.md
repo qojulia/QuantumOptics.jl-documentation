@@ -1,6 +1,6 @@
 # QuantumOptics.jl documentation
 
-This is the source repository for the documentation. You can find an already built version of the documentation at https://qojulia.org/documentation/. The documentation is built using markdown files and [Documenter.jl](https://juliadocs.github.io/Documenter.jl) and includes resources from **QuantumOptics.jl** and **QuantumOptics.jl-examples**:
+This is the source repository for the documentation. You can find an already built version of the documentation at https://docs.qojulia.org/. The documentation is built using markdown files and [Documenter.jl](https://juliadocs.github.io/Documenter.jl) and includes resources from **QuantumOptics.jl** and **QuantumOptics.jl-examples**:
 
 * Functions exported from **QuantumOptics.jl** are included in `api.md`.
 * Examples from **QuantumOptics.jl-examples** are included in `src/examples`
@@ -8,11 +8,10 @@ This is the source repository for the documentation. You can find an already bui
 
 ## Directory layout
 
-When building the documentation the only requirement is that the documentation and the website are in the same directory:
-
+When building the documentation the only requirement is that the notebooks from the examples repo have been executed and copied over by make.jl from the examples directory.
     |
     |--> ./QuantumOptics.jl-documentation/
-    |--> ./QuantumOptics.jl-website/
+    |
 
 
 ## Software requirements
@@ -24,4 +23,4 @@ When building the documentation the only requirement is that the documentation a
 
 * Make sure the correct version of **QuantumOptics.jl** is in the Julia searchpath.
 * Build **QuantumOptics.jl-examples**. Output will automatically be copied into `src/examples`.
-* Run `julia make.jl`. This will first generate the documentation as html files in the `build` directory. Then it will extract the html body of each site and add a jekyll *frontmatter*, which specifies the template that will be used by jekyll when building the documentation pages. The result of this process is stored in the the `postbuild` directory. Finally these files are also copied into `../QuantumOptics.jl-website/documentation`.
+* Run `julia make.jl`. This will generate the documentation in the build directory.

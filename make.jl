@@ -3,14 +3,6 @@ using QuantumOptics
 using QuantumOpticsBase
 
 builddir = "build"
-postprocessdir = "postbuild"
-targetpath = "../QuantumOptics.jl-website/src/documentation"
-
-@assert !isdir(basename(targetpath))
-if !isdir(targetpath)
-    println("Creating documentation output directory at \"", targetpath, "\"")
-    mkdir(targetpath)
-end
 
 pages = [
         "index.md",
@@ -72,46 +64,15 @@ pages = [
     ]
 
 makedocs(
-    modules = [QuantumOptics,QuantumOpticsBase],
+    modules = [QuantumOptics, QuantumOpticsBase],
     checkdocs = :exports,
-    format=Documenter.HTML(),
+    format=Documenter.HTML(
+        edit_link = nothing,
+        canonical = "https://docs.qojulia.org/",
+        assets = [ asset("assets/favicon.png", class=:ico, islocal = true) ]),
     build = builddir,
     sitename = "QuantumOptics.jl",
     pages = pages
     )
+    
 
-# Copy files to separate directory for post processing
-cp(builddir, postprocessdir; force=true)
-
-layout(search) = "---\nlayout: default\ntype: documentation\nsearch: $search\n---\n\n"
-extractbody(text) = text[last(findfirst("<body>", text))+1:first(findfirst("</body>", text))-1]
-
-for (rootdir, dirs, files) in walkdir(postprocessdir)
-    for file in files
-        if endswith(file, ".html")
-            println("Prefixing: ", file)
-            path = joinpath(rootdir, file)
-            text = read(path, String)
-            text = extractbody(text)
-            if occursin("search", rootdir)
-                text_ = layout("true") * text
-            else
-                text_ = layout("false") * text
-            end
-            write(path, text_)
-        end
-    end
-end
-
-# Remove body font-size from css file
-path = joinpath(postprocessdir, "assets/documenter.css")
-text = read(path, String)
-i0 = first(findfirst("body", text))
-i0 += first(findfirst("font-size", text[i0:end])) - 1
-i0 = last(findlast("\n", text[1:i0]))
-i1 = first(findfirst("\n", text[i0+1:end])) + i0
-
-write(path, text[1:i0-1]*text[i1:end])
-
-# Copy finished documentation build to website
-cp(postprocessdir, targetpath; force=true)
