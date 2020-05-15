@@ -44,6 +44,10 @@ DataOperator
 ```
 
 ```@docs
+Operator
+```
+
+```@docs
 DenseOperator
 ```
 
@@ -190,16 +194,11 @@ permutesystems
 ```
 
 ```@docs
-exp(op::AbstractOperator)
-exp(op::DenseSuperOperator)
+exp(::AbstractOperator)
 ```
 
 ```@docs
-QuantumOpticsBase.gemv!
-```
-
-```@docs
-QuantumOpticsBase.gemm!
+QuantumOpticsBase.mul!
 ```
 
 * Conversion of operators
@@ -435,7 +434,11 @@ manybodyoperator
 onebodyexpect
 ```
 
+<<<<<<< HEAD
+### [Direct sum](@id API: Direct-sum)
+=======
 ## [Direct sum](@id API: Direct-sum)
+>>>>>>> master
 
 ```@docs
 SumBasis
@@ -518,6 +521,7 @@ entanglement_entropy
 ```@docs
 avg_gate_fidelity
 ```
+
 
 ## [Time-evolution](@id API: Time-evolution)
 

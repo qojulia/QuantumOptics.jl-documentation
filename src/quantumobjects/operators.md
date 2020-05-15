@@ -17,10 +17,9 @@ mutable struct MyOperator{BL<:Basis,BR<:Basis} <: AbstractOperator{BL,BR}
 end
 ```
 
-For performance reasons there are several different implementations of operators in **QuantumOptics.jl**, all inheriting from the abstract [`AbstractOperator`](@ref) type:
+For performance reasons there are two different implementations of operators in **QuantumOptics.jl**, all inheriting from the abstract [`AbstractOperator`](@ref) type:
 
-* [Dense operators](@ref)
-* [Sparse operators](@ref)
+* [Operators](@ref)
 * [Lazy operators](@ref)
 
 They have the same interface and can in most cases be used interchangeably, e.g. they can be combined using arithmetic functions `*, /, +, -`:
@@ -49,43 +48,27 @@ Additionally, the following functions are implemented for all types of operators
 * [`ptrace`](@ref)
 * [`exp`](@ref)
 
-Conversion from one type of operator to another is also provided. I.e. to obtain a [`DenseOperator`](@ref) or [`SparseOperator`](@ref) use the [`DenseOperator`](@ref) constructor and [`sparse`](@ref) function, respectively.
-
 ### [Operator data and tensor products](@id tensor_order)
 
 The data field of an operator (or a ket/bra) built by a tensor product exhibits reverse ordering to the standard Kronecker product, i.e. `tensor(A, B).data = kron(B.data, A.data)`. This is due to the fact that this order respects the column-major order of stored data in the Julia language which is beneficial for performance. One has to keep this in mind when manipulating the data fields. If desired you can change the data output printed to the REPL with the [`QuantumOpticsBase.set_printing`](@ref) function, i.e. by doing `QuantumOpticsBase.set_printing(standard_order=true)`. Note, that this will only change the displayed output while leaving the respective operator data fields the unmodified.
 
 
-## Dense operators
+## [Operators](@id operators_concrete)
 
-[`DenseOperator`](@ref) is the default type used for density operators. I.e. creating an operator by using the tensor product of a ket and a bra state results in a [`DenseOperator`](@ref). It is implemented as:
+[`Operator`](@ref) with a data field represented by a dense array is the default type used for density operators. It is implemented as:
 
 ```julia
-mutable struct DenseOperator{BL<:Basis,BR<:Basis,T<:Matrix{ComplexF64}} <: AbstractOperator{BL,BR}
+mutable struct Operator{BL<:Basis,BR<:Basis,T} <: AbstractOperator{BL,BR}
     basis_l::BL
     basis_r::BR
     data::T
 end
 ```
 
-where the data is stored as complex (dense) matrix in the `data` field.
+where the data field can be any type that implements Julia's [AbstractArray interace](https://docs.julialang.org/en/v1/manual/interfaces/#man-interface-array-1).
 
-The [`DenseOperator(::AbstractOperator)`](@ref) constructor can be used to convert other types of operators to dense operators.
-
-
-## Sparse operators
-
-[`SparseOperator`](@ref) is the default type used in **QuantumOptics.jl**. The reason is that in many quantum systems the Hamiltonians and jump operators in respect to the commonly used bases are sparse. They are implemented as:
-
-```julia
-using SparseArrays # hide
-mutable struct SparseOperator{BL<:Basis,BR<:Basis,T<:SparseMatrixCSC{ComplexF64,Int}} <: AbstractOperator{BL,BR}
-    basis_l::BL
-    basis_r::BR
-    data::T
-end
-```
-To convert other operators to sparse operators the [`sparse(::AbstractOperator)`](@ref) function can be used.
+The [`DenseOperator`](@ref) function can be used to construct an [`Operator`](@ref) with a dense array data field, or convert other types of operators to such a type.
+Similarly, one can use the [`SparseOperator`](@ref) function to construct an [`Operator`](@ref) with a sparse data field, and convert other types of operators. Also, a method for [`sparse(::AbstractOperator)`](@ref) is provided for conversion.
 
 
 ## Lazy operators
@@ -132,7 +115,7 @@ nothing # hide
 **Note**
 
 
-A [`LazyTensor`](@ref) can only consist of [`SparseOperator`](@ref) and/or [`DenseOperator`](@ref) when it is to be used with a time evolution. Using, for example, [`LazyProduct`](@ref) to build a [`LazyTensor`](@ref) will result in an error. However, in almost all use cases, one can rewrite these constructs such that [`LazyTensor`](@ref) remains at the lowest level.
+A [`LazyTensor`](@ref) can only consist of [`Operator`](@ref) types when it is to be used with a time evolution. Using, for example, [`LazyProduct`](@ref) to build a [`LazyTensor`](@ref) will result in an error. However, in almost all use cases, one can rewrite these constructs such that [`LazyTensor`](@ref) remains at the lowest level.
 
 
 See also:
