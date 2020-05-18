@@ -17,7 +17,7 @@ tout, ρt = stochastic.master(T, ψ0, H, J, Js; dt=1e-1)
 nothing # hide
 ```
 
-Note, that we need to set the keyword `dt` here, since the default algorithm is a fixed time step method (see below). Like the [Time-evolution](@ref) module, the stochastic solvers are built around [**DifferentialEquations.jl**](https://github.com/JuliaDiffEq/DifferentialEquations.jl) using its stochastic module **StochasticDiffEq**. Many of the options available for stochastic problems treated with [**DifferentialEquations.jl**](https://github.com/JuliaDiffEq/DifferentialEquations.jl) like, for example, the choice of algorithm can be used seamlessly within **QuantumOptics.jl**.
+Note, that we need to set the keyword `dt` here, since the default algorithm is a fixed time step method (see below). Like the [Time-evolution](@ref) module, the stochastic solvers are built around [**DifferentialEquations.jl**](https://github.com/SciML/DifferentialEquations.jl) using its stochastic module **StochasticDiffEq**. Many of the options available for stochastic problems treated with [**DifferentialEquations.jl**](https://github.com/SciML/DifferentialEquations.jl) like, for example, the choice of algorithm can be used seamlessly within **QuantumOptics.jl**.
 
 
 ### [Default algorithm and noise](@id stochastic-defaults)
@@ -43,4 +43,4 @@ nothing # hide
 
 corresponds to the default for a single noise term in the Schrödinger equation. Note, that the default is complex noise for semiclassical stochastic equations, where only classical noise is included (for details see [stochastic semiclassical systems](@ref stochastic-semiclassical))
 
-For details on the available algorithms and further control over the solvers, we refer to the [documentation](http://docs.juliadiffeq.org/stable/) of [**DifferentialEquations.jl**](https://github.com/JuliaDiffEq/DifferentialEquations.jl).
+For details on the available algorithms and further control over the solvers, we refer to the [documentation](http://docs.juliadiffeq.org/stable/) of [**DifferentialEquations.jl**](https://github.com/SciML/DifferentialEquations.jl).
