@@ -54,12 +54,14 @@ pages = [
             "Doppler cooling" => "examples/doppler-cooling.md",
             "Cavity cooling" => "examples/cavity-cooling.md",
             "Lasing and cooling" => "examples/lasing-and-cooling.md",
+            "Heat-pumped Maser" => "examples/three-level-maser.md",
             "Optomechanical cavity" => "examples/optomech-cooling.md",
             "Ramsey spectroscopy" => "examples/ramsey.md",
             "Dephasing of Atom" => "examples/atom-dephasing.md",
             "Quantum Zeno Effect" => "examples/quantum-zeno-effect.md",
             "Quantum Kicked Top" => "examples/quantum-kicked-top.md",
-            "Quantum Vortices" => "examples/vortex.md"
+            "Quantum Vortices" => "examples/vortex.md",
+            "Spinor BEC" => "examples/spin-orbit-coupled-BEC1D.md"
         ],
         "api.md",
     ]
@@ -70,7 +72,8 @@ makedocs(
     format=Documenter.HTML(
         edit_link = nothing,
         canonical = "https://docs.qojulia.org/",
-        assets = [ asset("assets/favicon.png", class=:ico, islocal = true) ]),
+        assets = [asset("assets/favicon.png", class=:ico, islocal = true)]
+        ),
     build = builddir,
     sitename = "QuantumOptics.jl",
     pages = pages
