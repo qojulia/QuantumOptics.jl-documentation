@@ -434,11 +434,7 @@ manybodyoperator
 onebodyexpect
 ```
 
-<<<<<<< HEAD
-### [Direct sum](@id API: Direct-sum)
-=======
 ## [Direct sum](@id API: Direct-sum)
->>>>>>> master
 
 ```@docs
 SumBasis
