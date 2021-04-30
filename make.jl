@@ -28,6 +28,7 @@ pages = [
             "Schrödinger equation" => "timeevolution/schroedinger.md",
             "Master equation" => "timeevolution/master.md",
             "Quantum trajectories" => "timeevolution/mcwf.md",
+            "Time-dependent problems" => "timeevolution/timedependent-problems.md"
         ],
         "metrics.md",
         "steadystate.md",

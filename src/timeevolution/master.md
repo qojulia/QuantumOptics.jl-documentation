@@ -39,8 +39,6 @@ The second keyword argument can be used to pass a specific set of jump operators
 
 We can pass an output function just like the one for a Schrödinger equation. Note, though, that now the function must be defined with the arguments `fout(t, rho)`.
 
-Furthermore, a time-dependent Hamiltonian can also be implemented analogously to a Schrödinger equation using [`timeevolution.master_dynamic(tspan, rho0, f)`](@ref).
-
 For performance reasons the solver internally first creates the non-hermitian Hamiltonian ``H_\mathrm{nh} = H - \frac{i\hbar}{2} \sum_i J_i^\dagger J_i`` and solves the equation
 
 ```math

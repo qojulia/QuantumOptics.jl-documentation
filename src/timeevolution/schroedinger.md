@@ -42,18 +42,7 @@ nothing # hide
 
 Although the method using `fout` might seem more complicated, it can be very useful for large systems to save memory since instead of all the states we only store one complex number per time step. Note, that `fout` must always be defined with the arguments `(t, psi)`. If `fout` is given, all variables are assigned within `fout` and the call to [`timeevolution.schroedinger`](@ref) returns `nothing`.
 
-We can also calculate the time evolution for a Hamiltonian that is time-dependent. In that case, we need to use the function [`timeevolution.schroedinger_dynamic(tspan, psi0, f::Function)`](@ref). As you can see, this function requires the same arguments as [`timeevolution.schroedinger`](@ref), but a function `f` instead of a Hamiltonian. As a brief example, consider a spin-1/2 particle that is coherently driven by a laser that has an amplitude that varies in time. We can implement this with:
-
-```@example schroedinger
-basis = SpinBasis(1//2)
-ψ₀ = spindown(basis)
-function pump(t, psi)
-  return sin(t)*(sigmap(basis) + sigmam(basis))
-end
-tspan = [0:0.1:10;]
-tout, ψₜ = timeevolution.schroedinger_dynamic(tspan, ψ₀, pump)
-nothing # hide
-```
+We can also calculate the time evolution for a Hamiltonian that is time-dependent. In that case, we need to use the function [`timeevolution.schroedinger_dynamic(tspan, psi0, f::Function)`](@ref). As you can see, this function requires the same arguments as [`timeevolution.schroedinger`](@ref), but a function `f` instead of a Hamiltonian. 
 
 
 ## [Functions](@id schroedinger: Functions)
