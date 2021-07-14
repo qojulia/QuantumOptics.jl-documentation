@@ -622,6 +622,14 @@ steadystate.eigenvector
 steadystate.liouvillianspectrum
 ```
 
+```@docs
+steadystate.iterative
+```
+
+```@docs
+steadystate.iterative!
+```
+
 
 ## [Time correlations](@id API: Time correlations)
 
