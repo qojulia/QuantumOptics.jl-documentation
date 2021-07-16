@@ -533,6 +533,10 @@ avg_gate_fidelity
 
 ## [Time-evolution](@id API: Time-evolution)
 
+```@docs
+timeevolution.recast!
+```
+
 ### [Schroedinger](@id API: Schroedinger)
 
 ```@docs
@@ -541,6 +545,14 @@ timeevolution.schroedinger
 
 ```@docs
 timeevolution.schroedinger_dynamic
+```
+
+```@docs
+timeevolution.dschroedinger!
+```
+
+```@docs
+timeevolution.dschroedinger_dynamic!
 ```
 
 ### [Master](@id API: Master)
@@ -563,6 +575,26 @@ timeevolution.master_dynamic
 
 ```@docs
 timeevolution.master_nh_dynamic
+```
+
+```@docs
+timeevolution.dmaster_h!
+```
+
+```@docs
+timeevolution.dmaster_nh!
+```
+
+```@docs
+timeevolution.dmaster_liouville!
+```
+
+```@docs
+timeevolution.dmaster_h_dynamic!
+```
+
+```@docs
+timeevolution.dmaster_nh_dynamic!
 ```
 
 ```@docs
@@ -669,7 +701,15 @@ semiclassical.schroedinger_dynamic
 ```
 
 ```@docs
+semiclassical.dschroedinger_dynamic!
+```
+
+```@docs
 semiclassical.master_dynamic
+```
+
+```@docs
+semiclassical.dmaster_h_dynamic!
 ```
 
 ```@docs
