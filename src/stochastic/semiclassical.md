@@ -15,25 +15,25 @@ tspan = [0,0.1] # hide
 dt = 0.1 # hide
 ψ0 = semiclassical.State(fockstate(b, 0), [0.0im, 0.0im]) # hide
 fquantum_schroedinger(t, psi, u) = H # hide
-fclassical_schroedinger(t, psi, u, du) = du # hide
+fclassical_schroedinger!(du, u, psi, t) = du # hide
 function fstoch_q_schroedinger(t, psi, u)
     # Calculate time-dependent stuff
     Hs
 end
 
-function fstoch_c_schroedinger(t, psi, u, du)
+function fstoch_c_schroedinger!(du, u, psi, t)
     # Calculate classical stochastic stuff
     du[1] = -u[2] # some example
     du[2] = u[1]
 end
 
 # Quantum noise
-stochastic.schroedinger_semiclassical(tspan, ψ0, fquantum_schroedinger, fclassical_schroedinger;
+stochastic.schroedinger_semiclassical(tspan, ψ0, fquantum_schroedinger, fclassical_schroedinger!;
 fstoch_quantum=fstoch_q_schroedinger, dt=dt)
 
 # Classical noise
-stochastic.schroedinger_semiclassical(tspan, ψ0, fquantum_schroedinger, fclassical_schroedinger;
-fstoch_classical=fstoch_c_schroedinger, dt=dt)
+stochastic.schroedinger_semiclassical(tspan, ψ0, fquantum_schroedinger, fclassical_schroedinger!;
+fstoch_classical=fstoch_c_schroedinger!, dt=dt)
 nothing # hide
 ```
 
@@ -50,25 +50,25 @@ C = J # hide
 Cdagger = Jdagger # hide
 ρ0 = ψ0 # hide
 fquantum_master(t, psi, u) = H, J, Jdagger # hide
-fclassical_master(t, psi, u, du) = du # hide
+fclassical_master!(du, u, psi, t) = du # hide
 function fstoch_q_master(t, psi, u)
     # Calculate time-dependent stuff
     C, Cdagger
 end
 
-function fstoch_c_master(t, psi, u, du)
+function fstoch_c_master!(du, u, psi, t)
     # Calculate classical stochastic stuff
     du[1] = -u[2] # some example
     du[2] = u[1]
 end
 
 # Quantum noise
-stochastic.master_semiclassical(tspan, ρ0, fquantum_master, fclassical_master;
+stochastic.master_semiclassical(tspan, ρ0, fquantum_master, fclassical_master!;
 fstoch_quantum=fstoch_q_master, dt=dt)
 
 # Classical noise
-stochastic.master_semiclassical(tspan, ρ0, fquantum_master, fclassical_master;
-fstoch_classical=fstoch_c_master, dt=dt)
+stochastic.master_semiclassical(tspan, ρ0, fquantum_master, fclassical_master!;
+fstoch_classical=fstoch_c_master!, dt=dt)
 nothing # hide
 ```
 
@@ -87,14 +87,14 @@ function fstoch_q_diagonal(t, psi, u)
     Hs # This is a vector containing a single operator
 end
 
-function fstoch_c_diagonal(t, psi, u, du)
+function fstoch_c_diagonal!(du, u, psi, t)
     # Same example as before, but du is now an array
     du[1,1] = -u[2]
     du[2,2] = u[1]
 end
 
-stochastic.schroedinger_semiclassical(tspan, ψ0, fquantum_schroedinger, fclassical_schroedinger;
-fstoch_quantum=fstoch_q_diagonal, fstoch_classical=fstoch_c_diagonal,
+stochastic.schroedinger_semiclassical(tspan, ψ0, fquantum_schroedinger, fclassical_schroedinger!;
+fstoch_quantum=fstoch_q_diagonal, fstoch_classical=fstoch_c_diagonal!,
 noise_prototype_classical=zeros(ComplexF64, 2, 2), dt=dt)
 nothing # hide
 ```
@@ -104,7 +104,7 @@ Note, how we need to index the diagonal of the array `du` in order to treat to o
 Non-diagonal classical noise can be treated in the same way, e.g.
 
 ```@example stochastic-semiclassical
-function fstoch_c_nondiag(t, psi, u, du)
+function fstoch_c_nondiag!(du, u, psi, t)
     # Non-diagonal noise
     du[1,1] = -u[2]
     du[1,2] = 0.1u[1]
@@ -113,8 +113,8 @@ function fstoch_c_nondiag(t, psi, u, du)
     du[2,3] = u[2]
 end
 
-stochastic.schroedinger_semiclassical(tspan, ψ0, fquantum_schroedinger, fclassical_schroedinger; dt=dt,
-fstoch_classical=fstoch_c_nondiag, noise_prototype_classical=zeros(ComplexF64, 2, 3))
+stochastic.schroedinger_semiclassical(tspan, ψ0, fquantum_schroedinger, fclassical_schroedinger!; dt=dt,
+fstoch_classical=fstoch_c_nondiag!, noise_prototype_classical=zeros(ComplexF64, 2, 3))
 nothing # hide
 ```
 

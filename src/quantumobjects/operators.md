@@ -105,8 +105,8 @@ b = tensor(b0, b0)
 sm0 = sigmam(b0) # Single spin operator
 
 # Build composite space using lazy tensors
-sm1 = LazyTensor(b, [1], [sm0])
-sm2 = LazyTensor(b, [2], [sm0])
+sm1 = LazyTensor(b, [1], (sm0,))
+sm2 = LazyTensor(b, [2], (sm0,))
 
 H = LazySum(LazyProduct(dagger(sm1), sm1), LazyProduct(dagger(sm2), sm2))
 nothing # hide

@@ -47,7 +47,7 @@ function fquantum_master(t, ψ, u)
 end
 
 # fclassical
-function fclassical(t, ψ, u, du)
+function fclassical!(du, u, ψ, t)
   # update du (vector of derivatives of classical variables)
   # according to dependencies on classical variables
   # u and quantum state ψ
@@ -62,23 +62,23 @@ We can then calculate the time evolution by passing the functions to the solver 
 
 ```@example semiclassical1
 tspan = [0:0.1:10;] # hide
-tout, ψt = semiclassical.schroedinger_dynamic(tspan, ψ_sc, fquantum_schroedinger, fclassical)
-tout, ρt = semiclassical.master_dynamic(tspan, ψ_sc, fquantum_master, fclassical)
+tout, ψt = semiclassical.schroedinger_dynamic(tspan, ψ_sc, fquantum_schroedinger, fclassical!)
+tout, ρt = semiclassical.master_dynamic(tspan, ψ_sc, fquantum_master, fclassical!)
 nothing # hide
 ```
 
 Computing Monte-Carlo wave function trajectories of a semiclassical system slightly differs in syntax. Namely, when using [`semiclassical.mcwf_dynamic`](@ref) one can also apply "jumps" to the classical part of the system. This is for example the case when considering the recoil an atom experiences when it spontaneously emits a photon. The semiclassical jump is implemented via an additional function, i.e. using the previously defined functions one needs to define an additional one like so:
 
 ```@example semiclassical1
-function fjump_classical(t,psi,u,i)
+function fjump_classical!(u,psi,i,t)
   # update u according to the jump occurring with J[i]
   # -- no return statement!
 end
-tout, ψt = semiclassical.mcwf_dynamic(tspan, ψ_sc, fquantum_master, fclassical, fjump_classical)
+tout, ψt = semiclassical.mcwf_dynamic(tspan, ψ_sc, fquantum_master, fclassical!, fjump_classical!)
 nothing # hide
 ```
 
-Note, that the function `fjump_classical` takes four arguments: the time `t`, and the quantum and classical parts of the state `psi` and `u`, respectively. The last argument `i` is an integer corresponding to the index of the list of jump operators. This can be used when there are multiple possible jumps which act on `u` in a different way.
+Note, that the function `fjump_classical!` takes four arguments: the classical and the quantum parts of the state `u` and `psi`, respectively, the index of which jump occurs `i` and the time `t`. The index `i` is an integer corresponding to the index of the list of jump operators. This can be used when there are multiple possible jumps which act on `u` in a different way.
 
 ## [Functions](@id semiclassical: Functions)
 
