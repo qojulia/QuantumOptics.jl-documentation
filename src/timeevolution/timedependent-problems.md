@@ -1,8 +1,49 @@
-# Time-dependent operators
+# Time-dependent problems
 
-Each of the time evolution functions offers a variant that can handle arbitrary time and state dependencies in the operators defining the problem. Here, we will detail how to use them.
+Each of the time evolution functions offers a variant that can handle arbitrary time and state dependencies in the operators defining the problem. 
+These functions accept time-dependent operators in two different forms:
+1. as user-provided operator-valued functions of time
+2. as subtypes of [`AbstractTimeDependentOperator`](@ref)
 
-## Closed systems
+The former is completely general, but care must be taken to ensure good performance.
+The latter is has fewer performance caveats and is typically more convenient, but
+requires that the time-dependence of your problem takes certain supported forms.
+
+## Time-dependent operators
+
+Time-dependent operators are subtypes of [`AbstractTimeDependentOperator`](@ref).
+Each such operator has its own internal "clock" set to a time `t` and hence
+always has a concrete value.
+
+Operator clocks can be read with [`current_time`](@ref) and set either with
+[`set_time!`](@ref) or by calling the operator itself as a function of `t` like
+`my_operator(t)`.
+
+Time evolution functions use [`set_time!`](@ref) to update evolution operators
+to the current integrator time.
+
+Composing time-dependent operators, say by summing them, is only allowed if their
+clocks are set to the same time.
+
+## Time-depedent sums
+
+The [`TimeDependentSum`](@ref) operator is an [`AbstractTimeDependentOperator`](@ref)
+representing a sum of constant operators multiplied by time-dependent coefficients.
+In code, these are operators of the form 
+```math
+H(t) = \sum_k c_k(t) h_k,
+```
+where `t` is time. They can be constructed directly, mixing static and time-dependent
+coefficients, for example
+* `TimeDepedentSum([1.0, cos, t->10.0 * sin(5*t)], [H_static, H_drive1, H_drive2])`
+* `TimeDepedentSum(1.0=>H_static, cos=>H_drive1, t->10.0 * sin(5*t)=>H_drive2)`
+
+or by composition
+```julia
+H = H_static + TimeDependentSum(cos=>H_drive1) + 10 * TimeDependentSum(t->sin(5*t)=>H_drive2)
+```
+
+## Closed system evolution
 
 For closed systems with a time-dependent Hamiltonian, you can use [`timeevolution.schroedinger_dynamic(tspan, psi0, H::Function)`](@ref) to obtain a solution. The function `H(t,psi)` needs to take the current time `t` and state `psi` as input and return a valid Hamiltonian. As a brief example, consider a spin-1/2 particle that is coherently driven by a laser that has an amplitude that varies in time. We can implement this with:
 
@@ -19,7 +60,20 @@ tout, ψₜ = timeevolution.schroedinger_dynamic(tspan, ψ₀, H_pump)
 nothing # hide
 ```
 
-## Open systems
+Alternatively, using [`TimeDependentSum`](@ref):
+```@example timeevolution_dynamic
+using QuantumOptics
+basis = SpinBasis(1//2)
+ψ₀ = spindown(basis)
+sx = sigmax(basis)
+H_pump = TimeDependentSum(sin=>sx)
+tspan = [0:0.1:10;]
+tout, ψₜ = timeevolution.schroedinger_dynamic(tspan, ψ₀, H_pump)
+nothing # hide
+```
+
+
+## Open system evolution
 
 Similarly to the above, we can also use [`timeevolution.master_dynamic(tspan, rho0, f::Function)`](@ref) and [`timeevolution.mcwf_dynamic(tspan, rho0, f::Function)`](@ref), respectively, to simulate open-system dynamics with time-dependent operators. The function still takes the current time and state as input. However, it needs to return the Hamiltonian, as well as the respective jump operators at every time step. To illustrate, let's add spontaneous emission to the example above:
 
@@ -41,7 +95,16 @@ Optionally, we can also return four arguments, where the last one specifies the 
 
     The state passed to the dynamic function is still used by the integrator. Do not modify the state directly! Also, when using the state in a dynamic function in [`timeevolution.mcwf_dynamic`](@ref), e.g. to compute expectation values, keep in mind that the state is not normalized. Expectation values need to be divided by the norm to ensure correctness.
 
-## Comment on performance
+With [`TimeDependentSum`](@ref):
+```@example timeevolution_dynamic
+J = [sigmam(basis)]
+H_pump = TimeDependentSum(sin=>sx)
+tspan = [0:0.1:10;]
+tout, ρₜ = timeevolution.master_dynamic(tspan, ψ₀, H_pump, J)
+nothing # hide
+```
+
+## Comment on performance with the functional approach
 
 The functional approach to time-dependent problems gives you a lot of freedom as you can implement almost arbitrary time and state dependencies. However, it also makes you responsible for performance as the functions passed into the time evolution are time-critical (they are evaluated at every time step the solver takes). For general tips on writing performant Julia code, see the official [Julia manual](https://docs.julialang.org/en/v1/manual/performance-tips/). To summarize, the most relevant points are:
 
@@ -52,7 +115,7 @@ The functional approach to time-dependent problems gives you a lot of freedom as
 To check for type-instabilities you can use Julia's `@code_warntype`. While trying to optimize a function the [BenchmarkTools](https://github.com/JuliaCI/BenchmarkTools.jl) package is quite useful too.
 
 
-## Efficient solution for Hamiltonians with time-dependent coefficients
+### Efficient solution for Hamiltonians with time-dependent coefficients
 
 You will commonly encounter a time-dependent Hamiltonian of the form
 
@@ -108,6 +171,10 @@ tout, psi_t = timeevolution.schroedinger_dynamic(tspan, psi0, Ht)
 nothing # hide
 ```
 
+!!! note
+
+    Using [`TimeDependentSum`](@ref) achieves essentially the same thing as this
+    example using [`LazySum`](@ref) and is preferred for these cases.
 
 #### Sampling discrete coefficients
 
