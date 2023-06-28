@@ -67,6 +67,15 @@ LazySum
 LazyProduct
 ```
 
+* Time-dependent operators. See also [Time-dependent Operators](@ref).
+
+```@docs
+AbstractTimeDependentOperator
+```
+
+```@docs
+TimeDependentSum
+```
 
 * Super operators:
 
@@ -217,6 +226,28 @@ dense
 
 ```@docs
 sparse(::AbstractOperator)
+```
+
+* Time-dependent operators. See also [Time-dependent Operators](@ref).
+
+```@docs
+current_time
+```
+
+```@docs
+set_time!
+```
+
+```@docs
+time_shift
+```
+
+```@docs
+time_stretch
+```
+
+```@docs
+time_restrict
 ```
 
 ### [Exceptions](@id API: Quantum objects exceptions)
