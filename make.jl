@@ -1,4 +1,5 @@
 using Documenter
+using QuantumInterface
 using QuantumOptics
 using QuantumOpticsBase
 
@@ -68,7 +69,7 @@ pages = [
     ]
 
 makedocs(
-    modules = [QuantumOptics, QuantumOpticsBase],
+    modules = [QuantumInterface, QuantumOptics, QuantumOpticsBase],
     checkdocs = :exports,
     format=Documenter.HTML(
         edit_link = nothing,

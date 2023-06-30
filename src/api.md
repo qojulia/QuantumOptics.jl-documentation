@@ -67,7 +67,7 @@ LazySum
 LazyProduct
 ```
 
-* Time-dependent operators. See also [Time-dependent Operators](@ref).
+* Time-dependent operators. See also [Time-dependent operators](@ref).
 
 ```@docs
 AbstractTimeDependentOperator
@@ -228,7 +228,7 @@ dense
 sparse(::AbstractOperator)
 ```
 
-* Time-dependent operators. See also [Time-dependent Operators](@ref).
+* Time-dependent operators. See also [Time-dependent operators](@ref).
 
 ```@docs
 current_time
@@ -279,6 +279,14 @@ create(::Type{C}, ::FockBasis) where C
 
 ```@docs
 displace
+```
+
+```@docs
+displace_analytical
+```
+
+```@docs
+displace_analytical!
 ```
 
 ```@docs

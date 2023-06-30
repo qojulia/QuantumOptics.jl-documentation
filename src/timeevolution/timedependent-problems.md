@@ -66,9 +66,9 @@ using QuantumOptics
 basis = SpinBasis(1//2)
 ψ₀ = spindown(basis)
 sx = sigmax(basis)
-H_pump = TimeDependentSum(sin=>sx)
+H_pump_tdop = TimeDependentSum(sin=>sx)
 tspan = [0:0.1:10;]
-tout, ψₜ = timeevolution.schroedinger_dynamic(tspan, ψ₀, H_pump)
+tout, ψₜ = timeevolution.schroedinger_dynamic(tspan, ψ₀, H_pump_tdop)
 nothing # hide
 ```
 
@@ -98,9 +98,9 @@ Optionally, we can also return four arguments, where the last one specifies the 
 With [`TimeDependentSum`](@ref):
 ```@example timeevolution_dynamic
 J = [sigmam(basis)]
-H_pump = TimeDependentSum(sin=>sx)
+H_pump_tdop = TimeDependentSum(sin=>sx)
 tspan = [0:0.1:10;]
-tout, ρₜ = timeevolution.master_dynamic(tspan, ψ₀, H_pump, J)
+tout, ρₜ = timeevolution.master_dynamic(tspan, ψ₀, H_pump_tdop, J)
 nothing # hide
 ```
 
