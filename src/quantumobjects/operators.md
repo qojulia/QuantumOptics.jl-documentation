@@ -17,10 +17,11 @@ mutable struct MyOperator{BL<:Basis,BR<:Basis} <: AbstractOperator{BL,BR}
 end
 ```
 
-For performance reasons there are two different implementations of operators in **QuantumOptics.jl**, all inheriting from the abstract [`AbstractOperator`](@ref) type:
+For performance reasons there are three different implementations of operators in **QuantumOptics.jl**, all inheriting from the abstract [`AbstractOperator`](@ref) type:
 
 * [Operators](@ref)
 * [Lazy operators](@ref)
+* [Time-dependent operators](@ref)
 
 They have the same interface and can in most cases be used interchangeably, e.g. they can be combined using arithmetic functions `*, /, +, -`:
 
