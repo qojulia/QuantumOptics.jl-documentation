@@ -29,7 +29,7 @@ clocks are set to the same time.
 
 The [`TimeDependentSum`](@ref) operator is an [`AbstractTimeDependentOperator`](@ref)
 representing a sum of constant operators multiplied by time-dependent coefficients.
-In code, these are operators of the form 
+These are operators of the form 
 ```math
 H(t) = \sum_k c_k(t) h_k,
 ```
