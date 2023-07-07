@@ -61,7 +61,7 @@ nothing # hide
 ```
 
 Alternatively, using [`TimeDependentSum`](@ref):
-```@example timeevolution_dynamic
+```@example timeevolution_dynamic_tdop
 using QuantumOptics
 basis = SpinBasis(1//2)
 ψ₀ = spindown(basis)
@@ -96,7 +96,7 @@ Optionally, we can also return four arguments, where the last one specifies the 
     The state passed to the dynamic function is still used by the integrator. Do not modify the state directly! Also, when using the state in a dynamic function in [`timeevolution.mcwf_dynamic`](@ref), e.g. to compute expectation values, keep in mind that the state is not normalized. Expectation values need to be divided by the norm to ensure correctness.
 
 With [`TimeDependentSum`](@ref):
-```@example timeevolution_dynamic
+```@example timeevolution_dynamic_tdop
 J = [sigmam(basis)]
 H_pump_tdop = TimeDependentSum(sin=>sx)
 tspan = [0:0.1:10;]
