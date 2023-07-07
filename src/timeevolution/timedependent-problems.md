@@ -25,7 +25,7 @@ to the current integrator time.
 Composing time-dependent operators, say by summing them, is only allowed if their
 clocks are set to the same time.
 
-## Time-depedent sums
+## Time-dependent sums
 
 The [`TimeDependentSum`](@ref) operator is an [`AbstractTimeDependentOperator`](@ref)
 representing a sum of constant operators multiplied by time-dependent coefficients.
