@@ -125,6 +125,10 @@ spost
 ```
 
 ```@docs
+sprepost
+```
+
+```@docs
 liouvillian
 ```
 
@@ -301,6 +305,9 @@ coherentstate
 coherentstate!
 ```
 
+```@docs
+squeeze
+```
 
 ### [Phase space](@id API: Phase space)
 
@@ -728,6 +735,9 @@ timecorrelations.spectrum
 timecorrelations.correlation2spectrum
 ```
 
+```@docs
+timecorrelations.correlation_dynamic
+```
 
 ## [Semi-classical](@id API: Semi-classical systems)
 
@@ -833,4 +843,22 @@ DenseChiMatrix
 
 ```@docs
 QuantumOpticsBase.set_printing
+```
+
+## [LazyTensor functions](@id API: Printing)
+
+```@docs
+lazytensor_enable_cache
+```
+
+```@docs
+lazytensor_disable_cache
+```
+
+```@docs
+lazytensor_cachesize
+```
+
+```@docs
+lazytensor_clear_cache
 ```
