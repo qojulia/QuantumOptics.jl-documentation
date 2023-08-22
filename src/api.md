@@ -845,7 +845,7 @@ DenseChiMatrix
 QuantumOpticsBase.set_printing
 ```
 
-## [LazyTensor functions](@id API: Printing)
+## [LazyTensor functions](@id API: LazyTensor functions)
 
 ```@docs
 lazytensor_enable_cache
