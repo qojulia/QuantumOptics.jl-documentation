@@ -1,0 +1,86 @@
+name: Documentation Build
+
+# read-only repo token
+# no access to secrets
+# TODO change trigger to manual after testing
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        pkg: [
+            "qojulia/QuantumOptics.jl"
+        ]
+        pkgversion: [latest]
+        examples_repo: [
+          "qojulia/QuantumOptics.jl-examples"
+        ]
+        docs_repo: [
+            "qojulia/QuantumOptics.jl-documentation"
+        ]
+       
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # Install Julia
+      - uses: julia-actions/setup-julia@v1
+        with:
+          version: 1
+          arch: x64
+      - uses: actions/cache@v3
+        env:
+          cache-name: cache-artifacts
+        with:
+          path: ~/.julia/artifacts
+          key: ${{ runner.os }}-test-${{ env.cache-name }}-${{ hashFiles('**/Project.toml') }}
+          restore-keys: |
+            ${{ runner.os }}-test-${{ env.cache-name }}-
+            ${{ runner.os }}-test-
+            ${{ runner.os }}-
+      - uses: julia-actions/julia-buildpkg@v1
+
+      # Build examples and then docs
+      - name: 'Build'
+        env:
+          URL: ${{ matrix.pkg }}
+          VERSION: ${{ matrix.pkgversion }}
+        run: |
+          set -v
+          mkdir -p ./pr
+          echo "${{ github.event.number }}" > ./pr/NR
+          git clone https://github.com/qojulia/QuantumOptics.jl-examples
+          git clone https://github.com/qojulia/QuantumOptics.jl-documentation
+
+          # build examples
+          cd QuantumOptics.jl-examples
+          julia -e '
+          using Pkg
+          Pkg.activate(".")
+          Pkg.instantiate()
+          include("make.jl")
+          '
+
+          # build docs
+          cd ../QuantumOptics.jl-documentation
+          julia -e '
+          using Pkg
+          Pkg.activate(".")
+          Pkg.instantiate()
+          include("make.jl")
+          '
+
+      # Push to complete build of documentation to FTP server
+      - name: 'Deploy'
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+            server: ${{ secrets.ftp_server_url }}
+            username: ${{ secrets.ftp_user }}
+            password: ${{ secrets.ftp_password }}
+            local-dir: ./build/  # TODO or is that ./QuantumOptics.jl-documentation/build/ ?
+
