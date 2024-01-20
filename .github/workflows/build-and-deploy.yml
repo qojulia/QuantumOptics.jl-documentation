@@ -11,19 +11,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
-      fail-fast: false
-      matrix:
-        pkg: [
-            "qojulia/QuantumOptics.jl"
-        ]
-        pkgversion: [latest]
-        examples_repo: [
-          "qojulia/QuantumOptics.jl-examples"
-        ]
-        docs_repo: [
-            "qojulia/QuantumOptics.jl-documentation"
-        ]
-       
+      fail-fast: false       
 
     steps:
       - uses: actions/checkout@v4
@@ -46,10 +34,7 @@ jobs:
       - uses: julia-actions/julia-buildpkg@v1
 
       # Build examples and then docs
-      - name: 'Build'
-        env:
-          URL: ${{ matrix.pkg }}
-          VERSION: ${{ matrix.pkgversion }}
+      - name: 'Clone repos'
         run: |
           set -v
           mkdir -p ./pr
@@ -57,16 +42,23 @@ jobs:
           git clone https://github.com/qojulia/QuantumOptics.jl-examples
           git clone https://github.com/qojulia/QuantumOptics.jl-documentation
 
-          # build examples
-          cd QuantumOptics.jl-examples
+      - name: 'Build examples'
+        run: |
+          set -v
+          cd ./QuantumOptics.jl-examples
           julia -e '
           using Pkg
           Pkg.activate(".")
           Pkg.instantiate()
+          Pkg.add("PyCall")
+          Pkg.build("PyCall")
+          Pkg.add("IJulia")
+          Pkg.build("IJulia")
           include("make.jl")
           '
-
-          # build docs
+      - name: 'Build docs'
+        run: |
+          set -v
           cd ../QuantumOptics.jl-documentation
           julia -e '
           using Pkg
