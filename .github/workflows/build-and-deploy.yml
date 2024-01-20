@@ -45,8 +45,10 @@ jobs:
       - name: 'Build examples'
         working-directory: ./QuantumOptics.jl-examples
         run: |
+          pwd
           set -v
           julia -e '
+          pwd()
           using Pkg
           Pkg.activate(".")
           Pkg.instantiate()
@@ -54,6 +56,8 @@ jobs:
           Pkg.build("PyCall")
           Pkg.add("IJulia")
           Pkg.build("IJulia")
+          pwd()
+          readdir()
           include("make.jl")
           '
       - name: 'Build docs'
