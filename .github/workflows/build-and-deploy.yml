@@ -43,9 +43,9 @@ jobs:
           git clone https://github.com/qojulia/QuantumOptics.jl-documentation
 
       - name: 'Build examples'
+        working-directory: ./QuantumOptics.jl-examples
         run: |
           set -v
-          cd ./QuantumOptics.jl-examples
           julia -e '
           using Pkg
           Pkg.activate(".")
@@ -57,9 +57,9 @@ jobs:
           include("make.jl")
           '
       - name: 'Build docs'
+        working-directory: ./QuantumOptics.jl-documentation
         run: |
           set -v
-          cd ../QuantumOptics.jl-documentation
           julia -e '
           using Pkg
           Pkg.activate(".")
