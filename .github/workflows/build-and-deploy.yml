@@ -35,18 +35,12 @@ jobs:
 
       # Build examples and then docs
       - name: 'Clone repos'
-        run: |
-          set -v
-          mkdir -p ./pr
-          echo "${{ github.event.number }}" > ./pr/NR
-          git clone https://github.com/qojulia/QuantumOptics.jl-examples
-          git clone https://github.com/qojulia/QuantumOptics.jl-documentation
+        run: git clone https://github.com/qojulia/QuantumOptics.jl-examples
 
       - name: 'Build examples'
         working-directory: ./QuantumOptics.jl-examples
         run: |
           pwd
-          set -v
           julia -e '
           pwd()
           using Pkg
@@ -63,7 +57,6 @@ jobs:
       - name: 'Build docs'
         working-directory: ./QuantumOptics.jl-documentation
         run: |
-          set -v
           julia -e '
           using Pkg
           Pkg.activate(".")
