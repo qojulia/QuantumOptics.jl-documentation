@@ -34,15 +34,16 @@ jobs:
       - uses: julia-actions/julia-buildpkg@v1
 
       # Build examples and then docs
-      - name: 'Clone repos'
-        run: git clone https://github.com/qojulia/QuantumOptics.jl-examples
+      - name: 'Checkout examples repo'
+        uses: actions/checkout@v4
+        with:
+          repository: qojulia/QuantumOptics.jl-examples
+          path: './examples-repo'
 
       - name: 'Build examples'
-        working-directory: ./QuantumOptics.jl-examples
+        working-directory: ./examples-repo
         run: |
-          pwd
           julia -e '
-          pwd()
           using Pkg
           Pkg.activate(".")
           Pkg.instantiate()
@@ -50,17 +51,17 @@ jobs:
           Pkg.build("PyCall")
           Pkg.add("IJulia")
           Pkg.build("IJulia")
-          pwd()
-          readdir()
+          print(readdir())
           include("make.jl")
           '
+
       - name: 'Build docs'
-        working-directory: ./QuantumOptics.jl-documentation
         run: |
           julia -e '
           using Pkg
           Pkg.activate(".")
           Pkg.instantiate()
+          print(readdir())
           include("make.jl")
           '
 
