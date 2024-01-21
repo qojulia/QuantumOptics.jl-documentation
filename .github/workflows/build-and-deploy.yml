@@ -51,9 +51,9 @@ jobs:
           Pkg.build("PyCall")
           Pkg.add("IJulia")
           Pkg.build("IJulia")
-          print(readdir())
-          include("make.jl")
+          print(readdir("notebooks"))
           '
+          julia make.jl
 
       - name: 'Build docs'
         run: |
