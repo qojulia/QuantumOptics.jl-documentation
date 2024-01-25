@@ -49,6 +49,8 @@ jobs:
 
       - name: 'Build examples'
         working-directory: ./examples-repo
+        env:
+          TARGETPATH_EXAMPLES: ../src/examples
         run: |
           julia -e '
           using Pkg
