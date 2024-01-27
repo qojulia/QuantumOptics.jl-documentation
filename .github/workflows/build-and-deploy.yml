@@ -69,7 +69,6 @@ jobs:
           using Pkg
           Pkg.activate(".")
           Pkg.instantiate()
-          print(readdir())
           include("make.jl")
           '
 
@@ -80,5 +79,5 @@ jobs:
             server: ${{ secrets.ftp_server_url }}
             username: ${{ secrets.ftp_user }}
             password: ${{ secrets.ftp_password }}
-            local-dir: ./build/  # TODO or is that ./QuantumOptics.jl-documentation/build/ ?
+            local-dir: ./build/
 
