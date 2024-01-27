@@ -1,0 +1,79 @@
+name: Documentation Build
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false       
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # Install jupyter-notebook
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - name: Install jupyter
+        run: python -m pip install jupyter nbconvert nbformat matplotlib
+
+      # Install Julia
+      - uses: julia-actions/setup-julia@v1
+        with:
+          version: 1
+          arch: x64
+      - uses: actions/cache@v4
+        env:
+          cache-name: cache-artifacts
+        with:
+          path: ~/.julia/artifacts
+          key: ${{ runner.os }}-test-${{ env.cache-name }}-${{ hashFiles('**/Project.toml') }}
+          restore-keys: |
+            ${{ runner.os }}-test-${{ env.cache-name }}-
+            ${{ runner.os }}-test-
+            ${{ runner.os }}-
+      - uses: julia-actions/julia-buildpkg@v1
+
+      # Build examples and then docs
+      - name: 'Checkout examples repo'
+        uses: actions/checkout@v4
+        with:
+          repository: qojulia/QuantumOptics.jl-examples
+          path: './examples-repo'
+
+      - name: 'Build examples'
+        working-directory: ./examples-repo
+        env:
+          TARGETPATH_EXAMPLES: ../src/examples
+        run: |
+          julia -e '
+          using Pkg
+          Pkg.activate(".")
+          Pkg.instantiate()
+          Pkg.add("PyCall")
+          Pkg.build("PyCall")
+          Pkg.add("IJulia")
+          Pkg.build("IJulia")
+          include("make.jl")
+          '
+
+      - name: 'Build docs'
+        run: |
+          julia -e '
+          using Pkg
+          Pkg.activate(".")
+          Pkg.instantiate()
+          include("make.jl")
+          '
+
+      # Push to complete build of documentation to FTP server
+      - name: 'Deploy'
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+            server: ${{ secrets.ftp_server_url }}
+            username: ${{ secrets.ftp_user }}
+            password: ${{ secrets.ftp_password }}
+            local-dir: ./build/
+

@@ -117,6 +117,10 @@ randoperator
 ```
 
 ```@docs
+randunitary_haar
+```
+
+```@docs
 spre
 ```
 
@@ -815,6 +819,10 @@ phase_average
 
 ```@docs
 passive_state
+```
+
+```@docs
+randstate_haar
 ```
 
 ## [Pauli](@id API: Pauli)

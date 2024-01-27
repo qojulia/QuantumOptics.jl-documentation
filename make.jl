@@ -74,7 +74,9 @@ makedocs(
     format=Documenter.HTML(
         edit_link = nothing,
         canonical = "https://docs.qojulia.org/",
-        assets = [asset("assets/favicon.png", class=:ico, islocal = true)]
+        assets = [asset("assets/favicon.png", class=:ico, islocal = true)],
+        size_threshold = 400 * 2^10,
+        size_threshold_warn = 300 * 2^10,
         ),
     build = builddir,
     sitename = "QuantumOptics.jl",

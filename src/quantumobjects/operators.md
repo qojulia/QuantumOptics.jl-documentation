@@ -66,7 +66,7 @@ mutable struct Operator{BL<:Basis,BR<:Basis,T} <: AbstractOperator{BL,BR}
 end
 ```
 
-where the data field can be any type that implements Julia's [AbstractArray interace](https://docs.julialang.org/en/v1/manual/interfaces/#man-interface-array-1).
+where the data field can be any type that implements Julia's [AbstractArray interface](https://docs.julialang.org/en/v1/manual/interfaces/#man-interface-array-1).
 
 The [`DenseOperator`](@ref) function can be used to construct an [`Operator`](@ref) with a dense array data field, or convert other types of operators to such a type.
 Similarly, one can use the [`SparseOperator`](@ref) function to construct an [`Operator`](@ref) with a sparse data field, and convert other types of operators. Also, a method for [`sparse(::AbstractOperator)`](@ref) is provided for conversion.
