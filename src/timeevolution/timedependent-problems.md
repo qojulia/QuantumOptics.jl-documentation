@@ -35,12 +35,12 @@ H(t) = \sum_k c_k(t) h_k,
 ```
 where `t` is time. They can be constructed directly, mixing static and time-dependent
 coefficients, for example
-* `TimeDepedentSum([1.0, cos, t->10.0 * sin(5*t)], [H_static, H_drive1, H_drive2])`
-* `TimeDepedentSum(1.0=>H_static, cos=>H_drive1, t->10.0 * sin(5*t)=>H_drive2)`
+* `TimeDependentSum([1.0, cos, (t->10.0 * sin(5*t))], [H_static, H_drive1, H_drive2])`
+* `TimeDependentSum(1.0=>H_static, cos=>H_drive1, (t->10.0 * sin(5*t))=>H_drive2)`
 
 or by composition
 ```julia
-H = H_static + TimeDependentSum(cos=>H_drive1) + 10 * TimeDependentSum(t->sin(5*t)=>H_drive2)
+H = H_static + TimeDependentSum(cos=>H_drive1) + 10 * TimeDependentSum((t->sin(5*t))=>H_drive2)
 ```
 
 ## Closed system evolution
