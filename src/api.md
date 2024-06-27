@@ -258,6 +258,10 @@ time_stretch
 time_restrict
 ```
 
+```@docs
+static_operator
+```
+
 ### [Exceptions](@id API: Quantum objects exceptions)
 
 ```@docs
@@ -437,6 +441,32 @@ QuantumOpticsBase.FFTKets
 
 ```@docs
 transform
+```
+
+### [Charge](@id API: Charge)
+
+```@docs
+ChargeBasis
+```
+
+```@docs
+ShiftedChargeBasis
+```
+
+```@docs
+chargeop
+```
+
+```@docs
+expiφ
+```
+
+```@docs
+cosφ
+```
+
+```@docs
+sinφ
 ```
 
 ### [Subspace bases](@id API: Subspace bases)
