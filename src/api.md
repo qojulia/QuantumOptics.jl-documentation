@@ -33,6 +33,10 @@ Bra
 Ket
 ```
 
+```@docs
+LazyKet
+```
+
 * General purpose operators. A few more specialized operators are implemented in [API: Quantum-systems](@ref).
 
 ```@docs
@@ -465,6 +469,10 @@ ManyBodyBasis
 
 ```@docs
 fermionstates
+```
+
+```@docs
+FermionBitstring
 ```
 
 ```@docs
