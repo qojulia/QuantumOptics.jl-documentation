@@ -458,6 +458,10 @@ ShiftedChargeBasis
 ```
 
 ```@docs
+chargestate
+```
+
+```@docs
 chargeop
 ```
 
