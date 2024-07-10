@@ -20,7 +20,7 @@ nothing # hide
 
 Many quantum systems are already implemented:
 * [Fock space](@ref)
-* [Integer charge](@ref)
+* [Charge basis](@ref)
 * [Spin](@ref)
 * [Particle](@ref)
 * [N-Level](@ref)
