@@ -9,6 +9,10 @@ The charge basis is a natural representation for circuit-QED elements such as
 the "transmon", which has a hamiltonian of the form
 ```@example
 using QuantumOptics # hide
+ncut = 20
+E_C = 1.0
+E_J = 10.0
+n_g = 0.0
 b = ChargeBasis(ncut)
 H = 4E_C * (n_g * identityoperator(b) + chargeop(b))^2 - E_J * cosφ(b)
 nothing # hide
