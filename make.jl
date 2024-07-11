@@ -19,6 +19,7 @@ pages = [
             "Introduction" => "quantumsystems/quantumsystems.md",
             "quantumsystems/spin.md",
             "quantumsystems/fock.md",
+            "quantumsystems/charge.md",
             "quantumsystems/nlevel.md",
             "quantumsystems/particle.md",
             "quantumsystems/subspace.md",
