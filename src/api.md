@@ -60,6 +60,10 @@ SparseOperator
 ```
 
 ```@docs
+LazyKet
+
+
+```@docs
 LazyTensor
 ```
 
@@ -223,7 +227,7 @@ permutesystems
 ```
 
 ```@docs
-exp(::AbstractOperator)
+exp(op::AbstractOperator)
 ```
 
 ```@docs
@@ -244,6 +248,10 @@ sparse(::AbstractOperator)
 
 ```@docs
 current_time
+```
+
+```@docs
+static_operator
 ```
 
 ```@docs
@@ -347,6 +355,36 @@ wignersu2
 ylm
 ```
 
+### [Charge](@id API: Charge)
+
+```@docs
+ChargeBasis
+```
+
+```@docs
+ShiftedChargeBasis
+```
+
+```@docs
+chargestate
+```
+
+```@docs
+chargeop
+```
+
+```@docs
+expiφ
+```
+
+```@docs
+cosφ
+```
+
+```@docs
+sinφ
+```
+
 ### [N-level](@id API: N-level)
 
 ```@docs
@@ -359,6 +397,18 @@ transition(::Type{T}, ::NLevelBasis, ::Integer, ::Integer) where T
 
 ```@docs
 nlevelstate
+```
+
+```@docs
+paulix
+```
+
+```@docs
+pauliy
+```
+
+```@docs
+pauliz
 ```
 
 ### [Spin](@id API: Spin)
@@ -499,6 +549,10 @@ sparseprojector
 
 ```@docs
 ManyBodyBasis
+```
+
+```@docs
+FermionBitstring
 ```
 
 ```@docs
@@ -868,10 +922,6 @@ randstate_haar
 ```
 
 ## [Pauli](@id API: Pauli)
-
-```@docs
-PauliBasis
-```
 
 ```@docs
 PauliTransferMatrix
